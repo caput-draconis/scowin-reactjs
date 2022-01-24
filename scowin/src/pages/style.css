@@ -1,23 +1,16 @@
-.img1{
-    margin-top: 130px;
-}
-.home_head{
-    text-align: left;
-    margin-left: 290px;
-}
 .card{
     width: 20rem;
     border: 1px solid #ADACAC;
     background-color: #F9EBEB;
-    margin-left: 30px;
     padding: 10px;
+}
+.home-head {
+    text-align: left;
 }
 .card-group{
     display: flex;
-    margin-left: 250px;
 }
 .card-link{
-    margin-left: 150px;
     display: contents;
 }
 .card-body{

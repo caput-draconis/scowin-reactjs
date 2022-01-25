@@ -6,6 +6,9 @@
 }
 .home-head {
     text-align: left;
+    font-size:18px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 .card-group{
     display: flex;
@@ -27,4 +30,7 @@ hr{
 }
 .card-text{
     font-size: 16px;
+}
+.data1{
+    text-align: left;
 }

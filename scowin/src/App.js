@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Navbar from './components/Navbar';
 import VaccinationDrive from './components/VaccinationDrive/VaccinationDrive';
 import Vaccine from './pages/vaccination';
+import Managestud from './pages/manageStudent';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route path='/' exact element={<Home />} />
             <Route path='/vaccination' element={<Vaccine />} />
             <Route path='/vaccinationDrive' element={<VaccinationDrive />} />
+            <Route path='/manageStudent' exact element={<Managestud />} />
           </Routes>
         </div>
       </Router>

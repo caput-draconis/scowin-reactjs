@@ -5,6 +5,7 @@ import CardGroup from 'react-bootstrap/CardGroup';
 import { vaccineData } from '../data/vaccineData';
 import { studentVaccineData } from '../data/studentVaccination';
 
+
 export default function Home() {
   return (
     <Fragment>

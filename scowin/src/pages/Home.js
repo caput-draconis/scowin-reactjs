@@ -2,10 +2,10 @@ import React, { Fragment } from 'react';
 import './style.css';
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
-import { vaccineData } from '../data/vaccineData';
+import { vaccineData, vaccineHeaders } from '../data/vaccineData';
 import { studentVaccineData } from '../data/studentVaccination';
 import { studentData } from '../data/studentData';
-import MaterialTable from "material-table";
+import MaterialTable from "@material-table/core";
 
 // Import Material Icons
 import { forwardRef } from 'react';
@@ -25,14 +25,7 @@ import ViewColumn from '@material-ui/icons/ViewColumn';
 
 export default function Home() {
   const percent = (studentVaccineData.length/studentData.length)*100
-  const columns = [     
-    { title: 'Date', field: 'date' },
-    { title: 'Vaccine Name', field: 'vaccineName' },
-    { title: 'Doses Available', field: 'dosesAvailable' },
-    { title: 'Slots', field: 'slots' },
-    { title: 'Drive Approval', field: 'driveApproval' },
-    { title: 'Drive Status', field: 'driveStatus' }
-  ]
+
   const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
     Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
@@ -95,7 +88,7 @@ export default function Home() {
               </CardGroup>
         </div>
         <div className='data1'>
-          <MaterialTable title="Vaccination Drive" icons={tableIcons} columns={columns} data={ vaccineData } />
+          {vaccineData.length===0 ? <p>No Upcoming Drives</p> :<MaterialTable title="Vaccination Drive" icons={tableIcons} columns={vaccineHeaders} data={ vaccineData } />}
         </div>
       </div>
     </Fragment>

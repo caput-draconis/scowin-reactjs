@@ -25,7 +25,7 @@ function Navbar() {
             <Nav.Link as={Link} to="/vaccination"><span><FaIcons.FaUserMd /> Update Vaccination status </span></Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link as={Link} to="/generateReport"><span><FaIcons.FaWpforms /> Generate Reports </span></Nav.Link>
+            <Nav.Link as={Link} to="/generateReport"><span><FaIcons.FaWpforms /> Generate Vaccination Reports </span></Nav.Link>
           </Nav.Item>
           <Nav.Item>
             <Nav.Link as={Link} to="/vaccinationDrive">

@@ -45,23 +45,18 @@ hr{
 .input{
     width: 300px;
     height: 30px;
-    margin-bottom: 15px;
+    border:1px solid gray !important;
+    border-radius: 4px;
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
 }
 .input1{
-    margin-top: 10px;
-    margin-bottom: 10px;
     margin-left: 7px;
     width: 240px;
     height: 30px;
 }
 #grade{
     margin-left: 15px;
-}
-.gender{
-    margin: 10px;
-}
-input{
-    margin: auto;
 }
 #outlined-multiline-static{
     width: 270px;
@@ -72,4 +67,18 @@ input{
 .header2{
     text-align: center;
     font-size: 18px;
+}
+.g1{
+    display: flex;
+    margin-left: 2px !important;
+}
+.in_1{
+    display: flex;
+}
+.gender{
+    margin-top: 7px;
+    margin-bottom: 5px;
+}
+#male{
+    margin-top: 7px;
 }

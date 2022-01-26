@@ -180,31 +180,34 @@ function ManageStudent () {
             <input className="input" type="number" placeholder="Student ID" value={ID} onChange={handleID} />
             <input className="input" type="text" placeholder="Full Name" value={name} onChange={handleName} />
             <input className="input" type="date" placeholder="Date of Birth" value={dob} onChange={handleDob} />
-            <div onChange={handleGender} value={gender}>
-              <label>Gender :</label>
-              <input type="radio" value="Male" className="gender" /> Male
+            <div onChange={handleGender} value={gender} className='g1'> Gender
+              <input type="radio" value="Male" className="gender" id="male"/> Male 
               <input type="radio" value="Female" className="gender" /> Female
               <input type="radio" value="Other" className="gender" /> Other
             </div>
             <input className="input" type="text" placeholder="Blood Group" value={bgroup} onChange={handlebgroup} />
-            <label> Grade </label>
-            <select className="input1" id="grade" onChange={handleGrade} value={grade}> 
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="2">3</option>
-              <option value="2">4</option>
-              <option value="2">5</option>
-              <option value="2">6</option>
-              <option value="2">7</option>
-              <option value="2">8</option>
-              <option value="2">9</option>
-              <option value="2">10</option>
-            </select>
-            <label>Section</label>
-            <select className="input1" onChange={handleSection} value={section}> 
-              <option value="A">A</option>
-              <option value="B">B</option>
-            </select>
+            <div className='in_1'>
+              <p> Grade </p>
+              <select className="input1" id="grade" onChange={handleGrade} value={grade}> 
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="2">3</option>
+                <option value="2">4</option>
+                <option value="2">5</option>
+                <option value="2">6</option>
+                <option value="2">7</option>
+                <option value="2">8</option>
+                <option value="2">9</option>
+                <option value="2">10</option>
+              </select>
+            </div>
+            <div className='in_1'>
+              <p>Section</p>
+              <select className="input1" onChange={handleSection} value={section}> 
+                <option value="A">A</option>
+                <option value="B">B</option>
+              </select>
+            </div>
             <input className="input" type="number" placeholder="Aadhar Card Number" value={aadhar} onChange={handleAadhar} />
             <TextField id="outlined-multiline-static" label="Existing Comoribidities" multiline rows={4}  value={EC} onChange={handleEC}  />
             <Button type='submit' className='btn2'>Submit</Button>

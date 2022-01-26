@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { useState } from 'react';
 import './style.css';
-import MaterialTable from "material-table";
+import MaterialTable from "@material-table/core";
 import { studentData } from '../data/studentData';
 import Button from 'react-bootstrap/Button'
 import Modal from '@mui/material/Modal';
@@ -167,7 +167,6 @@ function ManageStudent () {
       </label>
       <input type="submit" value="Submit" />
     </form> */}
-    Popup content
         </Box>
       </Modal>
       <Modal

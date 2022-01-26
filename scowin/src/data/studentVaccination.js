@@ -143,3 +143,38 @@ export const studentVaccineData = [
         comorbiditiesDetails:'fever'
     }
 ]
+
+export const studentVaccinationHeaders = [
+    {
+        title: 'Student Name',
+        field: 'studentName'
+    },
+    {
+        title: 'Student ID',
+        field: 'studentID'
+    },
+    {
+        title: 'Aadhar ID',
+        field: 'aadharID'
+    },
+    {
+        title: 'Date of Birth',
+        field: 'dob'
+    },
+    {
+        title: 'Genderl',
+        field: 'gender'
+    },
+    {
+        title: 'Vaccination name',
+        field: 'vaccineName'
+    },
+    {
+        title: 'Vaccine dosage',
+        field: 'dosage'
+    },
+    {
+        title: 'Comorbidities Details',
+        field: 'comorbiditiesDetails'
+    }
+]

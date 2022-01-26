@@ -88,11 +88,7 @@ export default function Home() {
               </CardGroup>
         </div>
         <div className='data1'>
-<<<<<<< HEAD
-          {vaccineData.length===0 ? <p>No Upcoming Drives</p> :<MaterialTable title="Vaccination Drive" icons={tableIcons} columns={vaccineHeaders} data={ vaccineData } />}
-=======
-          <MaterialTable title="Vaccination Drive" icons={tableIcons} columns={vaccineHeaders} data={ vaccineData } />
->>>>>>> main
+          {vaccineData.length===0 ? <p className='home-head'>No Upcoming Drives</p> :<MaterialTable title="Vaccination Drive" icons={tableIcons} columns={vaccineHeaders} data={ vaccineData } />}
         </div>
       </div>
     </Fragment>

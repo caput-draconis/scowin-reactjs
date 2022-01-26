@@ -200,3 +200,14 @@ export const studentData = [
           bloodGroup:'A+ve'
         }
 ]
+export const columnStudents = [     
+    { title:'Id', field:'studentID'},
+    { title: 'Name', field: 'studentName' },
+    { title: 'DOB', field: 'dob' },
+    { title: 'Gender', field: 'gender' },
+    { title: 'Blood Group', field: 'bloodGroup' },
+    { title: 'Grade', field: 'grade' },
+    { title: 'Section', field: 'section' },
+    { title: 'AAdhar', field: 'aadharID' },
+    { title: 'Existing Comorbidities', field: 'existingComorbidites' }
+]

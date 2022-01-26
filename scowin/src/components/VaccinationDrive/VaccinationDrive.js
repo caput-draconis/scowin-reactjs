@@ -54,19 +54,21 @@ function VaccinationDrive() {
         onClose={closeModal}
       >
         <Box sx={style}>
-        <h5 className='header'>Add Student Details</h5>
+        <div className='header3'>
+          <h5 className='header'>Add Student Details</h5>
+        </div>
           <form onSubmit={handleSubmit(onSubmit)} className='d-flex flex-column'>
-            <div>
+            <div className='input3'>
               <label>Vaccine Name</label>
-              <select name="vaccineName" {...register("vaccineName", { required: true })}>
+              <select className="vaccineName" {...register("vaccineName", { required: true })}>
                 <option value="Covaxin">Covaxin</option>
                 <option value="Covisheild">Covisheild</option>
                 <option value="Sputnik V">Sputnik V</option>
               </select>
             </div>
-            <div>
+            <div className='input3'>
               <label>Slots</label>
-              <input
+              <input className='input4'
                 type="number"
                 {...register("slots", {
                   required: true,
@@ -74,16 +76,16 @@ function VaccinationDrive() {
                 })}
               />
             </div>
-            <div>
+            <div className='input3'>
               <label>Vaccination Date</label>
-              <input
+              <input className='ivaccine'
                 type="date"
                 {...register("vaccinationDate", { required: true, valueAsDate: true })}
               />
             </div>
-            <div>
+            <div className='input3'>
               <label>Doses Available</label>
-              <input
+              <input  className='input5'
                 type="number"
                 {...register("dosesAvailable", {
                   required: true,
@@ -103,7 +105,7 @@ function VaccinationDrive() {
         {...register("developer", { required: true })}
       /> */}
 
-            <input type="submit" className='mt-4'/>
+          <Button type='submit' className='btn2'>Submit</Button>
           </form>
         </Box>
       </Modal>

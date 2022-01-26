@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { useState } from 'react';
 import './style.css';
 import MaterialTable from "@material-table/core";
-import { studentData } from '../data/studentData';
+import { studentData, columnStudents } from '../data/studentData';
 import Button from 'react-bootstrap/Button'
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
@@ -36,17 +36,7 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-const columns = [     
-  { title:'Id', field:'studentID'},
-  { title: 'Name', field: 'studentName' },
-  { title: 'DOB', field: 'dob' },
-  { title: 'Gender', field: 'gender' },
-  { title: 'Blood Group', field: 'bloodGroup' },
-  { title: 'Grade', field: 'grade' },
-  { title: 'Section', field: 'section' },
-  { title: 'AAdhar', field: 'aadharID' },
-  { title: 'Existing Comorbidities', field: 'existingComorbidites' }
-]
+
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
   Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
@@ -154,7 +144,6 @@ function ManageStudent () {
         onClose={closeModal}
       >
         <Box sx={style}>
-<<<<<<< HEAD
           <div className='header3'>
             <h5 className='header2'>Upload Students Details</h5>
           </div>
@@ -163,19 +152,6 @@ function ManageStudent () {
             <Button type='button' className='btn3'>Upload</Button>
             <a href='#' onClick={onBtnExportDataAsExcel} className='link1'>Download Template</a>
           </div>
-=======
-        {/* <form onSubmit={handleSubmit}>
-      <label>
-        Frirst Name:
-        <input
-          type="text"
-          value={name}
-          onChange={e => setName(e.target.value)}
-        />
-      </label>
-      <input type="submit" value="Submit" />
-    </form> */}
->>>>>>> main
         </Box>
       </Modal>
       <Modal
@@ -189,7 +165,10 @@ function ManageStudent () {
           <form onSubmit={submitDetails}>
             <input className="input" type="number" placeholder="Student ID" value={ID} onChange={handleID} />
             <input className="input" type="text" placeholder="Full Name" value={name} onChange={handleName} />
-            <input className="input" type="date" placeholder="Date of Birth" value={dob} onChange={handleDob} />
+            <div className='inp1'>
+              <label>Date of Birth</label>
+              <input className="input" id="dob" type="date" placeholder="Date of Birth" value={dob} onChange={handleDob} />
+            </div>
             <div onChange={handleGender} value={gender} className='g1'>
               <label>Gender</label>
               <input type="radio" value="Male" className="gender" /> Male
@@ -225,7 +204,7 @@ function ManageStudent () {
           </form>
         </Box>
       </Modal>
-        <MaterialTable title="Student Details" icons={tableIcons} columns={columns} data={ studentData } />
+        <MaterialTable title="Student Details" icons={tableIcons} columns={columnStudents} data={ studentData } />
       </div>
     </Fragment>
   )

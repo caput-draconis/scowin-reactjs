@@ -59,6 +59,9 @@ hr{
 }
 .gender{
     margin-top: -30px;
+    margin-left: -20px;
+    width: 50px !important;
+    height: 10px !important;
 }
 #outlined-multiline-static{
     width: 270px;
@@ -107,4 +110,9 @@ form{
 }
 .link1{
     display: block;
+}
+#dob{
+    width: 213px;
+    margin-top: 20px;
+    margin-left: 10px;
 }

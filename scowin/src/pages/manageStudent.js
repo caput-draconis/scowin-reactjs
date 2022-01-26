@@ -98,12 +98,6 @@ function ManageStudent () {
   const navigate = useNavigate();
 
   const submitDetails = () => {
-    console.log(name)
-    console.log(dob)
-    console.log(gender)
-    console.log(grade)
-    console.log(section)
-    console.log(EC)
     console.log('submitted successfully')
     navigate("/manageStudent");
   }
@@ -144,6 +138,10 @@ function ManageStudent () {
     setEC(event.target.value)
   }
 
+  const onBtnExportDataAsExcel = () => { 
+    console.log('hey')
+  }
+
   return (
     <Fragment>
       <div className="sec1">
@@ -156,6 +154,16 @@ function ManageStudent () {
         onClose={closeModal}
       >
         <Box sx={style}>
+<<<<<<< HEAD
+          <div className='header3'>
+            <h5 className='header2'>Upload Students Details</h5>
+          </div>
+          <div className='section2'>
+            <p>Upload Student details Excel by filling all details in the below template</p>
+            <Button type='button' className='btn3'>Upload</Button>
+            <a href='#' onClick={onBtnExportDataAsExcel} className='link1'>Download Template</a>
+          </div>
+=======
         {/* <form onSubmit={handleSubmit}>
       <label>
         Frirst Name:
@@ -167,6 +175,7 @@ function ManageStudent () {
       </label>
       <input type="submit" value="Submit" />
     </form> */}
+>>>>>>> main
         </Box>
       </Modal>
       <Modal
@@ -174,36 +183,42 @@ function ManageStudent () {
         onClose={closeDetails}
       >
         <Box sx={style}>
-          <h5 className='header2'>Add Student Details</h5>
+          <div className='header3'>
+            <h5 className='header2'>Add Student Details</h5>
+          </div>
           <form onSubmit={submitDetails}>
             <input className="input" type="number" placeholder="Student ID" value={ID} onChange={handleID} />
             <input className="input" type="text" placeholder="Full Name" value={name} onChange={handleName} />
             <input className="input" type="date" placeholder="Date of Birth" value={dob} onChange={handleDob} />
-            <div onChange={handleGender} value={gender}>
-              <label>Gender :</label>
+            <div onChange={handleGender} value={gender} className='g1'>
+              <label>Gender</label>
               <input type="radio" value="Male" className="gender" /> Male
               <input type="radio" value="Female" className="gender" /> Female
               <input type="radio" value="Other" className="gender" /> Other
             </div>
             <input className="input" type="text" placeholder="Blood Group" value={bgroup} onChange={handlebgroup} />
-            <label> Grade </label>
-            <select className="input1" id="grade" onChange={handleGrade} value={grade}> 
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="2">3</option>
-              <option value="2">4</option>
-              <option value="2">5</option>
-              <option value="2">6</option>
-              <option value="2">7</option>
-              <option value="2">8</option>
-              <option value="2">9</option>
-              <option value="2">10</option>
-            </select>
-            <label>Section</label>
-            <select className="input1" onChange={handleSection} value={section}> 
-              <option value="A">A</option>
-              <option value="B">B</option>
-            </select>
+            <div className='inp1'>
+              <label> Grade </label>
+              <select className="input1" id="grade" onChange={handleGrade} value={grade}> 
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="2">3</option>
+                <option value="2">4</option>
+                <option value="2">5</option>
+                <option value="2">6</option>
+                <option value="2">7</option>
+                <option value="2">8</option>
+                <option value="2">9</option>
+                <option value="2">10</option>
+              </select>
+            </div>
+            <div className='inp1'>
+              <label>Section</label>
+              <select className="input1" onChange={handleSection} value={section}> 
+                <option value="A">A</option>
+                <option value="B">B</option>
+              </select>
+            </div>
             <input className="input" type="number" placeholder="Aadhar Card Number" value={aadhar} onChange={handleAadhar} />
             <TextField id="outlined-multiline-static" label="Existing Comoribidities" multiline rows={4}  value={EC} onChange={handleEC}  />
             <Button type='submit' className='btn2'>Submit</Button>

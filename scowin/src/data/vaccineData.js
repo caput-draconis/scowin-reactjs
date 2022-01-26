@@ -53,7 +53,11 @@ export const vaccineData = [
         dosesAvailable:100,
         slots:5,
         driveApproval:'Approved',
+<<<<<<< HEAD
         driveStatus:'Upcoming'
+=======
+        driveStatus:'Over'
+>>>>>>> main
     },
     {
         vaccinationDate:'28/02/2022',

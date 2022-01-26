@@ -154,6 +154,7 @@ function ManageStudent () {
         onClose={closeModal}
       >
         <Box sx={style}>
+<<<<<<< HEAD
           <div className='header3'>
             <h5 className='header2'>Upload Students Details</h5>
           </div>
@@ -162,6 +163,19 @@ function ManageStudent () {
             <Button type='button' className='btn3'>Upload</Button>
             <a href='#' onClick={onBtnExportDataAsExcel} className='link1'>Download Template</a>
           </div>
+=======
+        {/* <form onSubmit={handleSubmit}>
+      <label>
+        Frirst Name:
+        <input
+          type="text"
+          value={name}
+          onChange={e => setName(e.target.value)}
+        />
+      </label>
+      <input type="submit" value="Submit" />
+    </form> */}
+>>>>>>> main
         </Box>
       </Modal>
       <Modal

@@ -1,6 +1,6 @@
 import React from 'react';
-import "./App.css";
 import MaterialTable from "material-table";
+import { studentData } from '../data/studentData';
 
 // Import Material Icons
 import { forwardRef } from 'react';
@@ -46,75 +46,26 @@ class Students extends React.Component {
 
     // Material Table Columns
     const columns = [     
-      { title: 'Id', field: 'id' },
-      { title: 'Name', field: 'name' },
+      { title: 'Id', field: 'studentID' },
+      { title: 'Name', field: 'studentName' },
       { title: 'DOB', field: 'dob' },
       { title: 'Gender', field: 'gender' },
       { title: 'Grade', field: 'grade' },
       { title: 'Section', field: 'section' },
-      { title: 'AAdhar', field: 'aadhar' },
+      { title: 'AAdhar', field: 'aadharID' },
+      { title: 'Blood Group', field: 'bloodGroup' },
+      { title: 'Existing Comorbidities', field: 'existingComorbidites' }
     ]
-
-    // Material Table Columns Rows
-    const data = [
-        {
-            id: "142107",
-            name: "Y Diyva",
-            dob: "20-Jan-2009",
-            gender: "Female",
-            grade: "2",
-            section: "A",
-            aadhar: "123456789123"
-          },
-          {
-              id: "142107",
-              name: "Suman",
-              dob: "20-Jan-2009",
-              gender: "Female",
-              grade: "2",
-              section: "A",
-              aadhar: "123456789123"
-            },
-            {
-              id: "142107",
-              name: "Eliza",
-              dob: "20-Jan-2009",
-              gender: "Female",
-              grade: "2",
-              section: "A",
-              aadhar: "123456789123"
-            },
-            {
-              id: "142107",
-              name: "Anita",
-              dob: "20-Jan-2009",
-              gender: "Female",
-              grade: "2",
-              section: "A",
-              aadhar: "123456789123"
-            },
-            {
-              id: "142107",
-              name: "Ratna",
-              dob: "20-Jan-2010",
-              gender: "Female",
-              grade: "2",
-              section: "A",
-              aadhar: "123456789123"
-            }
-   ];
- 
-
 
     return (
       <div className="App wrapper">
-        <h2>Student Data</h2>
+        <h2>Generate Report</h2>
 
         <MaterialTable
-          title="Static Data Example"
+          title=""
           icons={tableIcons}
           columns={columns}
-          data={data}
+          data={ studentData }
           options={{
             exportButton: true,           
             filtering: true 

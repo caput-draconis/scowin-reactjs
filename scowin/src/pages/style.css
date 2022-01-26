@@ -33,4 +33,43 @@ hr{
 }
 .data1{
     text-align: left;
+    margin-top: 50px;
+}
+.vaccination-drive-button {
+    display: flex;
+    margin: 10px;
+}
+.bt1{
+    text-align: right;
+}
+.input{
+    width: 300px;
+    height: 30px;
+    margin-bottom: 15px;
+}
+.input1{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 7px;
+    width: 240px;
+    height: 30px;
+}
+#grade{
+    margin-left: 15px;
+}
+.gender{
+    margin: 10px;
+}
+input{
+    margin: auto;
+}
+#outlined-multiline-static{
+    width: 270px;
+}
+.btn2{
+    margin-top: 20px;
+}
+.header2{
+    text-align: center;
+    font-size: 18px;
 }

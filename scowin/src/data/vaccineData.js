@@ -21,7 +21,7 @@ export const vaccineData = [
         dosesAvailable:100,
         slots:5,
         driveApproval:'Approved',
-        driveStatus:'Over'
+        driveStatus:'Completed'
     },
     {
         date:'28/02/2022',

@@ -110,6 +110,7 @@ form{
 }
 .link1{
     display: block;
+    cursor: pointer;
 }
 #dob{
     width: 213px;

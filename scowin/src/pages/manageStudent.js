@@ -8,6 +8,9 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { useNavigate } from "react-router-dom";
+import * as FileSaver from 'file-saver';
+import * as XLSX from 'xlsx';
+
 
 // Import Material Icons
 import { forwardRef } from 'react';
@@ -127,11 +130,23 @@ function ManageStudent () {
   const handleEC = event => {
     setEC(event.target.value)
   }
-
-  const onBtnExportDataAsExcel = () => { 
-    console.log('hey')
+  const downloadTemplate = () => {
+    const fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+    const fileExtension = '.xlsx';
+    const fileName = 'bulkUpload'
+    const csvData = [ {Id:'', Name:'', Dob:'', Gender:'', Blood_Group:'', Grade:'', Section:'', AAdhar:'',Existing_Comorbidities:''} ]
+    const ws = XLSX.utils.json_to_sheet(csvData);
+    const wb = { Sheets: { 'data': ws }, SheetNames: ['data'] };
+    const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+    const data = new Blob([excelBuffer], {type: fileType});
+    FileSaver.saveAs(data, fileName + fileExtension);
+    closeModal();
   }
 
+	const handleSubmission = () => {
+    console.log('hello')
+	};
+  
   return (
     <Fragment>
       <div className="sec1">
@@ -149,8 +164,8 @@ function ManageStudent () {
           </div>
           <div className='section2'>
             <p>Upload Student details Excel by filling all details in the below template</p>
-            <Button type='button' className='btn3'>Upload</Button>
-            <a href='#' onClick={onBtnExportDataAsExcel} className='link1'>Download Template</a>
+            <Button type='file' className='btn3' onClick={handleSubmission}>Upload</Button>
+            <a className='link1' onClick={downloadTemplate}>Download Template</a>
           </div>
         </Box>
       </Modal>

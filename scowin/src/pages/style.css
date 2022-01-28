@@ -111,9 +111,17 @@ form{
 .link1{
     display: block;
     cursor: pointer;
+    font-size:14px;
+    color: blue;
+    text-decoration: underline;
 }
 #dob{
     width: 213px;
     margin-top: 20px;
     margin-left: 10px;
+}
+.uploadFile{
+    display: initial;
+    border: 1px solid white;
+    padding: 1px;
 }

@@ -8,9 +8,9 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { useNavigate } from "react-router-dom";
-import * as FileSaver from 'file-saver';
+import {ExcelRenderer} from 'react-excel-renderer';
 import * as XLSX from 'xlsx';
-
+import * as FileSaver from 'file-saver';
 
 // Import Material Icons
 import { forwardRef } from 'react';
@@ -27,6 +27,7 @@ import LastPage from '@material-ui/icons/LastPage';
 import Remove from '@material-ui/icons/Remove';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
+
 
 const style = {
   position: 'absolute',
@@ -72,21 +73,10 @@ function ManageStudent () {
   const [modalIsOpen,setModalIsOpen] = useState(false);
   const [detailsOpen, setdetailsOpen] = useState(false);
 
-  const showModal = () => {
-    setModalIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setModalIsOpen(false);
-  };
-
-  const showDetails = () => {
-    setdetailsOpen(true);
-  }
-
-  const closeDetails = () => {
-    setdetailsOpen(false);
-  }
+  const showModal = () => { setModalIsOpen(true);};
+  const closeModal = () => {setModalIsOpen(false);};
+  const showDetails = () => {setdetailsOpen(true);}
+  const closeDetails = () => {setdetailsOpen(false);}
 
   const navigate = useNavigate();
 
@@ -95,41 +85,16 @@ function ManageStudent () {
     navigate("/manageStudent");
   }
 
-  const handleName = event => {
-    setName(event.target.value)
-  }
+  const handleName = event => {setName(event.target.value)}
+  const handlebgroup = event => {setBgroup(event.target.value)}
+  const handleAadhar = event => {setAadhar(event.target.value)}
+  const handleDob = event => {setDob(event.target.value)}
+  const handleGender = event => {setGender(event.target.value)}
+  const handleGrade = event => {setGrade(event.target.value)}
+  const handleSection = event => {setSection(event.target.value)}
+  const handleID = event => {setID(event.target.value)}
+  const handleEC = event => {setEC(event.target.value)}
 
-  const handlebgroup = event => {
-    setBgroup(event.target.value)
-  }
-
-  const handleAadhar = event => {
-    setAadhar(event.target.value)
-  }
-
-  const handleDob = event => {
-    setDob(event.target.value)
-  }
-
-  const handleGender = event => {
-    setGender(event.target.value)
-  }
-
-  const handleGrade = event => {
-    setGrade(event.target.value)
-  }
-
-  const handleSection = event => {
-    setSection(event.target.value)
-  }
-
-  const handleID = event => {
-    setID(event.target.value)
-  }
-
-  const handleEC = event => {
-    setEC(event.target.value)
-  }
   const downloadTemplate = () => {
     const fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
     const fileExtension = '.xlsx';
@@ -142,11 +107,27 @@ function ManageStudent () {
     FileSaver.saveAs(data, fileName + fileExtension);
     closeModal();
   }
-
-	const handleSubmission = () => {
-    console.log('hello')
-	};
-  
+  const fileReader = (event) => {
+    let fileObj = event.target.files[0];
+    ExcelRenderer(fileObj, (err,resp) => {
+      if(err){
+        console.log(err)
+      }
+      else{
+        closeModal();
+        var rows = resp.rows['length']
+        var header = resp.rows[0]
+        for(var j=1;j<rows;j++){
+          var s1 = resp.rows[j]
+          var obj={}
+          for(var i=0;i<header.length;i++){
+            obj[header[i]]=s1[i];
+          }
+          console.log("JSON",obj)  
+        }
+      }
+    });
+  }
   return (
     <Fragment>
       <div className="sec1">
@@ -164,8 +145,8 @@ function ManageStudent () {
           </div>
           <div className='section2'>
             <p>Upload Student details Excel by filling all details in the below template</p>
-            <Button type='file' className='btn3' onClick={handleSubmission}>Upload</Button>
-            <a className='link1' onClick={downloadTemplate}>Download Template</a>
+            <input type="file" onChange={fileReader} className='uploadFile' />
+            <p className='link1' onClick={downloadTemplate}>Download Template</p>
           </div>
         </Box>
       </Modal>
@@ -219,7 +200,7 @@ function ManageStudent () {
           </form>
         </Box>
       </Modal>
-        <MaterialTable title="Student Details" icons={tableIcons} columns={columnStudents} data={ studentData } />
+        <MaterialTable title="Student Details" icons={tableIcons} columns={columnStudents} data={studentData} />
       </div>
     </Fragment>
   )

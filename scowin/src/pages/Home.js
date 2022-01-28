@@ -24,8 +24,8 @@ import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 
 export default function Home() {
-  const percent = (studentVaccineData.length/studentData.length)*100
-
+  
+  const percent = ((studentVaccineData.length/studentData.length)*100).toFixed(2);
   const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
     Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),

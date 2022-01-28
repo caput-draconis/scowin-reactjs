@@ -55,7 +55,7 @@ function VaccinationDrive() {
       >
         <Box sx={style}>
         <div className='header3'>
-          <h5 className='header'>Add Student Details</h5>
+          <h5 className='header'>Add Vaccination Drive Details</h5>
         </div>
           <form onSubmit={handleSubmit(onSubmit)} className='d-flex flex-column'>
             <div className='input3'>

@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import * as FiIcons from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
-import { IconContext } from 'react-icons';
-import logo_image from '../images/scowin_logo_2.png';
+import logo_image from '../../images/scowin_logo_2.png';
 import Nav from 'react-bootstrap/Nav'
 
 function Navbar() {

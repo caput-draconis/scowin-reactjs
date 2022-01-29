@@ -7,6 +7,7 @@ export const studentVaccineData = [
         gender:'female',
         grade:'3',
         vaccineName:'Covaxin',
+        vaccinationDate: '21/01/2022',
         dosage:'1',
         comorbiditiesDetails:'Fever'
     },
@@ -18,6 +19,7 @@ export const studentVaccineData = [
         gender:'male',
         grade:'3',
         vaccineName:'Covaxin',
+        vaccinationDate: '21/01/2022',
         dosage:'2',
         comorbiditiesDetails:'NA'
     },
@@ -29,6 +31,7 @@ export const studentVaccineData = [
         gender:'Female',
         grade:'3',
         vaccineName:'Covaxin',
+        vaccinationDate: '21/01/2022',
         dosage:'1',
         comorbiditiesDetails:'bodypain'
     },
@@ -40,6 +43,7 @@ export const studentVaccineData = [
         gender:'Male',
         grade:'4',
         vaccineName:'Covaxin',
+        vaccinationDate: '21/01/2022',
         dosage:'2',
         comorbiditiesDetails:'NA'
     },
@@ -51,6 +55,7 @@ export const studentVaccineData = [
         gender:'Male',
         grade:'2',
         vaccineName:'Covaxin',
+        vaccinationDate: '20/01/2022',
         dosage:'2',
         comorbiditiesDetails:'Headache'
     },
@@ -62,6 +67,7 @@ export const studentVaccineData = [
         gender:'Female',
         grade:'7',
         vaccineName:'Covisheild',
+        vaccinationDate: '20/01/2022',
         dosage:'1',
         comorbiditiesDetails:'Sevre body pain'
     },
@@ -73,6 +79,7 @@ export const studentVaccineData = [
         gender:'Female',
         grade:'4',
         vaccineName:'Covisheild',
+        vaccinationDate: '20/01/2022',
         dosage:'1',
         comorbiditiesDetails:'NA'
     },
@@ -84,6 +91,7 @@ export const studentVaccineData = [
         gender:'Male',
         grade:'7',
         vaccineName:'Covishield',
+        vaccinationDate: '15/01/2022',
         dosage:'1',
         comorbiditiesDetails:'Feverish'
     },
@@ -95,6 +103,7 @@ export const studentVaccineData = [
         gender:'Female',
         grade:'7',
         vaccineName:'Covaxin',
+        vaccinationDate: '15/01/2022',
         dosage:'2',
         comorbiditiesDetails:'NA'
     },
@@ -106,6 +115,7 @@ export const studentVaccineData = [
         gender:'Female',
         grade:'7',
         vaccineName:'Covisheild',
+        vaccinationDate: '20/01/2022',
         dosage:'1',
         comorbiditiesDetails:'NA'
     },
@@ -117,6 +127,7 @@ export const studentVaccineData = [
         gender:'Male',
         grade:'8',
         vaccineName:'Covisheild',
+        vaccinationDate: '19/01/2022',
         dosage:'1',
         comorbiditiesDetails:'Fever'
     },
@@ -128,6 +139,7 @@ export const studentVaccineData = [
         gender:'Female',
         grade:'7',
         vaccineName:'Covisheild',
+        vaccinationDate: '17/01/2022',
         dosage:'2',
         comorbiditiesDetails:'NA'
     },
@@ -139,6 +151,7 @@ export const studentVaccineData = [
         gender:'Female',
         grade:'8',
         vaccineName:'Covisheild',
+        vaccinationDate: '17/01/2022',
         dosage:'1',
         comorbiditiesDetails:'fever'
     }
@@ -166,8 +179,12 @@ export const studentVaccinationHeaders = [
         field: 'gender'
     },
     {
-        title: 'Vaccination name',
+        title: 'Vaccination Name',
         field: 'vaccineName'
+    },
+    {
+        title: 'Vaccination Date',
+        field: 'vaccinationDate'
     },
     {
         title: 'Vaccine dosage',

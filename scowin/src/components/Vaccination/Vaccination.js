@@ -1,6 +1,6 @@
-import page from '../images/page1.png';
+import page from '../../images/page1.png';
 import React, { Fragment } from 'react';
-import './style.css';
+import '../../common/Styles/style.css';
 
 export default function Vaccination() {
   return (

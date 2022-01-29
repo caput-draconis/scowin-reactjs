@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
-import './style.css';
+import '../../common/Styles/style.css';
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
-import { vaccineData, vaccineHeaders } from '../data/vaccineData';
-import { studentVaccineData } from '../data/studentVaccination';
-import { studentData } from '../data/studentData';
+import { vaccineData, vaccineHeaders } from '../../data/vaccineData';
+import { studentVaccineData } from '../../data/studentVaccination';
+import { studentData } from '../../data/studentData';
 import MaterialTable from "@material-table/core";
 
 // Import Material Icons

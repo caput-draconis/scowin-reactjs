@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
 import { useState } from 'react';
-import './style.css';
+import '../../common/Styles/style.css';
 import MaterialTable from "@material-table/core";
-import { studentData, columnStudents } from '../data/studentData';
+import { studentData, columnStudents } from '../../data/studentData';
 import Button from 'react-bootstrap/Button'
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';

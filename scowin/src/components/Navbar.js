@@ -13,10 +13,10 @@ function Navbar() {
   return (
     <>
       <div className='d-flex flex-direction-row bg-light justify-content-between align-items-center'>
-        <img src={logo_image} alt='logo_image' className='img3'></img>
+        <img src={logo_image} alt='logo_image' className='logo-image'></img>
         <Nav className="justify-content-end" activeKey="/home">
           <Nav.Item>
-            <Nav.Link as={Link}to="/"><span><AiIcons.AiFillHome /> Home  </span></Nav.Link>
+            <Nav.Link as={Link} to="/"><span><AiIcons.AiFillHome /> Home  </span></Nav.Link>
           </Nav.Item>
           <Nav.Item>
             <Nav.Link as={Link} to="/manageStudent"><span> <FaIcons.FaUserFriends /> Manage Student Details </span></Nav.Link>

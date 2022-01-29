@@ -60,6 +60,7 @@ const tableIcons = {
 };
 
 function ManageStudent () {
+  
   const [name, setName] = useState('');
   const [bgroup, setBgroup] = useState('');
   const [aadhar, setAadhar] = useState('');
@@ -114,6 +115,7 @@ function ManageStudent () {
         console.log(err)
       }
       else{
+        console.log("R",resp)
         closeModal();
         var rows = resp.rows['length']
         var header = resp.rows[0]
@@ -130,8 +132,8 @@ function ManageStudent () {
   }
   return (
     <Fragment>
-      <div className="sec1">
-        <div className='bt1'>
+      <div>
+        <div className='button-section'>
           <Button className='vaccination-drive-button' onClick={showModal}>Upload Students</Button>
           <Button className='vaccination-drive-button' onClick={showDetails}>Add New Student</Button>
         </div>
@@ -140,13 +142,13 @@ function ManageStudent () {
         onClose={closeModal}
       >
         <Box sx={style}>
-          <div className='header3'>
-            <h5 className='header2'>Upload Students Details</h5>
+          <div className='popup-section'>
+            <h5 className='popup-header'>Upload Students Details</h5>
           </div>
-          <div className='section2'>
+          <div className='upload-students-content'>
             <p>Upload Student details Excel by filling all details in the below template</p>
-            <input type="file" onChange={fileReader} className='uploadFile' />
-            <p className='link1' onClick={downloadTemplate}>Download Template</p>
+            <input type="file" onChange={fileReader} className='upload-file' />
+            <p className='download-template' onClick={downloadTemplate}>Download Template</p>
           </div>
         </Box>
       </Modal>
@@ -155,26 +157,26 @@ function ManageStudent () {
         onClose={closeDetails}
       >
         <Box sx={style}>
-          <div className='header3'>
-            <h5 className='header2'>Add Student Details</h5>
+          <div className='popup-section'>
+            <h5 className='popup-header'>Add Student Details</h5>
           </div>
           <form onSubmit={submitDetails}>
-            <input className="input" type="number" placeholder="Student ID" value={ID} onChange={handleID} />
-            <input className="input" type="text" placeholder="Full Name" value={name} onChange={handleName} />
-            <div className='inp1'>
+            <input className="form-input" type="number" placeholder="Student ID" value={ID} onChange={handleID} />
+            <input className="form-input" type="text" placeholder="Full Name" value={name} onChange={handleName} />
+            <div className='form-select-section'>
               <label>Date of Birth</label>
-              <input className="input" id="dob" type="date" placeholder="Date of Birth" value={dob} onChange={handleDob} />
+              <input className="form-input" id="dob" type="date" placeholder="Date of Birth" value={dob} onChange={handleDob} />
             </div>
-            <div onChange={handleGender} value={gender} className='g1'>
+            <div onChange={handleGender} value={gender} className='gender-class'>
               <label>Gender</label>
               <input type="radio" value="Male" className="gender" /> Male
               <input type="radio" value="Female" className="gender" /> Female
               <input type="radio" value="Other" className="gender" /> Other
             </div>
-            <input className="input" type="text" placeholder="Blood Group" value={bgroup} onChange={handlebgroup} />
-            <div className='inp1'>
+            <input className="form-input" type="text" placeholder="Blood Group" value={bgroup} onChange={handlebgroup} />
+            <div className='form-select-section'>
               <label> Grade </label>
-              <select className="input1" id="grade" onChange={handleGrade} value={grade}> 
+              <select className="form-select" id="grade" onChange={handleGrade} value={grade}> 
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="2">3</option>
@@ -187,16 +189,16 @@ function ManageStudent () {
                 <option value="2">10</option>
               </select>
             </div>
-            <div className='inp1'>
+            <div className='form-select-section'>
               <label>Section</label>
-              <select className="input1" onChange={handleSection} value={section}> 
+              <select className="form-select" onChange={handleSection} value={section}> 
                 <option value="A">A</option>
                 <option value="B">B</option>
               </select>
             </div>
-            <input className="input" type="number" placeholder="Aadhar Card Number" value={aadhar} onChange={handleAadhar} />
+            <input className="form-input" type="number" placeholder="Aadhar Card Number" value={aadhar} onChange={handleAadhar} />
             <TextField id="outlined-multiline-static" label="Existing Comoribidities" multiline rows={4}  value={EC} onChange={handleEC}  />
-            <Button type='submit' className='btn2'>Submit</Button>
+            <Button type='submit' className='submit-button'>Submit</Button>
           </form>
         </Box>
       </Modal>

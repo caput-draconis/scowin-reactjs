@@ -2,12 +2,12 @@ import page from '../images/page1.png';
 import React, { Fragment } from 'react';
 import './style.css';
 
-export default function vaccination() {
+export default function Vaccination() {
   return (
     <Fragment>
-      <div className="sec1">
+      <div>
         <div> 
-            <img className="img1" src={page} alt='page_construction' />
+            <img src={page} alt='page_construction' />
         </div>
       </div>
     </Fragment>

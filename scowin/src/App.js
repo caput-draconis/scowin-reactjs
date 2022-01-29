@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes , Route } from 'react-router-dom';
-import Home from './pages/Home';
-import Navbar from './components/Navbar';
+import Home from './components/Home/Home';
+import Navbar from './components/Navbar/Navbar';
 import VaccinationDrive from './components/VaccinationDrive/VaccinationDrive';
-import Vaccine from './pages/vaccination';
-import Managestud from './pages/manageStudent';
+import Vaccine from './components/Vaccination/Vaccination';
+import Managestud from './components/ManageStudent/ManageStudent';
 import GenerateReports from './components/GenerateReports/GenerateReports';
 
 function App() {

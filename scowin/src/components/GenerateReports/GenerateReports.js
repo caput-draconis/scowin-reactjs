@@ -1,8 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import './GenerateReports.css';
 import { studentVaccinationHeaders, studentVaccineData } from '../../data/studentVaccination'; 
-import Table from '../table';
+import Table from '../../common/components/table/table';
 
 const GenerateReports = () => (
   <div className="GenerateReports">

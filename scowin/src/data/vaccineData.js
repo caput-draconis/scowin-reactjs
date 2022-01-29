@@ -13,7 +13,7 @@ export const vaccineData = [
         dosesAvailable:500,
         slots:3,
         driveApproval:'Not Approved',
-        driveStatus:'Upcoming'
+        driveStatus:'Completed'
     },
     {
         vaccinationDate:'30/01/2022',
@@ -29,7 +29,7 @@ export const vaccineData = [
         dosesAvailable:450,
         slots:4,
         driveApproval:'Not Approved',
-        driveStatus:'Upcoming'
+        driveStatus:'Completed'
     },
     {
         vaccinationDate:'12/03/2022',

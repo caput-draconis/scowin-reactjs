@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import Button from 'react-bootstrap/Button'
-import Typography from '@mui/material/Typography';
+import Button from 'react-bootstrap/Button';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import { useForm } from "react-hook-form";
 import './VaccinationDrive.css'
-import Table from '../table';
+import Table from '../../common/components/table/table';
 import { vaccineData, vaccineHeaders } from '../../data/vaccineData';
 
 const style = {

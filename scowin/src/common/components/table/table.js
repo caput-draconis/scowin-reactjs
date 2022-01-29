@@ -115,7 +115,7 @@ class Table extends React.Component {
           title={this.props.header}
           icons={tableIcons}
           columns={columns}
-          data={ data }
+          data={data}
           options={{
             filtering: true,
             exportMenu: [{
@@ -126,17 +126,20 @@ class Table extends React.Component {
               exportFunc: (cols, datas) => ExportCsv(cols, datas, 'CsvFile')
             }]
           }}
-          actions={this.props.isEdit? [
-            {
-              icon: () => <Edit />,
-              tooltip: 'Edit',
-              onClick: (event, rowData) => {
-                const rowJson = JSON.stringify(rowData, null, 2);
-                this.props.parentCallback(rowData);
+          actions={this.props.isEdit ? [
+            (rowData) => {
+              return {
+                icon: () => <Edit />,
+                tooltip: 'Edit',
+                disabled: rowData.driveStatus === "Completed",
+                onClick: (event, rowData) => {
+                  const rowJson = JSON.stringify(rowData, null, 2);
+                  this.props.parentCallback(rowData);
+                }
               }
             }
-          ]: null}
-          
+          ] : null}
+
         />
       </div>
     );

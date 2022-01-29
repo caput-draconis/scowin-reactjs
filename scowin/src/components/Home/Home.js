@@ -45,9 +45,9 @@ export default function Home() {
   };
   return (
     <Fragment>
-      <div className="sec">
+      <div>
          <div> 
-            <h3 className='home-head'> Overview </h3>
+            <h3 className='home-header'> Overview </h3>
             <CardGroup>
                <Card>
                  <Card.Header>
@@ -87,8 +87,8 @@ export default function Home() {
                 </Card>
               </CardGroup>
         </div>
-        <div className='data1'>
-          {vaccineData.length===0 ? <p className='home-head'>No Upcoming Drives</p> :<MaterialTable title="Vaccination Drive" icons={tableIcons} columns={vaccineHeaders} data={ vaccineData } />}
+        <div className='vaccine-table'>
+          {vaccineData.length===0 ? <p className='home-header'>No Upcoming Drives</p> :<MaterialTable title="Vaccination Drive" icons={tableIcons} columns={vaccineHeaders} data={ vaccineData } />}
         </div>
       </div>
     </Fragment>

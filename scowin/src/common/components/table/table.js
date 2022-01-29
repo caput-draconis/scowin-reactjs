@@ -43,68 +43,7 @@ const tableIcons = {
 class Table extends React.Component {
 
   render() {
-
-    // Material Table Columns
-    //   const columns = [     
-    //     { title: 'Id', field: 'id' },
-    //     { title: 'Name', field: 'name' },
-    //     { title: 'DOB', field: 'dob' },
-    //     { title: 'Gender', field: 'gender' },
-    //     { title: 'Grade', field: 'grade' },
-    //     { title: 'Section', field: 'section' },
-    //     { title: 'AAdhar', field: 'aadhar' },
-    //   ]
-
-    //   // Material Table Columns Rows
-    //   const data = [
-    //       {
-    //           id: "142107",
-    //           name: "Y Diyva",
-    //           dob: "20-Jan-2009",
-    //           gender: "Female",
-    //           grade: "2",
-    //           section: "A",
-    //           aadhar: "123456789123"
-    //         },
-    //         {
-    //             id: "142107",
-    //             name: "Suman",
-    //             dob: "20-Jan-2009",
-    //             gender: "Female",
-    //             grade: "2",
-    //             section: "A",
-    //             aadhar: "123456789123"
-    //           },
-    //           {
-    //             id: "142107",
-    //             name: "Eliza",
-    //             dob: "20-Jan-2009",
-    //             gender: "Female",
-    //             grade: "2",
-    //             section: "A",
-    //             aadhar: "123456789123"
-    //           },
-    //           {
-    //             id: "142107",
-    //             name: "Anita",
-    //             dob: "20-Jan-2009",
-    //             gender: "Female",
-    //             grade: "2",
-    //             section: "A",
-    //             aadhar: "123456789123"
-    //           },
-    //           {
-    //             id: "142107",
-    //             name: "Ratna",
-    //             dob: "20-Jan-2010",
-    //             gender: "Female",
-    //             grade: "2",
-    //             section: "A",
-    //             aadhar: "123456789123"
-    //           }
-    //  ];
-
-
+    
     const columns = this.props.columns;
     const data = this.props.rows;
 

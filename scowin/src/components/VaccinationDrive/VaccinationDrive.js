@@ -52,21 +52,21 @@ function VaccinationDrive() {
         onClose={closeModal}
       >
         <Box sx={style}>
-        <div className='header3'>
-          <h5 className='header'>Add Vaccination Drive Details</h5>
+        <div className='popup-section'>
+          <h5 className='popup-header'>Add Vaccination Drive Details</h5>
         </div>
           <form onSubmit={handleSubmit(onSubmit)} className='d-flex flex-column'>
-            <div className='input3'>
+            <div className='form-input'>
               <label>Vaccine Name</label>
-              <select className="vaccineName" {...register("vaccineName", { required: true })}>
+              <select className="vaccine-name" {...register("vaccineName", { required: true })}>
                 <option value="Covaxin">Covaxin</option>
                 <option value="Covisheild">Covisheild</option>
                 <option value="Sputnik V">Sputnik V</option>
               </select>
             </div>
-            <div className='input3'>
+            <div className='form-input'>
               <label>Slots</label>
-              <input className='input4'
+              <input className='slots'
                 type="number"
                 {...register("slots", {
                   required: true,
@@ -74,16 +74,16 @@ function VaccinationDrive() {
                 })}
               />
             </div>
-            <div className='input3'>
+            <div className='form-input'>
               <label>Vaccination Date</label>
-              <input className='ivaccine'
+              <input className='vaccine-date'
                 type="date"
                 {...register("vaccinationDate", { required: true, valueAsDate: true })}
               />
             </div>
-            <div className='input3'>
+            <div className='form-input'>
               <label>Doses Available</label>
-              <input  className='input5'
+              <input  className='doses-available'
                 type="number"
                 {...register("dosesAvailable", {
                   required: true,
@@ -91,19 +91,7 @@ function VaccinationDrive() {
                 })}
               />
             </div>
-            {/* <label>Are you a developer?</label>
-      <input
-        type="radio"
-        value="Yes"
-        {...register("developer", { required: true })}
-      />
-      <input
-        type="radio"
-        value="No"
-        {...register("developer", { required: true })}
-      /> */}
-
-          <Button type='submit' className='btn2'>Submit</Button>
+          <Button type='submit' className='submit-button'>Submit</Button>
           </form>
         </Box>
       </Modal>

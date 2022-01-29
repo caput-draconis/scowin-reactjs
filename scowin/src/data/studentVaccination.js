@@ -162,7 +162,7 @@ export const studentVaccinationHeaders = [
         field: 'dob'
     },
     {
-        title: 'Genderl',
+        title: 'Gender',
         field: 'gender'
     },
     {

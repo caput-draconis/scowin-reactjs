@@ -7,10 +7,10 @@ import Button from 'react-bootstrap/Button'
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { useNavigate } from "react-router-dom";
-import {ExcelRenderer} from 'react-excel-renderer';
+import { ExcelRenderer } from 'react-excel-renderer';
 import * as XLSX from 'xlsx';
 import * as FileSaver from 'file-saver';
+import { useForm } from "react-hook-form";
 
 // Import Material Icons
 import { forwardRef } from 'react';
@@ -59,77 +59,62 @@ const tableIcons = {
   ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
 };
 
-function ManageStudent () {
-  
-  const [name, setName] = useState('');
-  const [bgroup, setBgroup] = useState('');
-  const [aadhar, setAadhar] = useState('');
-  const [dob, setDob] = useState('');
-  const [gender, setGender] = useState('');
-  const [grade, setGrade] = useState('');
-  const [section, setSection] = useState('');
-  const [ID, setID] = useState('');
-  const [EC, setEC] = useState('');
+function ManageStudent() {
 
-  const [modalIsOpen,setModalIsOpen] = useState(false);
+  const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm(
+    { mode: "onChange" }
+  );
+
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [detailsOpen, setdetailsOpen] = useState(false);
 
-  const showModal = () => { setModalIsOpen(true);};
-  const closeModal = () => {setModalIsOpen(false);};
-  const showDetails = () => {setdetailsOpen(true);}
-  const closeDetails = () => {setdetailsOpen(false);}
+  const showModal = () => { setModalIsOpen(true); };
+  const closeModal = () => { setModalIsOpen(false); };
+  const showDetails = () => { setdetailsOpen(true); }
+  const closeDetails = () => { setdetailsOpen(false); }
 
-  const navigate = useNavigate();
-
-  const submitDetails = () => {
-    console.log('submitted successfully')
-    navigate("/manageStudent");
-  }
-
-  const handleName = event => {setName(event.target.value)}
-  const handlebgroup = event => {setBgroup(event.target.value)}
-  const handleAadhar = event => {setAadhar(event.target.value)}
-  const handleDob = event => {setDob(event.target.value)}
-  const handleGender = event => {setGender(event.target.value)}
-  const handleGrade = event => {setGrade(event.target.value)}
-  const handleSection = event => {setSection(event.target.value)}
-  const handleID = event => {setID(event.target.value)}
-  const handleEC = event => {setEC(event.target.value)}
+  const submitDetails = (data) => {
+    console.log('data: ', data);
+    reset();
+    closeDetails();
+  };
 
   const downloadTemplate = () => {
     const fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
     const fileExtension = '.xlsx';
     const fileName = 'bulkUpload'
-    const csvData = [ {Id:'', Name:'', Dob:'', Gender:'', Blood_Group:'', Grade:'', Section:'', AAdhar:'',Existing_Comorbidities:''} ]
+    const csvData = [{ Id: '', Name: '', Dob: '', Gender: '', Blood_Group: '', Grade: '', Section: '', AAdhar: '', Existing_Comorbidities: '' }]
     const ws = XLSX.utils.json_to_sheet(csvData);
     const wb = { Sheets: { 'data': ws }, SheetNames: ['data'] };
     const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
-    const data = new Blob([excelBuffer], {type: fileType});
+    const data = new Blob([excelBuffer], { type: fileType });
     FileSaver.saveAs(data, fileName + fileExtension);
     closeModal();
-  }
+  };
+
   const fileReader = (event) => {
     let fileObj = event.target.files[0];
-    ExcelRenderer(fileObj, (err,resp) => {
-      if(err){
+    ExcelRenderer(fileObj, (err, resp) => {
+      if (err) {
         console.log(err)
       }
-      else{
-        console.log("R",resp)
+      else {
+        console.log("R", resp)
         closeModal();
         var rows = resp.rows['length']
         var header = resp.rows[0]
-        for(var j=1;j<rows;j++){
+        for (var j = 1; j < rows; j++) {
           var s1 = resp.rows[j]
-          var obj={}
-          for(var i=0;i<header.length;i++){
-            obj[header[i]]=s1[i];
+          var obj = {}
+          for (var i = 0; i < header.length; i++) {
+            obj[header[i]] = s1[i];
           }
-          console.log("JSON",obj)  
+          console.log("JSON", obj)
         }
       }
     });
-  }
+  };
+
   return (
     <Fragment>
       <div>
@@ -138,70 +123,93 @@ function ManageStudent () {
           <Button className='vaccination-drive-button' onClick={showDetails}>Add New Student</Button>
         </div>
         <Modal
-        open={modalIsOpen}
-        onClose={closeModal}
-      >
-        <Box sx={style}>
-          <div className='popup-section'>
-            <h5 className='popup-header'>Upload Students Details</h5>
-          </div>
-          <div className='upload-students-content'>
-            <p>Upload Student details Excel by filling all details in the below template</p>
-            <input type="file" onChange={fileReader} className='upload-file' />
-            <p className='download-template' onClick={downloadTemplate}>Download Template</p>
-          </div>
-        </Box>
-      </Modal>
-      <Modal
-        open={detailsOpen}
-        onClose={closeDetails}
-      >
-        <Box sx={style}>
-          <div className='popup-section'>
-            <h5 className='popup-header'>Add Student Details</h5>
-          </div>
-          <form onSubmit={submitDetails}>
-            <input className="form-input" type="number" placeholder="Student ID" value={ID} onChange={handleID} />
-            <input className="form-input" type="text" placeholder="Full Name" value={name} onChange={handleName} />
-            <div className='form-select-section'>
-              <label>Date of Birth</label>
-              <input className="form-input" id="dob" type="date" placeholder="Date of Birth" value={dob} onChange={handleDob} />
+          open={modalIsOpen}
+          onClose={closeModal}
+        >
+          <Box sx={style}>
+            <div className='popup-section'>
+              <h5 className='popup-header'>Upload Students Details</h5>
             </div>
-            <div onChange={handleGender} value={gender} className='gender-class'>
-              <label>Gender</label>
-              <input type="radio" value="Male" className="gender" /> Male
-              <input type="radio" value="Female" className="gender" /> Female
-              <input type="radio" value="Other" className="gender" /> Other
+            <div className='upload-students-content'>
+              <p>Upload Student details Excel by filling all details in the below template</p>
+              <input type="file" onChange={fileReader} className='upload-file' />
+              <p className='download-template' onClick={downloadTemplate}>Download Template</p>
             </div>
-            <input className="form-input" type="text" placeholder="Blood Group" value={bgroup} onChange={handlebgroup} />
-            <div className='form-select-section'>
-              <label> Grade </label>
-              <select className="form-select" id="grade" onChange={handleGrade} value={grade}> 
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="2">3</option>
-                <option value="2">4</option>
-                <option value="2">5</option>
-                <option value="2">6</option>
-                <option value="2">7</option>
-                <option value="2">8</option>
-                <option value="2">9</option>
-                <option value="2">10</option>
-              </select>
+          </Box>
+        </Modal>
+        <Modal
+          open={detailsOpen}
+          onClose={closeDetails}
+        >
+          <Box sx={style}>
+            <div className='popup-section'>
+              <h5 className='popup-header'>Add Student Details</h5>
             </div>
-            <div className='form-select-section'>
-              <label>Section</label>
-              <select className="form-select" onChange={handleSection} value={section}> 
-                <option value="A">A</option>
-                <option value="B">B</option>
-              </select>
-            </div>
-            <input className="form-input" type="number" placeholder="Aadhar Card Number" value={aadhar} onChange={handleAadhar} />
-            <TextField id="outlined-multiline-static" label="Existing Comoribidities" multiline rows={4}  value={EC} onChange={handleEC}  />
-            <Button type='submit' className='submit-button'>Submit</Button>
-          </form>
-        </Box>
-      </Modal>
+            <form onSubmit={handleSubmit(submitDetails)}>
+              <input className="form-input" type="number" placeholder="Student ID" {...register("studentID", {
+                required: "This is a required field.", maxLength: {
+                  value: 4,
+                  message: "Maximum value is 4, ex. 8877"
+                }
+              })} />
+              {errors.studentID && <p className='m-0 mt-2 alert-danger'>{errors.studentID.message}</p>}
+              <input className="form-input" type="text" placeholder="Full Name" {...register("name", {
+                required: "This is a required field.", pattern: {
+                  value: /^[a-zA-Z\\s]*$/,
+                  message: "Value doesn't match the correct validation"
+                }
+              })} />
+              {errors.name && <p className='m-0 mt-2 alert-danger'>{errors.name.message}</p>}
+              <div className='form-select-section'>
+                <label>Date of Birth</label>
+                <input className="form-input" id="dob" type="date" placeholder="Date of Birth" {...register("dob", { required: "This is a required field.", valueAsDate: true })} />
+                {errors.dob && <p className='m-0 mt-2 alert-danger'>{errors.dob.message}</p>}
+              </div>
+              <div {...register("gender", { required: "This is a required field." })} className='gender-class'>
+                <label>Gender</label>
+                <input type="radio" value="Male" className="gender" /> Male
+                <input type="radio" value="Female" className="gender" /> Female
+                <input type="radio" value="Other" className="gender" /> Other
+                {errors.gender && <p className='m-0 mt-2 alert-danger'>{errors.gender.message}</p>}
+              </div>
+              <input className="form-input" type="text" placeholder="Blood Group" {...register("bgGroup", {
+                required: "This is a required field.", pattern: {
+                  value: /^(A|B|AB|O)[+-]$/,
+                  message: "Value doesn't match the correct validation, eg. A+, B+, AB+"
+                }
+              })} />
+              {errors.bgGroup && <p className='m-0 mt-2 alert-danger'>{errors.bgGroup.message}</p>}
+              <div className='form-select-section'>
+                <label> Grade </label>
+                <select className="form-select" id="grade" {...register("grade", { required: "This is a required field." })}>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="2">3</option>
+                  <option value="2">4</option>
+                  <option value="2">5</option>
+                  <option value="2">6</option>
+                  <option value="2">7</option>
+                  <option value="2">8</option>
+                  <option value="2">9</option>
+                  <option value="2">10</option>
+                </select>
+                {errors.grade && <p className='m-0 mt-2 alert-danger'>{errors.grade.message}</p>}
+              </div>
+              <div className='form-select-section'>
+                <label>Section</label>
+                <select className="form-select" {...register("section", { required: "This is a required field." })}>
+                  <option value="A">A</option>
+                  <option value="B">B</option>
+                </select>
+                {errors.section && <p className='m-0 mt-2 alert-danger'>{errors.section.message}</p>}
+              </div>
+              <input className="form-input" type="number" placeholder="Aadhar Card Number" {...register("aadhar", { required: "This is a required field.", pattern: { value: /^[2-9]{1}[0-9]{3}[0-9]{4}[0-9]{4}$/, message: "Value doesn't match the required patter." } })} />
+              {errors.aadhar && <p className='m-0 mt-2 alert-danger'>{errors.aadhar.message}</p>}
+              <TextField id="outlined-multiline-static" label="Existing Comoribidities" multiline rows={4}  {...register("EC", { required: "This is a required field." })} />
+              <Button type='submit' className='submit-button' disabled={!isValid} >Submit</Button>
+            </form>
+          </Box>
+        </Modal>
         <MaterialTable title="Student Details" icons={tableIcons} columns={columnStudents} data={studentData} />
       </div>
     </Fragment>

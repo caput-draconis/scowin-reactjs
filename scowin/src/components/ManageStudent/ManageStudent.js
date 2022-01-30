@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { useState } from 'react';
-import '../../common/Styles/style.css';
+import './manageStudent.css';
 import MaterialTable from "@material-table/core";
 import { studentData, columnStudents } from '../../data/studentData';
 import Button from 'react-bootstrap/Button'

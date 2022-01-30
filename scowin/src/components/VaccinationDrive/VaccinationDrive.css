@@ -76,3 +76,7 @@ select {
   margin-bottom: -16px;
   margin-top: 16px;
 }
+.button-sec{
+  text-align: right;
+  margin-bottom: -45px;
+}

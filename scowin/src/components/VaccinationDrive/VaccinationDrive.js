@@ -28,7 +28,7 @@ function VaccinationDrive() {
   const closeModal = () => {
     setModalIsOpen(false);
   };
-  const { register, handleSubmit, errors, reset, setValue } = useForm()
+  const { register, handleSubmit, reset, setValue } = useForm()
   const onSubmit = data => {
     console.log('data: ', data);
     reset();
@@ -45,7 +45,9 @@ function VaccinationDrive() {
 
   return (
     <div className="d-flex flex-column">
-      <Button className='vaccination-drive-button' onClick={showModal}>Add Vaccination Drive</Button>
+      <div className='button-sec'>
+        <Button className='vaccination-drive-button' onClick={showModal}>Add Vaccination Drive</Button>
+      </div>
       <Table columns={vaccineHeaders} rows={vaccineData} header="Vaccination Drive" isEdit={true} parentCallback={editClicked} />
       <Modal
         open={modalIsOpen}

@@ -1,40 +1,3 @@
-.card{
-    width: 20rem;
-    border: 1px solid #ADACAC;
-    background-color: #F9EBEB;
-    padding: 10px;
-}
-.home-header {
-    text-align: left;
-    font-size:18px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-.card-group{
-    display: flex;
-}
-.card-link{
-    display: contents;
-}
-.card-body{
-    text-align: left;
-}
-.card-header{
-    text-align: right;
-}
-hr{
-    color: #ADACAC !important;
-}
-.card-title{
-    font-weight: bold;
-}
-.card-text{
-    font-size: 16px;
-}
-.vaccine-table{
-    text-align: left;
-    margin-top: 50px;
-}
 .vaccination-drive-button {
     display: flex;
     margin: 10px;
@@ -48,10 +11,11 @@ hr{
     margin-bottom: 15px;
 }
 .form-select{
+    padding: 1px !important;
     margin-top: 17px;
     margin-bottom: 17px;
     margin-left: 7px;
-    width: 240px;
+    width: 247px !important;
     height: 30px;
 }
 #grade{

@@ -1,11 +1,12 @@
 import React, { Fragment } from 'react';
-import '../../common/Styles/style.css';
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
 import { vaccineData, vaccineHeaders } from '../../data/vaccineData';
 import { studentVaccineData } from '../../data/studentVaccination';
 import { studentData } from '../../data/studentData';
 import MaterialTable from "@material-table/core";
+import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
+import './Home.css'
 
 // Import Material Icons
 import { forwardRef } from 'react';
@@ -24,7 +25,17 @@ import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 
 export default function Home() {
-  
+  const COLORS = ['#0088FE', '#00C49F'];
+  const pieData = [
+        {
+            "name": "Students Registered",
+            "value": studentData.length
+        },
+        {
+            "name": "Students Vaccinated",
+            "value": studentVaccineData.length
+        }
+  ];
   const percent = ((studentVaccineData.length/studentData.length)*100).toFixed(2);
   const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -42,6 +53,18 @@ export default function Home() {
     SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
     ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
     ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
+  };
+
+  const CustomTooltip = ({ active, payload, label }) => {
+    if (active) {
+        return (
+            <div className="custom-tooltip" style={{ backgroundColor: '#ffff', padding:'5px', border: '1px solid #cccc' }}>
+                <label>{`${payload[0].name} : ${payload[0].value}%`}</label>
+            </div>
+        );
+    }
+
+    return null;
   };
   return (
     <Fragment>
@@ -74,15 +97,32 @@ export default function Home() {
                   </Card.Body>
                 </Card>
                 <Card>
+                  <Card.Header>
+                    <Card.Link href="/vaccination">View Details</Card.Link> 
+                  </Card.Header>
+                  <hr />
+                  <Card.Body>
+                    <Card.Title>{percent} %</Card.Title>
+                    <Card.Text>
+                        PERCENTAGE OF STUDENTS VACCINATED
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+                <Card>
                 <Card.Header>
                     <Card.Link href="/vaccination">View Details</Card.Link> 
                  </Card.Header>
                   <hr />
                   <Card.Body>
-                    <Card.Title>{percent} %</Card.Title>
-                    <Card.Text>
-                      PERCENTAGE OF STUDENTS VACCINATED
-                    </Card.Text>
+                  <PieChart width={1000} height={150}>
+                    <Pie data={pieData} color="#000000" dataKey="value" nameKey="name" cx="10%" cy="50%" outerRadius={50} fill="#8884d8" >
+                        {
+                          pieData.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
+                        }
+                    </Pie>
+                    <Tooltip content={<CustomTooltip />} />
+                    <Legend />
+                  </PieChart>
                   </Card.Body>
                 </Card>
               </CardGroup>

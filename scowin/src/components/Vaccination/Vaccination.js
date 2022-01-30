@@ -1,6 +1,5 @@
 import page from '../../images/page1.png';
 import React, { Fragment } from 'react';
-import '../../common/Styles/style.css';
 
 export default function Vaccination() {
   return (

@@ -28,7 +28,10 @@ function VaccinationDrive() {
   const closeModal = () => {
     setModalIsOpen(false);
   };
-  const { register, handleSubmit, reset, setValue } = useForm()
+
+  const { register, formState: { errors, isValid }, handleSubmit, reset, setValue } = useForm(
+    { mode: "onChange" }
+  );
   const onSubmit = data => {
     console.log('data: ', data);
     reset();
@@ -54,46 +57,56 @@ function VaccinationDrive() {
         onClose={closeModal}
       >
         <Box sx={style}>
-        <div className='popup-section'>
-          <h5 className='popup-header'>Add Vaccination Drive Details</h5>
-        </div>
+          <div className='popup-section'>
+            <h5 className='popup-header'>Add Vaccination Drive Details</h5>
+          </div>
           <form onSubmit={handleSubmit(onSubmit)} className='d-flex flex-column'>
             <div className='form-input'>
               <label>Vaccine Name</label>
-              <select className="vaccine-name" {...register("vaccineName", { required: true })}>
+              <select className="vaccine-name" {...register("vaccineName", { required: "This is a required field." })}>
                 <option value="Covaxin">Covaxin</option>
                 <option value="Covisheild">Covisheild</option>
                 <option value="Sputnik V">Sputnik V</option>
               </select>
             </div>
+            {errors.vaccineName && <p className='m-0 mt-2 alert-danger'>{errors.vaccineName.message}</p>}
             <div className='form-input'>
               <label>Slots</label>
               <input className='slots'
                 type="number"
                 {...register("slots", {
-                  required: true,
-                  maxLength: 3
+                  required: "This is a required field.",
+                  maxLength: {
+                    value: 2,
+                    message: "Maximum slots should be below 100"
+                  }
                 })}
               />
             </div>
+            {errors.slots && <p className='m-0 mt-2 alert-danger'>{errors.slots.message}</p>}
             <div className='form-input'>
               <label>Vaccination Date</label>
               <input className='vaccine-date'
                 type="date"
-                {...register("vaccinationDate", { required: true, valueAsDate: true })}
+                {...register("vaccinationDate", { required: "This is a required field.", valueAsDate: true })}
               />
             </div>
+            {errors.vaccinationDate && <p className='m-0 mt-2 alert-danger'>{errors.vaccinationDate.message}</p>}
             <div className='form-input'>
               <label>Doses Available</label>
-              <input  className='doses-available'
+              <input className='doses-available'
                 type="number"
                 {...register("dosesAvailable", {
-                  required: true,
-                  maxLength: 5
+                  required: "This is a required field.",
+                  maxLength: {
+                    value: 5,
+                    message: "Maximum doses should be below 10000"
+                  }
                 })}
               />
             </div>
-          <Button type='submit' className='submit-button'>Submit</Button>
+            {errors.dosesAvailable && <p className='m-0 mt-2 alert-danger'>{errors.dosesAvailable.message}</p>}
+            <Button type='submit' className='submit-button' disabled={!isValid} >Submit</Button>
           </form>
         </Box>
       </Modal>

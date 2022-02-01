@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { useState } from 'react';
 import './manageStudent.css';
-import MaterialTable from "@material-table/core";
+import Table from '../../common/components/table/table';
 import { studentData, columnStudents } from '../../data/studentData';
 import Button from 'react-bootstrap/Button'
 import Modal from '@mui/material/Modal';
@@ -11,23 +11,6 @@ import { ExcelRenderer } from 'react-excel-renderer';
 import * as XLSX from 'xlsx';
 import * as FileSaver from 'file-saver';
 import { useForm } from "react-hook-form";
-
-// Import Material Icons
-import { forwardRef } from 'react';
-import AddBox from '@material-ui/icons/AddBox';
-import ArrowDownward from '@material-ui/icons/ArrowDownward';
-import Check from '@material-ui/icons/Check';
-import ChevronLeft from '@material-ui/icons/ChevronLeft';
-import ChevronRight from '@material-ui/icons/ChevronRight';
-import Clear from '@material-ui/icons/Clear';
-import DeleteOutline from '@material-ui/icons/DeleteOutline';
-import Edit from '@material-ui/icons/Edit';
-import FirstPage from '@material-ui/icons/FirstPage';
-import LastPage from '@material-ui/icons/LastPage';
-import Remove from '@material-ui/icons/Remove';
-import Search from '@material-ui/icons/Search';
-import ViewColumn from '@material-ui/icons/ViewColumn';
-
 
 const style = {
   position: 'absolute',
@@ -39,24 +22,6 @@ const style = {
   border: '2px solid #000',
   boxShadow: 24,
   p: 4,
-};
-
-const tableIcons = {
-  Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
-  Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
-  Clear: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
-  Delete: forwardRef((props, ref) => <DeleteOutline {...props} ref={ref} />),
-  DetailPanel: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
-  Edit: forwardRef((props, ref) => <Edit {...props} ref={ref} />),
-  FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
-  LastPage: forwardRef((props, ref) => <LastPage {...props} ref={ref} />),
-  NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
-  PreviousPage: forwardRef((props, ref) => <ChevronLeft {...props} ref={ref} />),
-  ResetSearch: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
-  Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
-  SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
-  ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
-  ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
 };
 
 function ManageStudent() {
@@ -210,7 +175,7 @@ function ManageStudent() {
             </form>
           </Box>
         </Modal>
-        <MaterialTable title="Student Details" icons={tableIcons} columns={columnStudents} data={studentData} />
+        <Table columns={columnStudents} rows={studentData} header="Student Details" isEdit={false} />
       </div>
     </Fragment>
   )

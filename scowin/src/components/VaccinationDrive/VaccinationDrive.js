@@ -63,19 +63,19 @@ function VaccinationDrive() {
           <form onSubmit={handleSubmit(onSubmit)} className='d-flex flex-column'>
             <div className='form-input'>
               <label>Vaccine Name</label>
-              <select className="vaccine-name" {...register("vaccineName", { required: "This is a required field." })}>
+              <select className="vaccine-name" {...register("vaccineName", { required:"This is a required field"})}>
                 <option value="Covaxin">Covaxin</option>
                 <option value="Covisheild">Covisheild</option>
                 <option value="Sputnik V">Sputnik V</option>
               </select>
             </div>
-            {errors.vaccineName && <p className='m-0 mt-2 alert-danger'>{errors.vaccineName.message}</p>}
+            {errors.vaccineName && <p className='alert-error'>{errors.vaccineName.message}</p>}
             <div className='form-input'>
               <label>Slots</label>
               <input className='slots'
                 type="number"
                 {...register("slots", {
-                  required: "This is a required field.",
+                  required: "This is a required field",
                   maxLength: {
                     value: 2,
                     message: "Maximum slots should be below 100"
@@ -83,21 +83,21 @@ function VaccinationDrive() {
                 })}
               />
             </div>
-            {errors.slots && <p className='m-0 mt-2 alert-danger'>{errors.slots.message}</p>}
+            {errors.slots && <p className='alert-error'>{errors.slots.message}</p>}
             <div className='form-input'>
               <label>Vaccination Date</label>
               <input className='vaccine-date'
                 type="date"
-                {...register("vaccinationDate", { required: "This is a required field.", valueAsDate: true })}
+                {...register("vaccinationDate", { required: "This is a required field", valueAsDate: true })}
               />
             </div>
-            {errors.vaccinationDate && <p className='m-0 mt-2 alert-danger'>{errors.vaccinationDate.message}</p>}
+            {errors.vaccinationDate && <p className='alert-error'>{errors.vaccinationDate.message}</p>}
             <div className='form-input'>
               <label>Doses Available</label>
               <input className='doses-available'
                 type="number"
                 {...register("dosesAvailable", {
-                  required: "This is a required field.",
+                  required: "This is a required field",
                   maxLength: {
                     value: 5,
                     message: "Maximum doses should be below 10000"
@@ -105,7 +105,7 @@ function VaccinationDrive() {
                 })}
               />
             </div>
-            {errors.dosesAvailable && <p className='m-0 mt-2 alert-danger'>{errors.dosesAvailable.message}</p>}
+            {errors.dosesAvailable && <p className='alert-error'>{errors.dosesAvailable.message}</p>}
             <Button type='submit' className='submit-button' disabled={!isValid} >Submit</Button>
           </form>
         </Box>

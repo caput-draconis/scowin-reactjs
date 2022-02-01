@@ -4,6 +4,7 @@
 }
 .button-section{
     text-align: right;
+    margin-bottom: -45px;
 }
 .form-input{
     width: 300px;
@@ -23,9 +24,10 @@
 }
 .gender{
     margin-top: -30px;
-    margin-left: -20px;
+    margin-left: -10px;
     width: 50px !important;
     height: 10px !important;
+    margin-right: -80px !important;
 }
 #outlined-multiline-static{
     width: 270px;
@@ -45,9 +47,12 @@
     align-content: stretch;
     justify-content: space-around;
     align-items: baseline;
+    margin-top: -19px;
+    margin-left: -35px;
 }
 .form-select-section{
     display: flex;
+    margin-top: -19px;
 }
 form{
     font-size: 14px;
@@ -71,6 +76,12 @@ form{
     color: blue;
     text-decoration: underline;
 }
+.download-template:hover{
+    color: #7f58b5;
+}
+.download-template:active{
+    color: #7f58b5;
+}
 #dob{
     width: 213px;
     margin-top: 20px;
@@ -80,4 +91,21 @@ form{
     display: initial;
     border: 1px solid white;
     padding: 1px;
+}
+#male{
+    margin-left: -60px !important;
+}
+#female{
+    margin-left: -60px !important;
+}
+#other{
+    margin-left: -60px !important;
+}
+.alert-danger{
+    background-color: white !important;
+    font-weight: bold !important;
+    font-size: 11px !important;
+    margin-top: -0.8rem !important;
+    margin-bottom: 7px !important;
+    color: red !important;
 }

@@ -80,3 +80,13 @@ select {
   text-align: right;
   margin-bottom: -45px;
 }
+.alert-error{
+  background-color: white !important;
+  font-weight: bold !important;
+  font-size: 11px !important;
+  color: red !important;
+  margin-top: 10px;
+  margin-bottom: -9px;
+  text-align: right;
+  margin-right: 40px;
+}

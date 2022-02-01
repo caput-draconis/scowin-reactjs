@@ -112,41 +112,41 @@ function ManageStudent() {
             </div>
             <form onSubmit={handleSubmit(submitDetails)}>
               <input className="form-input" type="number" placeholder="Student ID" {...register("studentID", {
-                required: "This is a required field.", maxLength: {
+                required: "This is a required field", maxLength: {
                   value: 4,
                   message: "Maximum value is 4, ex. 8877"
                 }
               })} />
-              {errors.studentID && <p className='m-0 mt-2 alert-danger'>{errors.studentID.message}</p>}
+              {errors.studentID && <p className='alert-danger'>{errors.studentID.message}</p>}
               <input className="form-input" type="text" placeholder="Full Name" {...register("name", {
                 required: "This is a required field.", pattern: {
                   value: /^[a-zA-Z\\s]*$/,
                   message: "Value doesn't match the correct validation"
                 }
               })} />
-              {errors.name && <p className='m-0 mt-2 alert-danger'>{errors.name.message}</p>}
+              {errors.name && <p className='alert-danger'>{errors.name.message}</p>}
               <div className='form-select-section'>
                 <label>Date of Birth</label>
-                <input className="form-input" id="dob" type="date" placeholder="Date of Birth" {...register("dob", { required: "This is a required field.", valueAsDate: true })} />
-                {errors.dob && <p className='m-0 mt-2 alert-danger'>{errors.dob.message}</p>}
+                <input className="form-input" id="dob" type="date" placeholder="Date of Birth" {...register("dob", { required: "This is a required field", valueAsDate: true })} />
+                {errors.dob && <p className='alert-danger'>{errors.dob.message}</p>}
               </div>
-              <div {...register("gender", { required: "This is a required field." })} className='gender-class'>
+              <div {...register("gender", { required: "This is a required field" })} className='gender-class'>
                 <label>Gender</label>
-                <input type="radio" value="Male" className="gender" /> Male
-                <input type="radio" value="Female" className="gender" /> Female
-                <input type="radio" value="Other" className="gender" /> Other
-                {errors.gender && <p className='m-0 mt-2 alert-danger'>{errors.gender.message}</p>}
+                <input type="radio" value="Male" className="gender" id="male" /> Male
+                <input type="radio" value="Female" className="gender" id="female" /> Female
+                <input type="radio" value="Other" className="gender" id="other" /> Other
+                {errors.gender && <p className='alert-danger'>{errors.gender.message}</p>}
               </div>
               <input className="form-input" type="text" placeholder="Blood Group" {...register("bgGroup", {
-                required: "This is a required field.", pattern: {
+                required: "This is a required field", pattern: {
                   value: /^(A|B|AB|O)[+-]$/,
                   message: "Value doesn't match the correct validation, eg. A+, B+, AB+"
                 }
               })} />
-              {errors.bgGroup && <p className='m-0 mt-2 alert-danger'>{errors.bgGroup.message}</p>}
+              {errors.bgGroup && <p className='alert-danger'>{errors.bgGroup.message}</p>}
               <div className='form-select-section'>
                 <label> Grade </label>
-                <select className="form-select" id="grade" {...register("grade", { required: "This is a required field." })}>
+                <select className="form-select" id="grade" {...register("grade", { required: "This is a required field" })}>
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="2">3</option>
@@ -158,19 +158,19 @@ function ManageStudent() {
                   <option value="2">9</option>
                   <option value="2">10</option>
                 </select>
-                {errors.grade && <p className='m-0 mt-2 alert-danger'>{errors.grade.message}</p>}
+                {errors.grade && <p className='alert-danger'>{errors.grade.message}</p>}
               </div>
               <div className='form-select-section'>
                 <label>Section</label>
-                <select className="form-select" {...register("section", { required: "This is a required field." })}>
+                <select className="form-select" {...register("section", { required: "This is a required field" })}>
                   <option value="A">A</option>
                   <option value="B">B</option>
                 </select>
-                {errors.section && <p className='m-0 mt-2 alert-danger'>{errors.section.message}</p>}
+                {errors.section && <p className='alert-danger'>{errors.section.message}</p>}
               </div>
-              <input className="form-input" type="number" placeholder="Aadhar Card Number" {...register("aadhar", { required: "This is a required field.", pattern: { value: /^[2-9]{1}[0-9]{3}[0-9]{4}[0-9]{4}$/, message: "Value doesn't match the required patter." } })} />
-              {errors.aadhar && <p className='m-0 mt-2 alert-danger'>{errors.aadhar.message}</p>}
-              <TextField id="outlined-multiline-static" label="Existing Comoribidities" multiline rows={4}  {...register("EC", { required: "This is a required field." })} />
+              <input className="form-input" type="number" placeholder="Aadhar Card Number" {...register("aadhar", { required: "This is a required field", pattern: { value: /^[2-9]{1}[0-9]{3}[0-9]{4}[0-9]{4}$/, message: "Value doesn't match the required pattern" } })} />
+              {errors.aadhar && <p className='alert-danger'>{errors.aadhar.message}</p>}
+              <TextField id="outlined-multiline-static" label="Existing Comoribidities" multiline rows={4}  {...register("EC", { required: "This is a required field" })} />
               <Button type='submit' className='submit-button' disabled={!isValid} >Submit</Button>
             </form>
           </Box>

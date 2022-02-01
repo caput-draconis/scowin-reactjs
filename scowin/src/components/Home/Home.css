@@ -16,6 +16,12 @@
 .card-link{
     display: contents;
 }
+.card-link:hover{
+    color: #7f58b5;
+}
+.card-link:active{
+    color: #7f58b5;
+}
 .card-body{
     text-align: left;
 }

@@ -13,12 +13,12 @@ export default function Home() {
 
   const pieData = [
     {
-      "name": "Students Registered",
-      "value": studentData.length
-    },
-    {
       "name": "Students Vaccinated",
       "value": studentVaccineData.length
+    },
+    {
+      "name": "Students Registered",
+      "value": studentData.length
     }
   ];
 

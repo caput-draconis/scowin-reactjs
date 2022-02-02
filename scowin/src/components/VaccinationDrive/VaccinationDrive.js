@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import { useForm } from "react-hook-form";
 import './VaccinationDrive.css'
 import Table from '../../common/components/table/table';
-import { vaccineData, vaccineHeaders } from '../../data/vaccineData';
+import { vaccineHeaders } from '../../data/vaccineData';
+import * as vaccinationDriveService from '../../services/vaccination-drive-service'
+import nextId from "react-id-generator";
 
 const style = {
   position: 'absolute',
@@ -21,11 +23,14 @@ const style = {
 
 function VaccinationDrive() {
 
+  let isEditFlow = false;
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [vaccinationDriveData, setVaccinationDriveData] = useState([]);
   const showModal = () => {
     setModalIsOpen(true);
   };
   const closeModal = () => {
+    isEditFlow = false;
     setModalIsOpen(false);
   };
 
@@ -33,9 +38,39 @@ function VaccinationDrive() {
     { mode: "onChange" }
   );
   const onSubmit = data => {
-    console.log('data: ', data);
-    reset();
-    closeModal();
+    data = {
+      ...data,
+      vaccinationDate: new Date(data?.vaccinationDate).toLocaleString().split(',')[0],
+      driveApproval: 'Not Approved',
+      driveStatus: 'Upcoming'
+    };
+    if(!isEditFlow) {
+      let idPrefix = JSON.stringify(data);
+    data = {
+      ...data,
+      id: nextId(idPrefix)
+    };
+    vaccinationDriveService.addVaccinationDrive(data).then(
+      _ => {
+        reset();
+        closeModal();
+        vaccinationDriveService.getVaccinationDriveDetails().then(
+          res => setVaccinationDriveData(res)
+        )
+      }
+    );
+    } else {
+      vaccinationDriveService.editVaccinationDrive(data).then(
+        _ => {
+          reset();
+          closeModal();
+          vaccinationDriveService.getVaccinationDriveDetails().then(
+            res => setVaccinationDriveData(res)
+          )
+        }
+      );
+    }
+
   };
 
   const editClicked = (editRowData) => {
@@ -43,15 +78,23 @@ function VaccinationDrive() {
     vaccineHeaders.forEach((header) => {
       setValue(header.field, editRowData[header.field]);
     });
+    isEditFlow = true;
     showModal();
   };
+
+  useEffect(() => {
+    vaccinationDriveService.getVaccinationDriveDetails().then(
+      res => setVaccinationDriveData(res)
+    )
+  }, []);
+
 
   return (
     <div className="d-flex flex-column">
       <div className='button-sec'>
         <Button className='vaccination-drive-button' onClick={showModal}>Add Vaccination Drive</Button>
       </div>
-      <Table columns={vaccineHeaders} rows={vaccineData} header="Vaccination Drive" isEdit={true} parentCallback={editClicked} />
+      <Table columns={vaccineHeaders} rows={vaccinationDriveData} header="Vaccination Drive" isEdit={true} parentCallback={editClicked} />
       <Modal
         open={modalIsOpen}
         onClose={closeModal}

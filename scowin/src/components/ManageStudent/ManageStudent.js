@@ -41,6 +41,7 @@ function ManageStudent() {
   const closeDetails = () => {
     isEditFlow = false;
     setdetailsOpen(false);
+    reset();
   }
 
   const submitDetails = (data) => {
@@ -162,9 +163,9 @@ function ManageStudent() {
               </div>
               <div {...register("gender", { required: "This is a required field" })} className='gender-class'>
                 <label>Gender</label>
-                <input type="radio" value="Male" className="gender" id="male" /> Male
-                <input type="radio" value="Female" className="gender" id="female" /> Female
-                <input type="radio" value="Other" className="gender" id="other" /> Other
+                <input type="radio" value="Male" className="gender" name="gender" id="male" /> Male
+                <input type="radio" value="Female" className="gender" name="gender" id="female" /> Female
+                <input type="radio" value="Other" className="gender" name="gender" id="other" /> Other
                 {errors.gender && <p className='alert-danger'>{errors.gender.message}</p>}
               </div>
               <input className="form-input" type="text" placeholder="Blood Group" {...register("bloodGroup", {

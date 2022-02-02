@@ -32,6 +32,7 @@ function VaccinationDrive() {
   const closeModal = () => {
     setEditFlow(false);
     setModalIsOpen(false);
+    reset();
   };
 
   const { register, formState: { errors, isValid }, handleSubmit, reset, setValue } = useForm(
@@ -46,7 +47,6 @@ function VaccinationDrive() {
     };
     console.log(data);
     if (!isEditFlow) {
-      let idPrefix = JSON.stringify(data);
       data = {
         ...data,
         id: uuid()

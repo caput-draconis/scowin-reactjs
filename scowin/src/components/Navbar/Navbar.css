@@ -8,3 +8,6 @@
 .nav-link:active{
   color: #7f58b5 !important;
 }
+.active{
+  color: red !important;
+}

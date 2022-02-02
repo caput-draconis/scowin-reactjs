@@ -21,7 +21,7 @@ export function editVaccinationDrive(requestBody) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(requestBody)
     };
-    return fetch(`http://localhost:3000/vaccineData${requestBody.id}`, requestOptions)
+    return fetch(`http://localhost:3000/vaccineData/${requestBody.id}`, requestOptions)
         .then(response => response.json())
         .then(data => data).catch(console.log);
 }

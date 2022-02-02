@@ -71,7 +71,7 @@ class Table extends React.Component {
                 icon: () => <Edit />,
                 tooltip: 'Edit',
                 disabled: rowData.driveStatus === "Completed",
-                onClick: (rowData) => {
+                onClick: (event, rowData) => {
                   this.props.parentCallback(rowData);
                 }
               }

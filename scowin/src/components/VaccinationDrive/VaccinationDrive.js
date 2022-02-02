@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import { useForm } from "react-hook-form";
 import './VaccinationDrive.css'
 import Table from '../../common/components/table/table';
-import { vaccineData, vaccineHeaders } from '../../data/vaccineData';
+import { vaccineHeaders } from '../../data/vaccineData';
+import * as vaccinationDriveService from '../../services/vaccination-drive-service'
+import { v4 as uuid } from 'uuid';
 
 const style = {
   position: 'absolute',
@@ -22,20 +24,58 @@ const style = {
 function VaccinationDrive() {
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [isEditFlow, setEditFlow] = useState(false);
+  const [vaccinationDriveData, setVaccinationDriveData] = useState([]);
   const showModal = () => {
     setModalIsOpen(true);
   };
   const closeModal = () => {
+    setEditFlow(false);
     setModalIsOpen(false);
+    reset();
   };
 
   const { register, formState: { errors, isValid }, handleSubmit, reset, setValue } = useForm(
     { mode: "onChange" }
   );
   const onSubmit = data => {
-    console.log('data: ', data);
-    reset();
-    closeModal();
+    data = {
+      ...data,
+      vaccinationDate: new Date(data?.vaccinationDate).toLocaleString().split(',')[0],
+      driveApproval: 'Not Approved',
+      driveStatus: 'Upcoming'
+    };
+    console.log(data);
+    if (!isEditFlow) {
+      data = {
+        ...data,
+        id: uuid()
+      };
+      vaccinationDriveService.addVaccinationDrive(data).then(
+        _ => {
+          reset();
+          closeModal();
+          vaccinationDriveService.getVaccinationDriveDetails().then(
+            res => setVaccinationDriveData(res)
+          )
+        }
+      );
+    } else {
+      data = {
+        ...data,
+        id: data.id
+      };
+      vaccinationDriveService.editVaccinationDrive(data).then(
+        _ => {
+          reset();
+          closeModal();
+          vaccinationDriveService.getVaccinationDriveDetails().then(
+            res => setVaccinationDriveData(res)
+          )
+        }
+      );
+    }
+
   };
 
   const editClicked = (editRowData) => {
@@ -43,15 +83,24 @@ function VaccinationDrive() {
     vaccineHeaders.forEach((header) => {
       setValue(header.field, editRowData[header.field]);
     });
+    setValue("id", editRowData['id']);
+    setEditFlow(true);
     showModal();
   };
+
+  useEffect(() => {
+    vaccinationDriveService.getVaccinationDriveDetails().then(
+      res => setVaccinationDriveData(res)
+    )
+  }, []);
+
 
   return (
     <div className="d-flex flex-column">
       <div className='button-sec'>
         <Button className='vaccination-drive-button' onClick={showModal}>Add Vaccination Drive</Button>
       </div>
-      <Table columns={vaccineHeaders} rows={vaccineData} header="Vaccination Drive" isEdit={true} parentCallback={editClicked} />
+      <Table columns={vaccineHeaders} rows={vaccinationDriveData} header="Vaccination Drive" isEdit={true} parentCallback={editClicked} />
       <Modal
         open={modalIsOpen}
         onClose={closeModal}
@@ -63,7 +112,7 @@ function VaccinationDrive() {
           <form onSubmit={handleSubmit(onSubmit)} className='d-flex flex-column'>
             <div className='form-input'>
               <label>Vaccine Name</label>
-              <select className="vaccine-name" {...register("vaccineName", { required:"This is a required field"})}>
+              <select className="vaccine-name" {...register("vaccineName", { required: "This is a required field" })}>
                 <option value="Covaxin">Covaxin</option>
                 <option value="Covisheild">Covisheild</option>
                 <option value="Sputnik V">Sputnik V</option>

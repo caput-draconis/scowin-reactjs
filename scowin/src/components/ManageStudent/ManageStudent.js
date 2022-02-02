@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './manageStudent.css';
 import Table from '../../common/components/table/table';
-import { studentData, columnStudents } from '../../data/studentData';
+import { columnStudents } from '../../data/studentData';
 import Button from 'react-bootstrap/Button'
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
@@ -11,6 +11,7 @@ import { ExcelRenderer } from 'react-excel-renderer';
 import * as XLSX from 'xlsx';
 import * as FileSaver from 'file-saver';
 import { useForm } from "react-hook-form";
+import * as studentDetailsService from '../../services/manage-students-service'
 
 const style = {
   position: 'absolute',
@@ -26,22 +27,46 @@ const style = {
 
 function ManageStudent() {
 
-  const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm(
+  const { register, handleSubmit, formState: { errors, isValid }, reset, setValue } = useForm(
     { mode: "onChange" }
   );
-
+  let isEditFlow = false;
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [detailsOpen, setdetailsOpen] = useState(false);
+  const [studentData, setStudentsDetailsData] = useState([]);
 
   const showModal = () => { setModalIsOpen(true); };
   const closeModal = () => { setModalIsOpen(false); };
   const showDetails = () => { setdetailsOpen(true); }
-  const closeDetails = () => { setdetailsOpen(false); }
+  const closeDetails = () => {
+    isEditFlow = false;
+    setdetailsOpen(false);
+    reset();
+  }
 
   const submitDetails = (data) => {
-    console.log('data: ', data);
-    reset();
-    closeDetails();
+    data = {
+      ...data,
+      dob: new Date(data?.dob).toLocaleString().split(',')[0]
+    };
+    studentDetailsService.addStudent(data).then(
+      _ => {
+        reset();
+        closeDetails();
+        studentDetailsService.getStudentsDetails().then(
+          res => setStudentsDetailsData(res)
+        )
+      }
+    );
+  };
+
+  const editClicked = (editRowData) => {
+    console.log(editRowData);
+    columnStudents.forEach((header) => {
+      setValue(header.field, editRowData[header.field]);
+    });
+    isEditFlow = true;
+    showDetails();
   };
 
   const downloadTemplate = () => {
@@ -80,6 +105,12 @@ function ManageStudent() {
     });
   };
 
+  useEffect(() => {
+    studentDetailsService.getStudentsDetails().then(
+      res => setStudentsDetailsData(res)
+    )
+  }, []);
+
   return (
     <Fragment>
       <div>
@@ -111,20 +142,20 @@ function ManageStudent() {
               <h5 className='popup-header'>Add Student Details</h5>
             </div>
             <form onSubmit={handleSubmit(submitDetails)}>
-              <input className="form-input" type="number" placeholder="Student ID" {...register("studentID", {
+              <input className="form-input" type="number" placeholder="Student ID" {...register("id", {
                 required: "This is a required field", maxLength: {
                   value: 4,
                   message: "Maximum value is 4, ex. 8877"
                 }
               })} />
-              {errors.studentID && <p className='alert-danger'>{errors.studentID.message}</p>}
-              <input className="form-input" type="text" placeholder="Full Name" {...register("name", {
+              {errors.id && <p className='alert-danger'>{errors.id.message}</p>}
+              <input className="form-input" type="text" placeholder="Enter Name" {...register("studentName", {
                 required: "This is a required field.", pattern: {
                   value: /^[a-zA-Z\\s]*$/,
                   message: "Value doesn't match the correct validation"
                 }
               })} />
-              {errors.name && <p className='alert-danger'>{errors.name.message}</p>}
+              {errors.studentName && <p className='alert-danger'>{errors.studentName.message}</p>}
               <div className='form-select-section'>
                 <label>Date of Birth</label>
                 <input className="form-input" id="dob" type="date" placeholder="Date of Birth" {...register("dob", { required: "This is a required field", valueAsDate: true })} />
@@ -132,18 +163,18 @@ function ManageStudent() {
               </div>
               <div {...register("gender", { required: "This is a required field" })} className='gender-class'>
                 <label>Gender</label>
-                <input type="radio" value="Male" className="gender" id="male" /> Male
-                <input type="radio" value="Female" className="gender" id="female" /> Female
-                <input type="radio" value="Other" className="gender" id="other" /> Other
+                <input type="radio" value="Male" className="gender" name="gender" id="male" /> Male
+                <input type="radio" value="Female" className="gender" name="gender" id="female" /> Female
+                <input type="radio" value="Other" className="gender" name="gender" id="other" /> Other
                 {errors.gender && <p className='alert-danger'>{errors.gender.message}</p>}
               </div>
-              <input className="form-input" type="text" placeholder="Blood Group" {...register("bgGroup", {
+              <input className="form-input" type="text" placeholder="Blood Group" {...register("bloodGroup", {
                 required: "This is a required field", pattern: {
                   value: /^(A|B|AB|O)[+-]$/,
                   message: "Value doesn't match the correct validation, eg. A+, B+, AB+"
                 }
               })} />
-              {errors.bgGroup && <p className='alert-danger'>{errors.bgGroup.message}</p>}
+              {errors.bloodGroup && <p className='alert-danger'>{errors.bloodGroup.message}</p>}
               <div className='form-select-section'>
                 <label> Grade </label>
                 <select className="form-select" id="grade" {...register("grade", { required: "This is a required field" })}>
@@ -168,14 +199,14 @@ function ManageStudent() {
                 </select>
                 {errors.section && <p className='alert-danger'>{errors.section.message}</p>}
               </div>
-              <input className="form-input" type="number" placeholder="Aadhar Card Number" {...register("aadhar", { required: "This is a required field", pattern: { value: /^[2-9]{1}[0-9]{3}[0-9]{4}[0-9]{4}$/, message: "Value doesn't match the required pattern" } })} />
-              {errors.aadhar && <p className='alert-danger'>{errors.aadhar.message}</p>}
-              <TextField id="outlined-multiline-static" label="Existing Comoribidities" multiline rows={4}  {...register("EC", { required: "This is a required field" })} />
+              <input className="form-input" type="number" placeholder="Aadhar Card Number" {...register("aadharID", { required: "This is a required field", pattern: { value: /^[2-9]{1}[0-9]{3}[0-9]{4}[0-9]{4}$/, message: "Value doesn't match the required pattern" } })} />
+              {errors.aadharID && <p className='alert-danger'>{errors.aadharID.message}</p>}
+              <TextField id="outlined-multiline-static" label="Existing Comoribidities" multiline rows={4}  {...register("existingComorbidites")} />
               <Button type='submit' className='submit-button' disabled={!isValid} >Submit</Button>
             </form>
           </Box>
         </Modal>
-        <Table columns={columnStudents} rows={studentData} header="Student Details" isEdit={false} />
+        <Table columns={columnStudents} rows={studentData} header="Student Details" isEdit={true} parentCallback={editClicked} />
       </div>
     </Fragment>
   )

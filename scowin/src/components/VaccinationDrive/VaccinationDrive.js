@@ -7,7 +7,7 @@ import './VaccinationDrive.css'
 import Table from '../../common/components/table/table';
 import { vaccineHeaders } from '../../data/vaccineData';
 import * as vaccinationDriveService from '../../services/vaccination-drive-service'
-import nextId from "react-id-generator";
+import { v4 as uuid } from 'uuid';
 
 const style = {
   position: 'absolute',
@@ -23,14 +23,14 @@ const style = {
 
 function VaccinationDrive() {
 
-  let isEditFlow = false;
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [isEditFlow, setEditFlow] = useState(false);
   const [vaccinationDriveData, setVaccinationDriveData] = useState([]);
   const showModal = () => {
     setModalIsOpen(true);
   };
   const closeModal = () => {
-    isEditFlow = false;
+    setEditFlow(false);
     setModalIsOpen(false);
   };
 
@@ -44,22 +44,27 @@ function VaccinationDrive() {
       driveApproval: 'Not Approved',
       driveStatus: 'Upcoming'
     };
-    if(!isEditFlow) {
+    console.log(data);
+    if (!isEditFlow) {
       let idPrefix = JSON.stringify(data);
-    data = {
-      ...data,
-      id: nextId(idPrefix)
-    };
-    vaccinationDriveService.addVaccinationDrive(data).then(
-      _ => {
-        reset();
-        closeModal();
-        vaccinationDriveService.getVaccinationDriveDetails().then(
-          res => setVaccinationDriveData(res)
-        )
-      }
-    );
+      data = {
+        ...data,
+        id: uuid()
+      };
+      vaccinationDriveService.addVaccinationDrive(data).then(
+        _ => {
+          reset();
+          closeModal();
+          vaccinationDriveService.getVaccinationDriveDetails().then(
+            res => setVaccinationDriveData(res)
+          )
+        }
+      );
     } else {
+      data = {
+        ...data,
+        id: data.id
+      };
       vaccinationDriveService.editVaccinationDrive(data).then(
         _ => {
           reset();
@@ -78,7 +83,8 @@ function VaccinationDrive() {
     vaccineHeaders.forEach((header) => {
       setValue(header.field, editRowData[header.field]);
     });
-    isEditFlow = true;
+    setValue("id", editRowData['id']);
+    setEditFlow(true);
     showModal();
   };
 
@@ -106,7 +112,7 @@ function VaccinationDrive() {
           <form onSubmit={handleSubmit(onSubmit)} className='d-flex flex-column'>
             <div className='form-input'>
               <label>Vaccine Name</label>
-              <select className="vaccine-name" {...register("vaccineName", { required:"This is a required field"})}>
+              <select className="vaccine-name" {...register("vaccineName", { required: "This is a required field" })}>
                 <option value="Covaxin">Covaxin</option>
                 <option value="Covisheild">Covisheild</option>
                 <option value="Sputnik V">Sputnik V</option>

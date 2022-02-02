@@ -5,7 +5,8 @@ export const vaccineData = [
         dosesAvailable:250,
         slots:5,
         driveApproval:'Approved',
-        driveStatus:'Upcoming'
+        driveStatus:'Upcoming',
+        id: 1
     },
     {
         vaccinationDate:'05/03/2022',
@@ -13,7 +14,8 @@ export const vaccineData = [
         dosesAvailable:500,
         slots:3,
         driveApproval:'Not Approved',
-        driveStatus:'Completed'
+        driveStatus:'Completed',
+        id: 2
     },
     {
         vaccinationDate:'30/01/2022',
@@ -21,7 +23,8 @@ export const vaccineData = [
         dosesAvailable:100,
         slots:5,
         driveApproval:'Approved',
-        driveStatus:'Upcoming'
+        driveStatus:'Upcoming',
+        id: 3
     },
     {
         vaccinationDate:'28/02/2022',
@@ -29,7 +32,8 @@ export const vaccineData = [
         dosesAvailable:450,
         slots:4,
         driveApproval:'Not Approved',
-        driveStatus:'Completed'
+        driveStatus:'Completed',
+        id: 4
     },
     {
         vaccinationDate:'12/03/2022',
@@ -37,7 +41,8 @@ export const vaccineData = [
         dosesAvailable:450,
         slots:4,
         driveApproval:'Approved',
-        driveStatus:'Upcoming'
+        driveStatus:'Upcoming',
+        id: 5
     },
     {
         vaccinationDate:'05/03/2022',
@@ -45,7 +50,8 @@ export const vaccineData = [
         dosesAvailable:500,
         slots:3,
         driveApproval:'Not Approved',
-        driveStatus:'Upcoming'
+        driveStatus:'Upcoming',
+        id: 6
     },
     {
         vaccinationDate:'30/01/2022',
@@ -53,7 +59,8 @@ export const vaccineData = [
         dosesAvailable:100,
         slots:5,
         driveApproval:'Approved',
-        driveStatus:'Upcoming'
+        driveStatus:'Upcoming',
+        id: 7
     },
     {
         vaccinationDate:'28/02/2022',
@@ -61,7 +68,8 @@ export const vaccineData = [
         dosesAvailable:450,
         slots:4,
         driveApproval:'Not Approved',
-        driveStatus:'Upcoming'
+        driveStatus:'Upcoming',
+        id: 8
     }
 ]
 

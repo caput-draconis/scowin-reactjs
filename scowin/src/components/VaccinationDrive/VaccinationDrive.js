@@ -53,7 +53,6 @@ function VaccinationDrive() {
       };
       vaccinationDriveService.addVaccinationDrive(data).then(
         _ => {
-          reset();
           closeModal();
           vaccinationDriveService.getVaccinationDriveDetails().then(
             res => setVaccinationDriveData(res)
@@ -67,7 +66,6 @@ function VaccinationDrive() {
       };
       vaccinationDriveService.editVaccinationDrive(data).then(
         _ => {
-          reset();
           closeModal();
           vaccinationDriveService.getVaccinationDriveDetails().then(
             res => setVaccinationDriveData(res)

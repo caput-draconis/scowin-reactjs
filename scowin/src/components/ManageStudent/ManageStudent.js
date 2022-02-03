@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import './manageStudent.css';
 import Table from '../../common/components/table/table';
 import { columnStudents } from '../../data/studentData';
+import { studentData } from '../../data/studentData';
 import Button from 'react-bootstrap/Button'
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
@@ -11,7 +12,9 @@ import { ExcelRenderer } from 'react-excel-renderer';
 import * as XLSX from 'xlsx';
 import * as FileSaver from 'file-saver';
 import { useForm } from "react-hook-form";
-import * as studentDetailsService from '../../services/manage-students-service'
+import * as studentDetailsService from '../../services/manage-students-service';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const style = {
   position: 'absolute',
@@ -31,6 +34,7 @@ function ManageStudent() {
     { mode: "onChange" }
   );
   let isEditFlow = false;
+  const [startDate, setStartDate] = useState(new Date('01/01/2005'));
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [detailsOpen, setdetailsOpen] = useState(false);
   const [studentData, setStudentsDetailsData] = useState([]);
@@ -111,6 +115,7 @@ function ManageStudent() {
     )
   }, []);
 
+  const mdate = new Date('31/01/2005')
   return (
     <Fragment>
       <div>
@@ -157,8 +162,8 @@ function ManageStudent() {
               })} />
               {errors.studentName && <p className='alert-danger'>{errors.studentName.message}</p>}
               <div className='form-select-section'>
-                <label>Date of Birth</label>
-                <input className="form-input" id="dob" type="date" placeholder="Date of Birth" {...register("dob", { required: "This is a required field", valueAsDate: true })} />
+                <label>Date of Birth</label> 
+                <DatePicker className="form-input" id="dob" selected={startDate} onChange={(date) => setStartDate(date)} startDate={startDate} minDate={startDate} maxDate={mdate} {...register("dob", { required: "This is a required field", valueAsDate: true })} /> 
                 {errors.dob && <p className='alert-danger'>{errors.dob.message}</p>}
               </div>
               <div {...register("gender", { required: "This is a required field" })} className='gender-class'>

@@ -171,7 +171,7 @@ function ManageStudent() {
               {errors.studentName && <p className='alert-danger'>{errors.studentName.message}</p>}
               <div className='form-select-section'>
                 <label>Date of Birth</label> 
-                <DatePicker className="form-input" id="dob" selected={startDate} onChange={(date) => setStartDate(date)} startDate={startDate} minDate={startDate} {...register("dob", { required: "This is a required field", valueAsDate: true })} /> 
+                <DatePicker className="form-input" id="dob" selected={startDate} onChange={(date) => setStartDate(date)} startDate={startDate} minDate={startDate} maxDate={new Date('2015/12/31')} /> 
                 {errors.dob && <p className='alert-danger'>{errors.dob.message}</p>}
               </div>
               <div {...register("gender", { required: "This is a required field" })} className='gender-class'>

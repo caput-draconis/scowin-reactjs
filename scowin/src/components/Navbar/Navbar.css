@@ -2,9 +2,6 @@
   height: 100px;
   width: 110px;
 }
-.active{
-  color: red !important;
-}
 .nav-link:hover{
   color: #7f58b5 !important;
 }

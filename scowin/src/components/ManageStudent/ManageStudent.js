@@ -41,7 +41,7 @@ function ManageStudent() {
   const closeModal = () => { setModalIsOpen(false); };
   const showDetails = () => { setdetailsOpen(true); }
   const closeDetails = () => {
-    isEditFlow = false;
+    setEditFlow(false);
     setdetailsOpen(false);
     reset();
   }
@@ -51,15 +51,25 @@ function ManageStudent() {
       ...data,
       dob: new Date(data?.dob).toLocaleString().split(',')[0]
     };
+    if (!isEditFlow) {
     studentDetailsService.addStudent(data).then(
       _ => {
-        reset();
         closeDetails();
         studentDetailsService.getStudentsDetails().then(
           res => setStudentsDetailsData(res)
         )
       }
     );
+    } else {
+      studentDetailsService.editStudentDetails(data).then(
+        _ => {
+          closeDetails();
+          studentDetailsService.getStudentsDetails().then(
+            res => setStudentsDetailsData(res)
+          )
+        }
+      );
+    }
   };
 
   const editClicked = (editRowData) => {
@@ -67,7 +77,7 @@ function ManageStudent() {
     columnStudents.forEach((header) => {
       setValue(header.field, editRowData[header.field]);
     });
-    isEditFlow = true;
+    setEditFlow(true);
     showDetails();
   };
 

@@ -74,13 +74,14 @@ export const vaccineData = [
 ]
 
 export const vaccineHeaders = [
-    {
-        title: 'Vaccine Name',
-        field: 'vaccineName'
-    },
+    
     {
         title: 'Vaccination Date',
         field: 'vaccinationDate'
+    },
+    {
+        title: 'Vaccine Name',
+        field: 'vaccineName'
     },
     {
         title: 'Doses Available',

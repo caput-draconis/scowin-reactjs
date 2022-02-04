@@ -98,6 +98,17 @@
       "aadharID": "456547480560",
       "existingComorbidites": "NA",
       "bloodGroup": "A+"
+    },
+    {
+      "id": "1122",
+      "studentName": "HuckleBB",
+      "dob": "06/09/1998",
+      "gender": "Male",
+      "bloodGroup": "O+",
+      "grade": "2",
+      "section": "A",
+      "aadharID": "343454546565",
+      "existingComorbidites": ""
     }
   ],
   "vaccinatedStudentsData": [

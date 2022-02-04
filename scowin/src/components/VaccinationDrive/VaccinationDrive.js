@@ -26,6 +26,7 @@ const style = {
 function VaccinationDrive() {
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [startDate, setStartDate] = useState(new Date());
   const [isEditFlow, setEditFlow] = useState(false);
   const [vaccinationDriveData, setVaccinationDriveData] = useState([]);
   const showModal = () => {
@@ -134,11 +135,8 @@ function VaccinationDrive() {
             </div>
             {errors.slots && <p className='alert-error'>{errors.slots.message}</p>}
             <div className='form-input'>
-              <label>Vaccination Date</label>
-              <input className='vaccine-date'
-                type="date"
-                {...register("vaccinationDate", { required: "This is a required field", valueAsDate: true })}
-              />
+              <label>Vaccination&nbsp;Date</label>
+              <DatePicker className="vaccine-date" selected={startDate} onChange={(date) => setStartDate(date)} startDate={startDate} minDate={startDate} {...register("vaccinationDate", { required: "This is a required field", valueAsDate: true })} /> 
             </div>
             {errors.vaccinationDate && <p className='alert-error'>{errors.vaccinationDate.message}</p>}
             <div className='form-input'>

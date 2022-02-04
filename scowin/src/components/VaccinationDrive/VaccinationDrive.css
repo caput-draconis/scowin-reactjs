@@ -51,7 +51,7 @@ select {
 .slots{
   margin-top: 20px;
   margin-left: 86px;
-  width: 187px;
+  width: 176px;
 }
 .vaccineName{
   width: 187px;
@@ -61,13 +61,13 @@ select {
 }
 .doses-available{
   margin-top: 20px;
-  margin-left: 20px;
-  width: 187px;
+  margin-left: 25px;
+  width: 180px;
 }
 .vaccine-date{
-  margin-left: 15px;
+  margin-left: 25px;
   margin-top: 20px;
-  width: 187px;
+  width: 180px;
   height: 30px;
 }
 .vaccine-name{

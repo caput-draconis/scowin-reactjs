@@ -124,7 +124,6 @@ function ManageStudent() {
     )
   }, []);
 
-  const mdate = new Date('31/01/2005')
   return (
     <Fragment>
       <div>
@@ -172,7 +171,7 @@ function ManageStudent() {
               {errors.studentName && <p className='alert-danger'>{errors.studentName.message}</p>}
               <div className='form-select-section'>
                 <label>Date of Birth</label> 
-                <DatePicker className="form-input" id="dob" selected={startDate} onChange={(date) => setStartDate(date)} startDate={startDate} minDate={startDate} maxDate={mdate} {...register("dob", { required: "This is a required field", valueAsDate: true })} /> 
+                <DatePicker className="form-input" id="dob" selected={startDate} onChange={(date) => setStartDate(date)} startDate={startDate} minDate={startDate} {...register("dob", { required: "This is a required field", valueAsDate: true })} /> 
                 {errors.dob && <p className='alert-danger'>{errors.dob.message}</p>}
               </div>
               <div {...register("gender", { required: "This is a required field" })} className='gender-class'>

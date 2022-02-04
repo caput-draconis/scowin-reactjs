@@ -8,6 +8,8 @@ import Table from '../../common/components/table/table';
 import { vaccineHeaders } from '../../data/vaccineData';
 import * as vaccinationDriveService from '../../services/vaccination-drive-service'
 import { v4 as uuid } from 'uuid';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const style = {
   position: 'absolute',

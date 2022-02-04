@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import './manageStudent.css';
 import Table from '../../common/components/table/table';
 import { columnStudents } from '../../data/studentData';
-import { studentData } from '../../data/studentData';
 import Button from 'react-bootstrap/Button'
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';

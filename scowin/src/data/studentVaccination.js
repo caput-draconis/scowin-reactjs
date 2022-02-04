@@ -4,7 +4,7 @@ export const studentVaccineData = [
         id:'22134',
         aadharID:'8989 4000 1234',
         dob:'16/03/2014',
-        gender:'female',
+        gender:'Female',
         grade:'3',
         vaccinationStatus: 'Completed',
         vaccineName:'Covaxin',
@@ -78,7 +78,7 @@ export const studentVaccineData = [
         comorbiditiesDetails:'Sevre body pain'
     },
     {
-        studentName:'Nikitha Nikhil',
+        studentName:'Nikitha John',
         id:'22140',
         aadharID:'4590 7800 3214',
         dob:'24/01/2013',

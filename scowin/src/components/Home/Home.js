@@ -8,6 +8,7 @@ import Table from '../../common/components/table/table';
 import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
 import './Home.css'
 
+
 export default function Home() {
   const COLORS = ['#0088FE', '#00C49F'];
 
@@ -28,7 +29,7 @@ export default function Home() {
     if (active) {
       return (
         <div className="custom-tooltip" style={{ backgroundColor: '#ffff', padding: '5px', border: '1px solid #cccc' }}>
-          <label>{`${payload[0].name} : ${payload[0].value}%`}</label>
+          <label>{`${payload[0].name} : ${payload[0].value}`}</label>
         </div>
       );
     }

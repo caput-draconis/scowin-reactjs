@@ -4,7 +4,7 @@ export const studentVaccineData = [
         id:'22134',
         aadharID:'8989 4000 1234',
         dob:'16/03/2014',
-        gender:'female',
+        gender:'Female',
         grade:'3',
         vaccinationStatus: 'Completed',
         vaccineName:'Covaxin',
@@ -78,7 +78,7 @@ export const studentVaccineData = [
         comorbiditiesDetails:'Sevre body pain'
     },
     {
-        studentName:'Nikitha Nikhil',
+        studentName:'Nikitha John',
         id:'22140',
         aadharID:'4590 7800 3214',
         dob:'24/01/2013',
@@ -89,84 +89,6 @@ export const studentVaccineData = [
         vaccinationDate: '20/01/2022',
         dosage:'1',
         comorbiditiesDetails:'NA'
-    },
-    {
-        studentName:'Prasoon K S',
-        id:'22141',
-        aadharID:'9345 6789 1234',
-        dob:'03/06/2010',
-        gender:'Male',
-        vaccinationStatus: 'Completed',
-        grade:'7',
-        vaccineName:'Covishield',
-        vaccinationDate: '15/01/2022',
-        dosage:'1',
-        comorbiditiesDetails:'Feverish'
-    },
-    {
-        studentName:'Reshma S S',
-        id:'22142',
-        aadharID:'1999 6578 4982',
-        dob:'21/08/2010',
-        gender:'Female',
-        vaccinationStatus: 'Completed',
-        grade:'7',
-        vaccineName:'Covaxin',
-        vaccinationDate: '15/01/2022',
-        dosage:'2',
-        comorbiditiesDetails:'NA'
-    },
-    {
-        studentName:'Roshan',
-        id:'22143',
-        aadharID:'3478 9002 4747',
-        dob:'20/03/2010',
-        gender:'Female',
-        vaccinationStatus: 'Partially Completed',
-        grade:'7',
-        vaccineName:'Covisheild',
-        vaccinationDate: '20/01/2022',
-        dosage:'1',
-        comorbiditiesDetails:'NA'
-    },
-    {
-        studentName:'Sanjay',
-        id:'22144',
-        aadharID:'9400 0600 3030',
-        dob:'24/11/2011',
-        gender:'Male',
-        vaccinationStatus: 'Partially Completed',
-        grade:'8',
-        vaccineName:'Covisheild',
-        vaccinationDate: '19/01/2022',
-        dosage:'1',
-        comorbiditiesDetails:'Fever'
-    },
-    {
-        studentName:'Switha K',
-        id:'22145',
-        aadharID:'9445 2324 0909',
-        dob:'17/05/2010',
-        gender:'Female',
-        vaccinationStatus: 'Partially Completed',
-        grade:'7',
-        vaccineName:'Covisheild',
-        vaccinationDate: '17/01/2022',
-        dosage:'2',
-        comorbiditiesDetails:'NA'
-    },
-    {
-        studentName:'Yashly Yesudas',
-        id:'22146',
-        aadharID:'2435 5657 9843',
-        dob:'17/06/2011',
-        gender:'Female',
-        vaccinationStatus: 'Partially Completed',
-        grade:'8',
-        vaccineName:'Covisheild',
-        vaccinationDate: '17/01/2022',
-        dosage:'1',
-        comorbiditiesDetails:'fever'
     }
 ]
 

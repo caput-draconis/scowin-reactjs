@@ -22,9 +22,7 @@ export default function Home() {
       "value": studentData.length
     }
   ];
-
-  const percent = ((studentVaccineData.length / studentData.length) * 100).toFixed(2);
-
+  
   const CustomTooltip = ({ active, payload, label }) => {
     if (active) {
       return (
@@ -36,8 +34,9 @@ export default function Home() {
 
     return null;
   };
-
+  const vaccineComplete = studentVaccineData.filter(data => data.vaccinationStatus==='Completed')
   const upcommingVaccinationDrive = vaccineData.filter(data => data.driveStatus === 'Upcoming');
+  const percent = ((vaccineComplete.length /studentVaccineData.length) * 100).toFixed(2);
 
   return (
     <Fragment>

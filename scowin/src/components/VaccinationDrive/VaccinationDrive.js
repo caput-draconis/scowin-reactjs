@@ -136,7 +136,7 @@ function VaccinationDrive() {
             {errors.slots && <p className='alert-error'>{errors.slots.message}</p>}
             <div className='form-input'>
               <label>Vaccination&nbsp;Date</label>
-              <DatePicker className="vaccine-date" selected={startDate} onChange={(date) => setStartDate(date)} startDate={startDate} minDate={startDate} {...register("vaccinationDate", { required: "This is a required field", valueAsDate: true })} /> 
+              <DatePicker className="vaccine-date" selected={startDate} onChange={(date) => setStartDate(date)} startDate={startDate} minDate={startDate}/> 
             </div>
             {errors.vaccinationDate && <p className='alert-error'>{errors.vaccinationDate.message}</p>}
             <div className='form-input'>

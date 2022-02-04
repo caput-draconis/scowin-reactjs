@@ -33,6 +33,7 @@ function ManageStudent() {
     { mode: "onChange" }
   );
   const [isEditFlow, setEditFlow] = useState(false);
+  const [startDate, setStartDate] = useState(new Date('01/01/2005'));
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [detailsOpen, setdetailsOpen] = useState(false);
   const [studentData, setStudentsDetailsData] = useState([]);

@@ -3,8 +3,8 @@ import Button from 'react-bootstrap/Button';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import { useForm, Controller } from "react-hook-form";
-import './VaccinationDrive.css'
-import Table from '../../common/components/table/table';
+import './VaccinationDrive.css';
+import Table from '../common/table/table';
 import { vaccineHeaders } from '../../data/vaccineData';
 import * as vaccinationDriveService from '../../services/vaccination-drive-service'
 import { v4 as uuid } from 'uuid';

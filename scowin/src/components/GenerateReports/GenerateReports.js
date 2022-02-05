@@ -1,6 +1,6 @@
 import React from 'react';
 import { studentVaccinationHeaders, studentVaccineData } from '../../data/studentVaccination'; 
-import Table from '../../common/components/table/table';
+import Table from '../common/table/table';
 
 const GenerateReports = () => (
   <div>

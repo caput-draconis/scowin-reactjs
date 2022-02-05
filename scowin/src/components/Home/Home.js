@@ -4,7 +4,7 @@ import CardGroup from 'react-bootstrap/CardGroup';
 import { vaccineData, vaccineHeaders } from '../../data/vaccineData';
 import { studentVaccineData } from '../../data/studentVaccination';
 import { studentData } from '../../data/studentData';
-import Table from '../../common/components/table/table';
+import Table from '../common/table/table';
 import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
 import './Home.css'
 

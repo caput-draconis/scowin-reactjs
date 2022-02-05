@@ -1,6 +1,6 @@
 export const vaccineData = [
     {
-        vaccinationDate:'02/03/2022',
+        vaccinationDate:'2022-02-27T12:19:47.000Z',
         vaccineName:'Covaxin',
         dosesAvailable:250,
         slots:5,
@@ -9,7 +9,7 @@ export const vaccineData = [
         id: 1
     },
     {
-        vaccinationDate:'05/03/2022',
+        vaccinationDate:'2022-01-19T12:19:47.000Z',
         vaccineName:'Covisheild',
         dosesAvailable:500,
         slots:3,
@@ -18,7 +18,7 @@ export const vaccineData = [
         id: 2
     },
     {
-        vaccinationDate:'30/01/2022',
+        vaccinationDate:'2022-02-14T12:19:47.000Z',
         vaccineName:'Sputnik V',
         dosesAvailable:100,
         slots:5,
@@ -27,7 +27,7 @@ export const vaccineData = [
         id: 3
     },
     {
-        vaccinationDate:'28/02/2022',
+        vaccinationDate:'2022-01-20T12:19:47.000Z',
         vaccineName:'Covisheild',
         dosesAvailable:450,
         slots:4,
@@ -36,7 +36,7 @@ export const vaccineData = [
         id: 4
     },
     {
-        vaccinationDate:'12/03/2022',
+        vaccinationDate:'2022-02-15T12:19:47.000Z',
         vaccineName:'Covaxin',
         dosesAvailable:450,
         slots:4,
@@ -45,31 +45,13 @@ export const vaccineData = [
         id: 5
     },
     {
-        vaccinationDate:'05/03/2022',
+        vaccinationDate:'2022-03-25T12:19:47.000Z',
         vaccineName:'Covisheild',
         dosesAvailable:500,
         slots:3,
         driveApproval:'Not Approved',
         driveStatus:'Upcoming',
         id: 6
-    },
-    {
-        vaccinationDate:'30/01/2022',
-        vaccineName:'Sputnik V',
-        dosesAvailable:100,
-        slots:5,
-        driveApproval:'Approved',
-        driveStatus:'Upcoming',
-        id: 7
-    },
-    {
-        vaccinationDate:'28/02/2022',
-        vaccineName:'Covisheild',
-        dosesAvailable:450,
-        slots:4,
-        driveApproval:'Not Approved',
-        driveStatus:'Upcoming',
-        id: 8
     }
 ]
 
@@ -77,7 +59,8 @@ export const vaccineHeaders = [
     
     {
         title: 'Vaccination Date',
-        field: 'vaccinationDate'
+        field: 'vaccinationDate',
+        type: "date"
     },
     {
         title: 'Vaccine Name',

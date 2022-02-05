@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import './VaccinationDrive.css'
 import Table from '../../common/components/table/table';
 import { vaccineHeaders } from '../../data/vaccineData';
@@ -25,8 +25,8 @@ const style = {
 
 function VaccinationDrive() {
 
+  const today = new Date();
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [startDate, setStartDate] = useState(new Date());
   const [isEditFlow, setEditFlow] = useState(false);
   const [vaccinationDriveData, setVaccinationDriveData] = useState([]);
   const showModal = () => {
@@ -38,17 +38,17 @@ function VaccinationDrive() {
     reset();
   };
 
-  const { register, formState: { errors, isValid }, handleSubmit, reset, setValue } = useForm(
-    { mode: "onChange" }
+  const { register, formState: { errors, isValid }, handleSubmit, reset, setValue, control } = useForm(
+    {
+      mode: "onChange"
+    }
   );
   const onSubmit = data => {
     data = {
       ...data,
-      vaccinationDate: new Date(data?.vaccinationDate).toLocaleString().split(',')[0],
       driveApproval: 'Not Approved',
       driveStatus: 'Upcoming'
     };
-    console.log(data);
     if (!isEditFlow) {
       data = {
         ...data,
@@ -80,7 +80,6 @@ function VaccinationDrive() {
   };
 
   const editClicked = (editRowData) => {
-    console.log(editRowData);
     vaccineHeaders.forEach((header) => {
       setValue(header.field, editRowData[header.field]);
     });
@@ -135,8 +134,22 @@ function VaccinationDrive() {
             </div>
             {errors.slots && <p className='alert-error'>{errors.slots.message}</p>}
             <div className='form-input'>
-              <label>Vaccination&nbsp;Date</label>
-              <DatePicker className="vaccine-date" selected={startDate} onChange={(date) => setStartDate(date)} startDate={startDate} minDate={startDate}/> 
+              <label>Vaccination Date</label>
+              <Controller
+                control={control}
+                name="vaccinationDate"
+                render={({ field }) => (
+                  <DatePicker
+                    className="vaccine-date"
+                    placeholderText="Select Vaccination Drive Date"
+                    onChange={(date) => field.onChange(date)}
+                    selected={field.value? new Date(field.value) : null}
+                    startDate={today}
+                    minDate={today}
+                  />
+                )}
+                rules={{ required: true }}
+              />
             </div>
             {errors.vaccinationDate && <p className='alert-error'>{errors.vaccinationDate.message}</p>}
             <div className='form-input'>

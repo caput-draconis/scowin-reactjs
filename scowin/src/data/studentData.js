@@ -3,7 +3,7 @@ export const studentData = [
         studentName: 'Aiswarya P',
         id: '22134',
         aadharID: '898940001234',
-        dob: '16/03/2014',
+        dob: '2014-03-16T18:30:00.000Z',
         gender: 'Female',
         grade: '3',
         section: 'A',
@@ -14,7 +14,7 @@ export const studentData = [
         studentName: 'Akshai R',
         id: '22135',
         aadharID: '760900004564',
-        dob: '02/03/2014',
+        dob: '2013-02-24T18:30:00.000Z',
         gender: 'Male',
         grade: '3',
         section: 'A',
@@ -25,7 +25,7 @@ export const studentData = [
         studentName: 'Anjana Ajith Kumar',
         id: '22136',
         aadharID: '561243217890',
-        dob: '02/02/2014',
+        dob: '2014-02-01T18:30:00.000Z',
         gender: 'Female',
         grade: '3',
         section: 'B',
@@ -36,7 +36,7 @@ export const studentData = [
         studentName: 'Yashly Yesudas',
         id: '22146',
         aadharID: '243556579843',
-        dob: '17/06/2011',
+        dob: '2011-06-17T18:30:00.000Z',
         gender: 'Female',
         grade: '8',
         section: 'B',
@@ -47,7 +47,7 @@ export const studentData = [
     {
         id: "22147",
         studentName: "Y Diyva",
-        dob: "20/01/2009",
+        dob: "2009-01-17T18:30:00.000Z",
         gender: "Female",
         grade: "8",
         section: "A",
@@ -58,7 +58,7 @@ export const studentData = [
     {
         id: "22148",
         studentName: "Suman Seetha",
-        dob: "22/11/2009",
+        dob: "2009-12-25T18:30:00.000Z",
         gender: "Female",
         grade: "8",
         section: "A",
@@ -69,7 +69,7 @@ export const studentData = [
     {
         id: "22149",
         studentName: "Eliza Mathew",
-        dob: "24/06/2009",
+        dob: "2005-07-08T18:30:00.000Z",
         gender: "Female",
         grade: "8",
         section: "B",
@@ -80,7 +80,7 @@ export const studentData = [
     {
         id: "22150",
         studentName: "Anita George",
-        dob: "26/04/2009",
+        dob: "2007-09-11T18:30:00.000Z",
         gender: "Female",
         grade: "8",
         section: "B",
@@ -91,7 +91,7 @@ export const studentData = [
     {
         id: "22151",
         studentName: "Ratna Kumar",
-        dob: "09/12/2010",
+        dob: "2003-04-13T18:30:00.000Z",
         gender: "Female",
         grade: "9",
         section: "B",
@@ -100,10 +100,11 @@ export const studentData = [
         bloodGroup: 'A+'
     }
 ]
+
 export const columnStudents = [
     { title: 'Id', field: 'id' },
     { title: 'Name', field: 'studentName' },
-    { title: 'DOB', field: 'dob' },
+    { title: 'DOB', field: 'dob', type: 'date' },
     { title: 'Gender', field: 'gender' },
     { title: 'Blood Group', field: 'bloodGroup' },
     { title: 'Grade', field: 'grade' },

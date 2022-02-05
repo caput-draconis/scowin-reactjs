@@ -159,7 +159,7 @@ function VaccinationDrive() {
                 {...register("dosesAvailable", {
                   required: "This is a required field",
                   maxLength: {
-                    value: 5,
+                    value: 4,
                     message: "Maximum doses should be below 10000"
                   }
                 })}

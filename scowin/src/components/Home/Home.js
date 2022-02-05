@@ -101,7 +101,7 @@ export default function Home() {
         </div>
         <div className='vaccine-table'>
           {upcommingVaccinationDrive.length === 0 ? <p className='home-header'>No Upcoming Drives</p> :
-            <Table columns={vaccineHeaders} rows={upcommingVaccinationDrive} header="Vaccination Drive" isEdit={false} />
+            <Table columns={vaccineHeaders} rows={upcommingVaccinationDrive} header="Upcoming Vaccination Drive" isEdit={false} />
           }
         </div>
       </div>

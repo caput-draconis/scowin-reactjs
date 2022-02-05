@@ -107,7 +107,7 @@ function VaccinationDrive() {
       >
         <Box sx={style}>
           <div className='popup-section'>
-            <h5 className='popup-header'>Add Vaccination Drive Details</h5>
+            <h5 className='popup-header'>{isEditFlow ? 'Update Vaccination Drive Details' : 'Add Vaccination Drive Details'}</h5>
           </div>
           <form onSubmit={handleSubmit(onSubmit)} className='d-flex flex-column'>
             <div className='form-input'>
@@ -143,7 +143,7 @@ function VaccinationDrive() {
                     className="vaccine-date"
                     placeholderText="Select Vaccination Drive Date"
                     onChange={(date) => field.onChange(date)}
-                    selected={field.value? new Date(field.value) : null}
+                    selected={field.value ? new Date(field.value) : null}
                     startDate={today}
                     minDate={today}
                   />

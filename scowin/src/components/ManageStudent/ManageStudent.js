@@ -150,7 +150,7 @@ function ManageStudent() {
         >
           <Box sx={style}>
             <div className='popup-section'>
-              <h5 className='popup-header'>Add Student Details</h5>
+              <h5 className='popup-header'>{isEditFlow? 'Update Student Details' : 'Add Student Details'}</h5>
             </div>
             <form onSubmit={handleSubmit(submitDetails)}>
               <input className="form-input" type="number" placeholder="Student ID" {...register("id", {

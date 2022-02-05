@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { useState, useEffect } from 'react';
 import './manageStudent.css';
-import Table from '../../common/components/table/table';
+import Table from '../common/table/table';
 import { columnStudents } from '../../data/studentData';
 import Button from 'react-bootstrap/Button'
 import Modal from '@mui/material/Modal';
@@ -10,7 +10,7 @@ import TextField from '@mui/material/TextField';
 import { ExcelRenderer } from 'react-excel-renderer';
 import * as XLSX from 'xlsx';
 import * as FileSaver from 'file-saver';
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import * as studentDetailsService from '../../services/manage-students-service';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -29,11 +29,11 @@ const style = {
 
 function ManageStudent() {
 
-  const { register, handleSubmit, formState: { errors, isValid }, reset, setValue } = useForm(
+  const { register, handleSubmit, formState: { errors, isValid }, reset, setValue, control } = useForm(
     { mode: "onChange" }
   );
   const [isEditFlow, setEditFlow] = useState(false);
-  const [startDate, setStartDate] = useState(new Date('01/01/2005'));
+  const startDate = new Date('01/01/2005');
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [detailsOpen, setdetailsOpen] = useState(false);
   const [studentData, setStudentsDetailsData] = useState([]);
@@ -49,8 +49,7 @@ function ManageStudent() {
 
   const submitDetails = (data) => {
     data = {
-      ...data,
-      dob: new Date(data?.dob).toLocaleString().split(',')[0]
+      ...data
     };
     if (!isEditFlow) {
     studentDetailsService.addStudent(data).then(
@@ -74,7 +73,6 @@ function ManageStudent() {
   };
 
   const editClicked = (editRowData) => {
-    console.log(editRowData);
     columnStudents.forEach((header) => {
       setValue(header.field, editRowData[header.field]);
     });
@@ -164,21 +162,36 @@ function ManageStudent() {
               {errors.id && <p className='alert-danger'>{errors.id.message}</p>}
               <input className="form-input" type="text" placeholder="Enter Name" {...register("studentName", {
                 required: "This is a required field.", pattern: {
-                  value: /^[a-zA-Z\\s]*$/,
+                  value: /^[a-zA-Z ]*$/,
                   message: "Value doesn't match the correct validation"
                 }
               })} />
               {errors.studentName && <p className='alert-danger'>{errors.studentName.message}</p>}
               <div className='form-select-section'>
                 <label>Date of Birth</label> 
-                <DatePicker className="form-input" id="dob" selected={startDate} onChange={(date) => setStartDate(date)} startDate={startDate} minDate={startDate} maxDate={new Date('2015/12/31')} /> 
+                <Controller
+                control={control}
+                name="dob"
+                render={({ field }) => (
+                  <DatePicker
+                    id="dob"
+                    className="form-input"
+                    placeholderText="Select DOB"
+                    selected={field.value? new Date(field.value) : null}
+                    onChange={(date) => field.onChange(date)}
+                    startDate={startDate}
+                    maxDate={new Date('2015/12/31')}
+                  />
+                )}
+                rules={{ required: true }}
+              />
                 {errors.dob && <p className='alert-danger'>{errors.dob.message}</p>}
               </div>
-              <div {...register("gender", { required: "This is a required field" })} className='gender-class'>
+              <div className='gender-class'>
                 <label>Gender</label>
-                <input type="radio" value="Male" className="gender" name="gender" id="male" /> Male
-                <input type="radio" value="Female" className="gender" name="gender" id="female" /> Female
-                <input type="radio" value="Other" className="gender" name="gender" id="other" /> Other
+                <input type="radio" value="Male" className="gender" name="gender" id="male"  {...register("gender", { required: "This is a required field" })} /> Male
+                <input type="radio" value="Female" className="gender" name="gender" id="female"  {...register("gender")}/> Female
+                <input type="radio" value="Other" className="gender" name="gender" id="other"  {...register("gender")}/> Other
                 {errors.gender && <p className='alert-danger'>{errors.gender.message}</p>}
               </div>
               <input className="form-input" type="text" placeholder="Blood Group" {...register("bloodGroup", {
@@ -193,14 +206,14 @@ function ManageStudent() {
                 <select className="form-select" id="grade" {...register("grade", { required: "This is a required field" })}>
                   <option value="1">1</option>
                   <option value="2">2</option>
-                  <option value="2">3</option>
-                  <option value="2">4</option>
-                  <option value="2">5</option>
-                  <option value="2">6</option>
-                  <option value="2">7</option>
-                  <option value="2">8</option>
-                  <option value="2">9</option>
-                  <option value="2">10</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
                 </select>
                 {errors.grade && <p className='alert-danger'>{errors.grade.message}</p>}
               </div>

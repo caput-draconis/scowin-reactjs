@@ -155,8 +155,8 @@ function ManageStudent() {
             <form onSubmit={handleSubmit(submitDetails)}>
               <input className="form-input" type="number" placeholder="Student ID" {...register("id", {
                 required: "This is a required field", maxLength: {
-                  value: 4,
-                  message: "Maximum value is 4, ex. 8877"
+                  value: 5,
+                  message: "Maximum value is 5, ex. 88777"
                 }
               })} />
               {errors.id && <p className='alert-danger'>{errors.id.message}</p>}

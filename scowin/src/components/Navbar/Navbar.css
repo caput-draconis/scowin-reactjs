@@ -1,6 +1,7 @@
 .logo-image{
-  height: 100px;
-  width: 110px;
+  height: 90px;
+  width: 70px;
+  margin-left:10px;
 }
 .nav-link:hover{
   color: #7f58b5 !important;
@@ -8,6 +9,6 @@
 .nav-link:active{
   color: #7f58b5 !important;
 }
-.active{
-  color: red;
+.active-link{
+  color: red !important;
 }

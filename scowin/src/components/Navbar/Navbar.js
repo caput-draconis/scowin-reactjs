@@ -19,19 +19,19 @@ function Navbar() {
         <img src={logo_image} alt='logo_image' className='logo-image'></img>
         <Nav className="justify-content-end" activeKey="/home">
           <Nav.Item>
-            <Nav.Link as={Link} className={"underline" + (url === "/" ?" active" : "")} to="/"><span><AiIcons.AiFillHome /> Home  </span></Nav.Link>
+            <Nav.Link as={Link} className={"underline" + (url === "/" ?" active-link" : "")} to="/"><span><AiIcons.AiFillHome /> Home  </span></Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link as={Link} className={"underline" + (url === "/manageStudent" ?" active" : "")}  to="/manageStudent"><span> <FaIcons.FaUserFriends /> Manage Student Details </span></Nav.Link>
+            <Nav.Link as={Link} className={"underline" + (url === "/manageStudent" ?" active-link" : "")}  to="/manageStudent"><span> <FaIcons.FaUserFriends /> Manage Student Details </span></Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link as={Link} className={"underline" + (url === "/vaccination" ?" active" : "")} to="/vaccination"><span><FaIcons.FaUserMd /> Update Vaccination status </span></Nav.Link>
+            <Nav.Link as={Link} className={"underline" + (url === "/vaccination" ?" active-link" : "")} to="/vaccination"><span><FaIcons.FaUserMd /> Update Vaccination status </span></Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link as={Link} className={"underline" + (url === "/generateReport" ?" active" : "")} to="/generateReport"><span><FaIcons.FaWpforms /> Generate Vaccination Reports </span></Nav.Link>
+            <Nav.Link as={Link} className={"underline" + (url === "/generateReport" ?" active-link" : "")} to="/generateReport"><span><FaIcons.FaWpforms /> Generate Vaccination Reports </span></Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link as={Link} className={"underline" + (url === "/vaccinationDrive" ?" active" : "")} to="/vaccinationDrive">
+            <Nav.Link as={Link} className={"underline" + (url === "/vaccinationDrive" ?" active-link" : "")} to="/vaccinationDrive">
               <span><FaIcons.FaSyringe /> Manage Vaccination drive </span>
             </Nav.Link>
           </Nav.Item>

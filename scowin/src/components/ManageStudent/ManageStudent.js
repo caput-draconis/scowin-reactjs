@@ -15,6 +15,7 @@ import * as studentDetailsService from '../../services/manage-students-service';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
+// Styling for popup modal
 const style = {
   position: 'absolute',
   top: '50%',
@@ -38,29 +39,39 @@ function ManageStudent() {
   const [detailsOpen, setdetailsOpen] = useState(false);
   const [studentData, setStudentsDetailsData] = useState([]);
 
+  // To show modal for bulk upload
   const showModal = () => { setModalIsOpen(true); };
+
+  // To close bulk upload modal
   const closeModal = () => { setModalIsOpen(false); };
+
+  // To show modal to add/edit student details
   const showDetails = () => { setdetailsOpen(true); }
+
+  // To close modal and reset the modal form data
   const closeDetails = () => {
     setEditFlow(false);
     setdetailsOpen(false);
     reset();
   }
 
+  // Submiting data to create or edit student on click of submit in popup modal
   const submitDetails = (data) => {
     data = {
       ...data
     };
     if (!isEditFlow) {
-    studentDetailsService.addStudent(data).then(
-      _ => {
-        closeDetails();
-        studentDetailsService.getStudentsDetails().then(
-          res => setStudentsDetailsData(res)
-        )
-      }
-    );
+      // Creating and submitting data for creating student details
+      studentDetailsService.addStudent(data).then(
+        _ => {
+          closeDetails();
+          studentDetailsService.getStudentsDetails().then(
+            res => setStudentsDetailsData(res)
+          )
+        }
+      );
     } else {
+      // Creating and submitting data for editing student details based on ID
       studentDetailsService.editStudentDetails(data).then(
         _ => {
           closeDetails();
@@ -72,6 +83,7 @@ function ManageStudent() {
     }
   };
 
+  // Open popup modal and setup form data when clicked on edit 
   const editClicked = (editRowData) => {
     columnStudents.forEach((header) => {
       setValue(header.field, editRowData[header.field]);
@@ -80,6 +92,7 @@ function ManageStudent() {
     showDetails();
   };
 
+  // Download excel template for bulk upload
   const downloadTemplate = () => {
     const fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
     const fileExtension = '.xlsx';
@@ -150,7 +163,7 @@ function ManageStudent() {
         >
           <Box sx={style}>
             <div className='popup-section'>
-              <h5 className='popup-header'>{isEditFlow? 'Update Student Details' : 'Add Student Details'}</h5>
+              <h5 className='popup-header'>{isEditFlow ? 'Update Student Details' : 'Add Student Details'}</h5>
             </div>
             <form onSubmit={handleSubmit(submitDetails)}>
               <input className="form-input" type="number" placeholder="Student ID" {...register("id", {
@@ -168,30 +181,30 @@ function ManageStudent() {
               })} />
               {errors.studentName && <p className='alert-danger'>{errors.studentName.message}</p>}
               <div className='form-select-section'>
-                <label>Date of Birth</label> 
+                <label>Date of Birth</label>
                 <Controller
-                control={control}
-                name="dob"
-                render={({ field }) => (
-                  <DatePicker
-                    id="dob"
-                    className="form-input"
-                    placeholderText="Select DOB"
-                    selected={field.value? new Date(field.value) : null}
-                    onChange={(date) => field.onChange(date)}
-                    startDate={startDate}
-                    maxDate={new Date('2015/12/31')}
-                  />
-                )}
-                rules={{ required: true }}
-              />
+                  control={control}
+                  name="dob"
+                  render={({ field }) => (
+                    <DatePicker
+                      id="dob"
+                      className="form-input"
+                      placeholderText="Select DOB"
+                      selected={field.value ? new Date(field.value) : null}
+                      onChange={(date) => field.onChange(date)}
+                      startDate={startDate}
+                      maxDate={new Date('2015/12/31')}
+                    />
+                  )}
+                  rules={{ required: true }}
+                />
                 {errors.dob && <p className='alert-danger'>{errors.dob.message}</p>}
               </div>
               <div className='gender-class'>
                 <label>Gender</label>
                 <input type="radio" value="Male" className="gender" name="gender" id="male"  {...register("gender", { required: "This is a required field" })} /> Male
-                <input type="radio" value="Female" className="gender" name="gender" id="female"  {...register("gender")}/> Female
-                <input type="radio" value="Other" className="gender" name="gender" id="other"  {...register("gender")}/> Other
+                <input type="radio" value="Female" className="gender" name="gender" id="female"  {...register("gender")} /> Female
+                <input type="radio" value="Other" className="gender" name="gender" id="other"  {...register("gender")} /> Other
                 {errors.gender && <p className='alert-danger'>{errors.gender.message}</p>}
               </div>
               <input className="form-input" type="text" placeholder="Blood Group" {...register("bloodGroup", {

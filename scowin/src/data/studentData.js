@@ -1,3 +1,4 @@
+// Mock students data
 export const studentData = [
     {
         studentName: 'Aiswarya P',
@@ -101,6 +102,7 @@ export const studentData = [
     }
 ]
 
+// Header data for student table
 export const columnStudents = [
     { title: 'Id', field: 'id' },
     { title: 'Name', field: 'studentName' },

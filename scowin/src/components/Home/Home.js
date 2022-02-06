@@ -22,7 +22,7 @@ export default function Home() {
       "value": studentData.length
     }
   ];
-  
+  // Tooltip data to show on hover of pie chart
   const CustomTooltip = ({ active, payload, label }) => {
     if (active) {
       return (
@@ -34,6 +34,7 @@ export default function Home() {
 
     return null;
   };
+
   const vaccineComplete = studentVaccineData.filter(data => data.vaccinationStatus==='Completed')
   const upcommingVaccinationDrive = vaccineData.filter(data => data.driveStatus === 'Upcoming');
   const percent = ((vaccineComplete.length /studentVaccineData.length) * 100).toFixed(2);
@@ -101,6 +102,7 @@ export default function Home() {
         </div>
         <div className='vaccine-table'>
           {upcommingVaccinationDrive.length === 0 ? <p className='home-header'>No Upcoming Drives</p> :
+            // Table to show upcoming vaccination drive
             <Table columns={vaccineHeaders} rows={upcommingVaccinationDrive} header="Upcoming Vaccination Drive" isEdit={false} />
           }
         </div>

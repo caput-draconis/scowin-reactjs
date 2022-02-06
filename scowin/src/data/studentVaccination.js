@@ -1,3 +1,4 @@
+// Mock vaccinated students data
 export const studentVaccineData = [
     {
         studentName:'Aiswarya P',
@@ -92,6 +93,7 @@ export const studentVaccineData = [
     }
 ]
 
+// Header data for vaccinated students table
 export const studentVaccinationHeaders = [
     {
         title: 'Student Name',

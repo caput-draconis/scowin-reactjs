@@ -44,12 +44,13 @@ class Table extends React.Component {
 
   render() {
     
+    // Get the data and headers through props
     const columns = this.props.columns;
     const data = this.props.rows;
 
     return (
       <div className="mt-5">
-
+        {/* Material Table component to show the data passed as a table with filter, sort and pagination  */}
         <MaterialTable
           title={this.props.header}
           icons={tableIcons}
@@ -65,6 +66,7 @@ class Table extends React.Component {
               exportFunc: (cols, datas) => ExportCsv(cols, datas, 'CsvFile')
             }]
           }}
+          // Show edit based on condition
           actions={this.props.isEdit ? [
             (rowData) => {
               return {

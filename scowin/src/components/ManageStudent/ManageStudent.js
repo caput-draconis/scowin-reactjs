@@ -225,9 +225,9 @@ function ManageStudent() {
                 </select>
                 {errors.section && <p className='alert-danger'>{errors.section.message}</p>}
               </div>
-              <input className="form-input" type="number" placeholder="Aadhar Card Number" {...register("aadharID", { required: "This is a required field", pattern: { value: /^[2-9]{1}[0-9]{3}[0-9]{4}[0-9]{4}$/, message: "Value doesn't match the required pattern" } })} />
+              <input className="form-input" id="aadhar" type="number" placeholder="Aadhar Card Number" {...register("aadharID", { required: "This is a required field", pattern: { value: /^[2-9]{1}[0-9]{3}[0-9]{4}[0-9]{4}$/, message: "Value doesn't match the required pattern" } })} />
               {errors.aadharID && <p className='alert-danger'>{errors.aadharID.message}</p>}
-              <TextField id="outlined-multiline-static" label="Existing Comoribidities" multiline rows={4}  {...register("existingComorbidites")} />
+              <TextField id="outlined-basic" label="Existing Comorbidites" placeholder='Existing Comorbidites' variant="outlined" multiline rows={5}  {...register("existingComorbidites")} />
               <Button type='submit' className='submit-button' disabled={!isValid} >Submit</Button>
             </form>
           </Box>

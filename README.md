@@ -4,7 +4,7 @@
 
 2. Clone the web app repository into local system using following command
 ```
-git clone https://github.com/saptis/ SCOWIN_frontEnd.git
+git clone https://github.com/saptis/SCOWIN_frontEnd.git
 ```
 3. Enter into the directory created
 ```

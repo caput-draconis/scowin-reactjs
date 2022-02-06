@@ -1,6 +1,6 @@
 # SCOWIN_Application
 
-The frontend development of the SCOWIN application using ReactJS. 
+The frontend development of the SCOWIN application using ReactJS. Here are the steps to be followed while running the application.
 
 1. Fork out the repository from GIT
 

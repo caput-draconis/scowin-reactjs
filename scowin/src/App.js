@@ -14,6 +14,7 @@ function App() {
       <Router>
           <Navbar />
           <div className='container mt-5'>
+          {/* To display different components based on routes */}
           <Routes>
             <Route path='/' exact element={<Home />} />
             <Route path='/vaccination' element={<Vaccine />} />

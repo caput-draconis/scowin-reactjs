@@ -1,9 +1,11 @@
+// To get all the student details
 export function getStudentsDetails() {
     return fetch("http://localhost:3000/studentData").then(res => res.json()).then(result => {
         return result;
     }).catch(console.log);
 }
 
+// To add new students
 export function addStudent(requestBody) {
     const requestOptions = {
         method: 'POST',
@@ -15,6 +17,7 @@ export function addStudent(requestBody) {
         .then(data => data).catch(console.log);
 }
 
+// To edit details of existing students
 export function editStudentDetails(requestBody) {
     const requestOptions = {
         method: 'PUT',

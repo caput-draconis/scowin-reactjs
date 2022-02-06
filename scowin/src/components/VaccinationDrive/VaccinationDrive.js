@@ -11,6 +11,7 @@ import { v4 as uuid } from 'uuid';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
+// Styling for popup modal
 const style = {
   position: 'absolute',
   top: '50%',
@@ -29,20 +30,27 @@ function VaccinationDrive() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [isEditFlow, setEditFlow] = useState(false);
   const [vaccinationDriveData, setVaccinationDriveData] = useState([]);
+
+  // To show modal
   const showModal = () => {
     setModalIsOpen(true);
   };
+
+  // To close modal and reset the modal form data
   const closeModal = () => {
     setEditFlow(false);
     setModalIsOpen(false);
     reset();
   };
 
+  // Getting all the methods required for form controls
   const { register, formState: { errors, isValid }, handleSubmit, reset, setValue, control } = useForm(
     {
       mode: "onChange"
     }
   );
+
+  // Submiting data to create or edit vaccination drive on click of submit in popup modal
   const onSubmit = data => {
     data = {
       ...data,
@@ -50,6 +58,7 @@ function VaccinationDrive() {
       driveStatus: 'Upcoming'
     };
     if (!isEditFlow) {
+      // Creating and submitting data for creating vaccination drive
       data = {
         ...data,
         id: uuid()
@@ -63,6 +72,7 @@ function VaccinationDrive() {
         }
       );
     } else {
+      // Creating and submitting data for editing vaccination drive based on ID
       data = {
         ...data,
         id: data.id
@@ -79,6 +89,7 @@ function VaccinationDrive() {
 
   };
 
+  // Open popup modal and setup form data when clicked on edit 
   const editClicked = (editRowData) => {
     vaccineHeaders.forEach((header) => {
       setValue(header.field, editRowData[header.field]);
@@ -89,6 +100,7 @@ function VaccinationDrive() {
   };
 
   useEffect(() => {
+    // Get the vaccination drive data
     vaccinationDriveService.getVaccinationDriveDetails().then(
       res => setVaccinationDriveData(res)
     )

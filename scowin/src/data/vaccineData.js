@@ -1,3 +1,4 @@
+// Mock vaccination drive data
 export const vaccineData = [
     {
         vaccinationDate:'2022-02-27T12:19:47.000Z',
@@ -55,6 +56,7 @@ export const vaccineData = [
     }
 ]
 
+// Header data for vacination drive
 export const vaccineHeaders = [
     
     {

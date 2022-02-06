@@ -16,6 +16,7 @@ function Navbar() {
   return (
     <>
       <div className='d-flex flex-direction-row bg-light justify-content-between align-items-center'>
+        {/* Header navigation menu items */}
         <img src={logo_image} alt='logo_image' className='logo-image'></img>
         <Nav className="justify-content-end" activeKey="/home">
           <Nav.Item>

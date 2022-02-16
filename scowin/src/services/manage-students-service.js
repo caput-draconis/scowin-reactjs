@@ -1,6 +1,6 @@
 // To get all the student details
 export function getStudentsDetails() {
-    return fetch("http://localhost:3000/studentData").then(res => res.json()).then(result => {
+    return fetch("http://127.0.0.1:8000/students").then(res => res.json()).then(result => {
         return result;
     }).catch(console.log);
 }
@@ -12,7 +12,7 @@ export function addStudent(requestBody) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(requestBody)
     };
-    return fetch('http://localhost:3000/studentData', requestOptions)
+    return fetch('http://127.0.0.1:8000/students', requestOptions)
         .then(response => response.json())
         .then(data => data).catch(console.log);
 }
@@ -24,7 +24,7 @@ export function editStudentDetails(requestBody) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(requestBody)
     };
-    return fetch(`http://localhost:3000/studentData/${requestBody.id}`, requestOptions)
+    return fetch(`http://127.0.0.1:8000/students/${requestBody.id}`, requestOptions)
         .then(response => response.json())
         .then(data => data).catch(console.log);
 }

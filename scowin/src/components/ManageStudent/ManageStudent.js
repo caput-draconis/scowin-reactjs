@@ -166,7 +166,7 @@ function ManageStudent() {
               <h5 className='popup-header'>{isEditFlow ? 'Update Student Details' : 'Add Student Details'}</h5>
             </div>
             <form onSubmit={handleSubmit(submitDetails)}>
-              <input className="form-input" type="number" placeholder="Student ID" {...register("id", {
+              <input className="form-input" type="number" disabled={isEditFlow} placeholder="Student ID" {...register("id", {
                 required: "This is a required field", maxLength: {
                   value: 5,
                   message: "Maximum value is 5, ex. 88777"

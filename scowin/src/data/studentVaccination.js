@@ -97,27 +97,27 @@ export const studentVaccineData = [
 export const studentVaccinationHeaders = [
     {
         title: 'Student Name',
-        field: 'studentName'
+        field: 'student.studentName'
     },
     {
         title: 'Student ID',
-        field: 'id'
+        field: 'student.id'
     },
     {
         title: 'Aadhar ID',
-        field: 'aadharID'
+        field: 'student.aadharID'
     },
     {
         title: 'Date of Birth',
-        field: 'dob'
+        field: 'student.dob'
     },
     {
         title: 'Gender',
-        field: 'gender'
+        field: 'student.gender'
     },
     {
         title: 'Vaccination Name',
-        field: 'vaccineName'
+        field: 'vaccine.vaccineName'
     },
     {
         title: 'Vaccination Status',
@@ -133,6 +133,6 @@ export const studentVaccinationHeaders = [
     },
     {
         title: 'Comorbidities Details',
-        field: 'comorbiditiesDetails'
+        field: 'student.existingComorbidites'
     }
 ]

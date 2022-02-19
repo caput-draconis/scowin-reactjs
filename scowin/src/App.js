@@ -6,7 +6,7 @@ import Navbar from './components/Navbar/Navbar';
 import VaccinationDrive from './components/VaccinationDrive/VaccinationDrive';
 import Vaccine from './components/Vaccination/Vaccination';
 import Managestud from './components/ManageStudent/ManageStudent';
-import GenerateReports from './components/GenerateReports/GenerateReports';
+import StudentVaccinationDetails from './components/GenerateReports/GenerateReports';
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
             <Route path='/vaccination' element={<Vaccine />} />
             <Route path='/vaccinationDrive' element={<VaccinationDrive />} />
             <Route path='/manageStudent' exact element={<Managestud />} />
-            <Route path='/generateReport' exact element={<GenerateReports />} />
+            <Route path='/generateReport' exact element={<StudentVaccinationDetails />} />
           </Routes>
         </div>
       </Router>

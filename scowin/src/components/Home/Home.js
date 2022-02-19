@@ -1,27 +1,17 @@
 import React, { Fragment } from 'react';
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
-import { vaccineData, vaccineHeaders } from '../../data/vaccineData';
-import { studentVaccineData } from '../../data/studentVaccination';
-import { studentData } from '../../data/studentData';
+import { vaccineHeaders } from '../../data/vaccineData';
 import Table from '../common/table/table';
 import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
 import './Home.css'
+import * as studentVaccinationMetadataService from '../../services/student-vaccination-metadata';
+import { useState, useEffect } from 'react';
 
 
 export default function Home() {
   const COLORS = ['#0088FE', '#00C49F'];
 
-  const pieData = [
-    {
-      "name": "Students Vaccinated",
-      "value": studentVaccineData.length
-    },
-    {
-      "name": "Students Registered",
-      "value": studentData.length
-    }
-  ];
   // Tooltip data to show on hover of pie chart
   const CustomTooltip = ({ active, payload, label }) => {
     if (active) {
@@ -35,9 +25,25 @@ export default function Home() {
     return null;
   };
 
-  const vaccineComplete = studentVaccineData.filter(data => data.vaccinationStatus==='Completed')
-  const upcommingVaccinationDrive = vaccineData.filter(data => data.driveStatus === 'Upcoming');
-  const percent = ((vaccineComplete.length /studentVaccineData.length) * 100).toFixed(2);
+  const [studentsVaccinationMetadata, setStudentsVaccinationMetadata] = useState([]);
+
+
+  useEffect(() => {
+    studentVaccinationMetadataService.getStudentsVaccinationMetadata().then(
+      res => setStudentsVaccinationMetadata(res)
+    )
+  }, []);
+
+  const pieData = [
+    {
+      "name": "Students Vaccinated",
+      "value": studentsVaccinationMetadata.vaccinatedStudentCount
+    },
+    {
+      "name": "Students Registered",
+      "value": studentsVaccinationMetadata.registeredStudentCount
+    }
+  ];
 
   return (
     <Fragment>
@@ -51,7 +57,7 @@ export default function Home() {
               </Card.Header>
               <hr />
               <Card.Body>
-                <Card.Title>{studentData.length}</Card.Title>
+                <Card.Title>{studentsVaccinationMetadata.registeredStudentCount}</Card.Title>
                 <Card.Text>
                   STUDENTS REGISTERED
                 </Card.Text>
@@ -63,7 +69,7 @@ export default function Home() {
               </Card.Header>
               <hr />
               <Card.Body>
-                <Card.Title>{studentVaccineData.length}</Card.Title>
+                <Card.Title>{studentsVaccinationMetadata.vaccinatedStudentCount}</Card.Title>
                 <Card.Text>
                   STUDENTS VACCINATED
                 </Card.Text>
@@ -75,7 +81,7 @@ export default function Home() {
               </Card.Header>
               <hr />
               <Card.Body>
-                <Card.Title>{percent} %</Card.Title>
+                <Card.Title>{((studentsVaccinationMetadata.vaccinatedStudentCount / studentsVaccinationMetadata.registeredStudentCount) * 100).toFixed(2)} %</Card.Title>
                 <Card.Text>
                   PERCENTAGE OF STUDENTS VACCINATED
                 </Card.Text>
@@ -101,9 +107,9 @@ export default function Home() {
           </CardGroup>
         </div>
         <div className='vaccine-table'>
-          {upcommingVaccinationDrive.length === 0 ? <p className='home-header'>No Upcoming Drives</p> :
+          {studentsVaccinationMetadata.vaccinatedStudentCount === 0 ? <p className='home-header'>No Upcoming Drives</p> :
             // Table to show upcoming vaccination drive
-            <Table columns={vaccineHeaders} rows={upcommingVaccinationDrive} header="Upcoming Vaccination Drive" isEdit={false} />
+            <Table columns={vaccineHeaders} rows={studentsVaccinationMetadata.upcomingVaccinationDrive} header="Upcoming Vaccination Drive" isEdit={false} />
           }
         </div>
       </div>

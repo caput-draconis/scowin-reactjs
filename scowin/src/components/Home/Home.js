@@ -107,7 +107,7 @@ export default function Home() {
           </CardGroup>
         </div>
         <div className='vaccine-table'>
-          {studentsVaccinationMetadata.vaccinatedStudentCount === 0 ? <p className='home-header'>No Upcoming Drives</p> :
+          {studentsVaccinationMetadata.upcomingVaccinationDrive?.length === 0 ? <p className='home-header'>No Upcoming Drives</p> :
             // Table to show upcoming vaccination drive
             <Table columns={vaccineHeaders} rows={studentsVaccinationMetadata.upcomingVaccinationDrive} header="Upcoming Vaccination Drive" isEdit={false} />
           }

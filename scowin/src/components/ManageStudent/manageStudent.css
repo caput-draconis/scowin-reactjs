@@ -119,3 +119,8 @@ label{
 #aadhar{
     margin-bottom: 20px;
 }
+#errorFile{
+    color:red;
+    font-size:12px;
+    font-weight:bold;
+}

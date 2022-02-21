@@ -106,27 +106,36 @@ function ManageStudent() {
     closeModal();
   };
 
-  const fileReader = (event) => {
+  const fileReader = (event) => {  
     let fileObj = event.target.files[0];
-    ExcelRenderer(fileObj, (err, resp) => {
-      if (err) {
-        console.log(err)
-      }
-      else {
-        console.log("R", resp)
-        closeModal();
-        var rows = resp.rows['length']
-        var header = resp.rows[0]
-        for (var j = 1; j < rows; j++) {
-          var s1 = resp.rows[j]
-          var obj = {}
-          for (var i = 0; i < header.length; i++) {
-            obj[header[i]] = s1[i];
-          }
-          console.log("JSON", obj)
+    console.log("fileobj",fileObj)
+    if(fileObj.type !== "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
+      console.log("Invalid file type")
+      var error1 = document.getElementById('errorFile');
+      console.log(error1)
+      error1.innerHTML = error1.innerHTML + `<p> Invalid file type </p>`;
+    }
+    else{
+      ExcelRenderer(fileObj, (err, resp) => {
+        if (err) {
+          console.log(err)
         }
-      }
-    });
+        else {
+          console.log("R", resp)
+          closeModal();
+          var rows = resp.rows['length']
+          var header = resp.rows[0]
+          for (var j = 1; j < rows; j++) {
+            var s1 = resp.rows[j]
+            var obj = {}
+            for (var i = 0; i < header.length; i++) {
+              obj[header[i]] = s1[i];
+            }
+            console.log("JSON", obj)
+          }
+        }
+      });
+    }
   };
 
   useEffect(() => {
@@ -152,7 +161,8 @@ function ManageStudent() {
             </div>
             <div className='upload-students-content'>
               <p>Upload Student details Excel by filling all details in the below template</p>
-              <input type="file" onChange={fileReader} className='upload-file' />
+              <input type="file" onChange={fileReader} className='upload-file' accept=".xlsx, .xls"/>
+              <div id="errorFile" className="errorFile"></div>
               <p className='download-template' onClick={downloadTemplate}>Download Template</p>
             </div>
           </Box>

@@ -37,11 +37,11 @@ export default function Home() {
   const pieData = [
     {
       "name": "Students Vaccinated",
-      "value": studentsVaccinationMetadata.vaccinatedStudentCount
+      "value": studentsVaccinationMetadata?.vaccinatedStudentCount
     },
     {
       "name": "Students Registered",
-      "value": studentsVaccinationMetadata.registeredStudentCount
+      "value": studentsVaccinationMetadata?.registeredStudentCount
     }
   ];
 
@@ -57,7 +57,7 @@ export default function Home() {
               </Card.Header>
               <hr />
               <Card.Body>
-                <Card.Title>{studentsVaccinationMetadata.registeredStudentCount}</Card.Title>
+                <Card.Title>{studentsVaccinationMetadata?.registeredStudentCount}</Card.Title>
                 <Card.Text>
                   STUDENTS REGISTERED
                 </Card.Text>
@@ -69,7 +69,7 @@ export default function Home() {
               </Card.Header>
               <hr />
               <Card.Body>
-                <Card.Title>{studentsVaccinationMetadata.vaccinatedStudentCount}</Card.Title>
+                <Card.Title>{studentsVaccinationMetadata?.vaccinatedStudentCount}</Card.Title>
                 <Card.Text>
                   STUDENTS VACCINATED
                 </Card.Text>
@@ -81,7 +81,7 @@ export default function Home() {
               </Card.Header>
               <hr />
               <Card.Body>
-                <Card.Title>{((studentsVaccinationMetadata.vaccinatedStudentCount / studentsVaccinationMetadata.registeredStudentCount) * 100).toFixed(2)} %</Card.Title>
+                <Card.Title>{((studentsVaccinationMetadata?.vaccinatedStudentCount / studentsVaccinationMetadata?.registeredStudentCount) * 100).toFixed(2)} %</Card.Title>
                 <Card.Text>
                   PERCENTAGE OF STUDENTS VACCINATED
                 </Card.Text>
@@ -107,9 +107,9 @@ export default function Home() {
           </CardGroup>
         </div>
         <div className='vaccine-table'>
-          {studentsVaccinationMetadata.upcomingVaccinationDrive?.length === 0 ? <p className='home-header'>No Upcoming Drives</p> :
+          {studentsVaccinationMetadata?.upcomingVaccinationDrive?.length === 0 ? <p className='home-header'>No Upcoming Drives</p> :
             // Table to show upcoming vaccination drive
-            <Table columns={vaccineHeaders} rows={studentsVaccinationMetadata.upcomingVaccinationDrive} header="Upcoming Vaccination Drive" isEdit={false} />
+            <Table columns={vaccineHeaders} rows={studentsVaccinationMetadata?.upcomingVaccinationDrive} header="Upcoming Vaccination Drive" isEdit={false} />
           }
         </div>
       </div>

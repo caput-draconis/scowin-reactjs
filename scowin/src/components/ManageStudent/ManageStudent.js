@@ -109,33 +109,42 @@ function ManageStudent() {
   const fileReader = (event) => {  
     let fileObj = event.target.files[0];
     console.log("fileobj",fileObj)
-    if(fileObj.type !== "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
-      console.log("Invalid file type")
-      var error1 = document.getElementById('errorFile');
-      console.log(error1)
-      error1.innerHTML = error1.innerHTML + `<p> Invalid file type </p>`;
-    }
-    else{
-      ExcelRenderer(fileObj, (err, resp) => {
-        if (err) {
-          console.log(err)
-        }
-        else {
-          console.log("R", resp)
-          closeModal();
-          var rows = resp.rows['length']
-          var header = resp.rows[0]
-          for (var j = 1; j < rows; j++) {
-            var s1 = resp.rows[j]
-            var obj = {}
-            for (var i = 0; i < header.length; i++) {
-              obj[header[i]] = s1[i];
-            }
-            console.log("JSON", obj)
-          }
-        }
-      });
-    }
+    // if(fileObj.type !== "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
+    //   console.log("Invalid file type")
+    //   var error1 = document.getElementById('errorFile');
+    //   console.log(error1)
+    //   error1.innerHTML = error1.innerHTML + `<p> Invalid file type </p>`;
+    // }
+    // else{
+    //   ExcelRenderer(fileObj, (err, resp) => {
+    //     if (err) {
+    //       console.log(err)
+    //     }
+    //     else {
+    //       console.log("R", resp)
+    //       closeModal();
+    //       var rows = resp.rows['length']
+    //       var header = resp.rows[0]
+    //       for (var j = 1; j < rows; j++) {
+    //         var s1 = resp.rows[j]
+    //         var obj = {}
+    //         for (var i = 0; i < header.length; i++) {
+    //           obj[header[i]] = s1[i];
+    //         }
+    //         console.log("JSON", obj)
+    //       }
+    //     }
+    //   });
+    // }
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      let data = new Uint8Array(e.target.result);
+      let workbook = XLSX.read(data, { type: "array" });
+      let firstSheet = workbook.SheetNames[0];
+      const elements = XLSX.utils.sheet_to_json(workbook.Sheets[firstSheet]);
+      console.log(JSON.stringify(elements));
+    };
+    reader.readAsArrayBuffer(fileObj);
   };
 
   useEffect(() => {

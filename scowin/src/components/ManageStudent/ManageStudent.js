@@ -14,6 +14,7 @@ import { useForm, Controller } from "react-hook-form";
 import * as studentDetailsService from '../../services/manage-students-service';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import moment from 'moment';
 
 // Styling for popup modal
 const style = {
@@ -109,42 +110,64 @@ function ManageStudent() {
   const fileReader = (event) => {  
     let fileObj = event.target.files[0];
     console.log("fileobj",fileObj)
-    // if(fileObj.type !== "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
-    //   console.log("Invalid file type")
-    //   var error1 = document.getElementById('errorFile');
-    //   console.log(error1)
-    //   error1.innerHTML = error1.innerHTML + `<p> Invalid file type </p>`;
-    // }
-    // else{
-    //   ExcelRenderer(fileObj, (err, resp) => {
-    //     if (err) {
-    //       console.log(err)
-    //     }
-    //     else {
-    //       console.log("R", resp)
-    //       closeModal();
-    //       var rows = resp.rows['length']
-    //       var header = resp.rows[0]
-    //       for (var j = 1; j < rows; j++) {
-    //         var s1 = resp.rows[j]
-    //         var obj = {}
-    //         for (var i = 0; i < header.length; i++) {
-    //           obj[header[i]] = s1[i];
-    //         }
-    //         console.log("JSON", obj)
-    //       }
-    //     }
-    //   });
-    // }
-    var reader = new FileReader();
-    reader.onload = function(e) {
-      let data = new Uint8Array(e.target.result);
-      let workbook = XLSX.read(data, { type: "array" });
-      let firstSheet = workbook.SheetNames[0];
-      const elements = XLSX.utils.sheet_to_json(workbook.Sheets[firstSheet]);
-      console.log(JSON.stringify(elements));
-    };
-    reader.readAsArrayBuffer(fileObj);
+    if(fileObj.type !== "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
+      console.log("Invalid file format")
+      var error1 = document.getElementById('errorFile');
+      console.log(error1)
+      error1.innerHTML = error1.innerHTML + `<p> Invalid file type </p>`;
+    }
+    else{
+      ExcelRenderer(fileObj, (err, resp) => {
+        if (err) {
+          console.log(err)
+        }
+        else {
+          console.log("R", resp)
+          closeModal();
+          var rows = resp.rows['length']
+          var header = resp.rows[0];
+          for (var j = 1; j < rows; j++) {
+            var s1 = resp.rows[j]
+            var obj = {}
+            for (var i = 0; i < header.length; i++) {
+              obj[header[i]] = s1[i];
+            }
+            var x = obj;
+            if(x['Id'] === undefined || x['Name'] === undefined || x['Dob'] === undefined || x['Gender'] === undefined || x['Blood_Group'] === undefined || x['AAdhar'] === undefined || x['Section'] === undefined || x['Grade'] === undefined || x['Existing_Comorbidities'] === undefined){
+              console.log('hmm')
+            }
+            else{
+              var idLength = x['Id'].toString().length
+              var nameFormat = /^[a-zA-Z ]*$/
+              var bloodFormat = /^(A|B|AB|O)[+-]$/
+              var aadharFormat = /^[2-9]{1}[0-9]{3}[0-9]{4}[0-9]{4}$/
+              // var startDate = moment('01/01/2005','DD/MM/YYYY');
+              // var endDate = moment('31/12/2015','DD/MM/YYYY') 
+              if(idLength <= 5){
+                if(bloodFormat.test(x['Blood_Group'])){
+                  if(x['Gender']==='Female' || x['Gender']==='Male' || x['Gender']==='Other' || x['Gender']==='female' || x['Gender']==='male'){
+                    if(aadharFormat.test(x['AAdhar'])){
+                      if(x['Section'] ==='A' || x['Section'] ==='B'){
+                        if(x['Grade'] >= 1 && x['Grade'] <= 10){
+                          if (nameFormat.test(x['Name'])){
+                            console.log(x)
+                            
+                            //var compareDate = moment(x['Dob'],'DD/MM/YYYY')
+                            // var isBetween = compareDate.isBetween(startDate,endDate)
+                            // console.log(x['Dob'])
+                            // console.log("between",isBetween) 
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      });
+    }
   };
 
   useEffect(() => {

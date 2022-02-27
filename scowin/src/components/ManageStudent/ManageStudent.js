@@ -7,14 +7,12 @@ import Button from 'react-bootstrap/Button'
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { ExcelRenderer } from 'react-excel-renderer';
 import * as XLSX from 'xlsx';
 import * as FileSaver from 'file-saver';
 import { useForm, Controller } from "react-hook-form";
 import * as studentDetailsService from '../../services/manage-students-service';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import moment from 'moment';
 
 // Styling for popup modal
 const style = {
@@ -39,9 +37,12 @@ function ManageStudent() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [detailsOpen, setdetailsOpen] = useState(false);
   const [studentData, setStudentsDetailsData] = useState([]);
+  const [excelUploadStudentData, setexcelUploadStudentData] = useState([]);
 
   // To show modal for bulk upload
-  const showModal = () => { setModalIsOpen(true); };
+  const showModal = () => {
+    setModalIsOpen(true);
+  };
 
   // To close bulk upload modal
   const closeModal = () => { setModalIsOpen(false); };
@@ -98,7 +99,7 @@ function ManageStudent() {
     const fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
     const fileExtension = '.xlsx';
     const fileName = 'bulkUpload'
-    const csvData = [{ Id: '', Name: '', Dob: '', Gender: '', Blood_Group: '', Grade: '', Section: '', AAdhar: '', Existing_Comorbidities: '' }]
+    const csvData = [{ id: '', studentName: '', dob: '', gender: '', bloodGroup: '', grade: '', section: '', aadharID: '', existingComorbidites: '' }]
     const ws = XLSX.utils.json_to_sheet(csvData);
     const wb = { Sheets: { 'data': ws }, SheetNames: ['data'] };
     const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
@@ -107,68 +108,186 @@ function ManageStudent() {
     closeModal();
   };
 
-  const fileReader = (event) => {  
+  const fileReader = (event) => {
     let fileObj = event.target.files[0];
-    console.log("fileobj",fileObj)
-    if(fileObj.type !== "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
-      console.log("Invalid file format")
-      var error1 = document.getElementById('errorFile');
-      console.log(error1)
-      error1.innerHTML = error1.innerHTML + `<p> Invalid file type </p>`;
-    }
-    else{
-      ExcelRenderer(fileObj, (err, resp) => {
-        if (err) {
-          console.log(err)
-        }
-        else {
-          console.log("R", resp)
-          closeModal();
-          var rows = resp.rows['length']
-          var header = resp.rows[0];
-          for (var j = 1; j < rows; j++) {
-            var s1 = resp.rows[j]
-            var obj = {}
-            for (var i = 0; i < header.length; i++) {
-              obj[header[i]] = s1[i];
-            }
-            var x = obj;
-            if(x['Id'] === undefined || x['Name'] === undefined || x['Dob'] === undefined || x['Gender'] === undefined || x['Blood_Group'] === undefined || x['AAdhar'] === undefined || x['Section'] === undefined || x['Grade'] === undefined || x['Existing_Comorbidities'] === undefined){
-              console.log('hmm')
-            }
-            else{
-              var idLength = x['Id'].toString().length
-              var nameFormat = /^[a-zA-Z ]*$/
-              var bloodFormat = /^(A|B|AB|O)[+-]$/
-              var aadharFormat = /^[2-9]{1}[0-9]{3}[0-9]{4}[0-9]{4}$/
-              // var startDate = moment('01/01/2005','DD/MM/YYYY');
-              // var endDate = moment('31/12/2015','DD/MM/YYYY') 
-              if(idLength <= 5){
-                if(bloodFormat.test(x['Blood_Group'])){
-                  if(x['Gender']==='Female' || x['Gender']==='Male' || x['Gender']==='Other' || x['Gender']==='female' || x['Gender']==='male'){
-                    if(aadharFormat.test(x['AAdhar'])){
-                      if(x['Section'] ==='A' || x['Section'] ==='B'){
-                        if(x['Grade'] >= 1 && x['Grade'] <= 10){
-                          if (nameFormat.test(x['Name'])){
-                            console.log(x)
-                            
-                            //var compareDate = moment(x['Dob'],'DD/MM/YYYY')
-                            // var isBetween = compareDate.isBetween(startDate,endDate)
-                            // console.log(x['Dob'])
-                            // console.log("between",isBetween) 
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      });
-    }
+    let reader = new FileReader();
+    reader.onload = function (e) {
+      let data = new Uint8Array(e.target.result);
+      let workbook = XLSX.read(data, { type: "array", cellText: false, cellDates: true });
+      let firstSheet = workbook.SheetNames[0];
+      const elements = XLSX.utils.sheet_to_json(workbook.Sheets[firstSheet]);
+      validateExcelData(elements);
+    };
+    reader.readAsArrayBuffer(fileObj);
   };
+
+  const validateExcelData = (excelData) => {
+    let formatedError = "<ul>";
+    let validData = [];
+    excelData.forEach((row, index) => {
+      let isRowValid = true;
+      if (row['id'] === undefined) {
+        isRowValid = false;
+        formatedError = formatedError.concat(`
+            <li>
+              Row Number:${index} ,Field: id, 
+              Error: Field is required
+            </li>`
+        );
+      } else if (row['id'].toString().length > 5 || row['id'].toString().length < 1) {
+        isRowValid = false;
+        formatedError = formatedError.concat(`
+            <li>
+              Row Number:${index} ,Field: id, 
+              Error: Maximum value is 5, ex. 88777
+            </li>`
+        );
+      }
+      if (row['studentName'] === undefined) {
+        isRowValid = false;
+        formatedError = formatedError.concat(`
+            <li>
+              Row Number:${index} ,Field: studentName, 
+              Error: Field is required
+            </li>`
+        );
+      } else if (!(/^[a-zA-Z ]*$/.test(row['studentName']))) {
+        isRowValid = false;
+        formatedError = formatedError.concat(`
+            <li>
+              Row Number:${index} ,Field: studentName,
+              Error: Value doesn't match the correct validation
+            </li>`
+        );
+      }
+      if (row['dob'] === undefined) {
+        isRowValid = false;
+        formatedError = formatedError.concat(`
+            <li>
+              Row Number:${index} ,Field: dob, 
+              Error: Field is required
+            </li>`
+        );
+      } else if (!((new Date().getFullYear() - new Date(row['dob'].toString()).getFullYear()) > 10)) {
+        isRowValid = false;
+        formatedError = formatedError.concat(`
+            <li>
+              Row Number:${index} ,Field: dob, 
+              Error: Age should be more than 10 and date format should be YYYY-MM-DD
+            </li>`
+        );
+      }
+      if (row['gender'] === undefined) {
+        isRowValid = false;
+        formatedError = formatedError.concat(`
+            <li>
+              Row Number:${index} ,Field: gender, 
+              Error: Field is required
+            </li>`
+        );
+      } else if (!(['Male', 'Female', 'Other'].includes(row['gender']))) {
+        isRowValid = false;
+        formatedError = formatedError.concat(`
+            <li>
+              Row Number:${index} ,Field: gender, 
+              Error: Value should be Male, Female or Other
+            </li>`
+        );
+      }
+      if (row['bloodGroup'] === undefined) {
+        isRowValid = false;
+        formatedError = formatedError.concat(`
+            <li>
+              Row Number:${index} ,Field: bloodGroup, 
+              Error: Field is required
+            </li>`
+        );
+      } else if (!(/^(A|B|AB|O)[+-]$/.test(row['bloodGroup']))) {
+        isRowValid = false;
+        formatedError = formatedError.concat(`
+            <li>
+              Row Number:${index} ,Field: bloodGroup, 
+              Error: Value doesn't match the correct validation, eg. A+, B+, AB+
+            </li>`
+        );
+      }
+      if (row['grade'] === undefined) {
+        isRowValid = false;
+        formatedError = formatedError.concat(`
+            <li>
+              Row Number:${index} ,Field: grade, 
+              Error: Field is required
+            </li>`
+        );
+      } else if (!(row['grade'] >= 1 || row['grade'] < 11)) {
+        isRowValid = false;
+        formatedError = formatedError.concat(`
+            <li>
+              Row Number:${index} ,Field: grade, 
+              Error: Grade should be between 1 to 10
+            </li>`
+        );
+      }
+      if (row['section'] === undefined) {
+        isRowValid = false;
+        formatedError = formatedError.concat(`
+            <li>
+              Row Number:${index} ,Field: section, 
+              Error: Field is required
+            </li>`
+        );
+      } else if (!(['A', 'B'].includes(row['section']))) {
+        isRowValid = false;
+        formatedError = formatedError.concat(`
+            <li>
+              Row Number:${index} ,Field: section, 
+              Error: section should be A or B
+            </li>`
+        );
+      }
+      if (row['aadharID'] === undefined) {
+        isRowValid = false;
+        formatedError = formatedError.concat(`
+            <li>
+              Row Number:${index} ,Field: aadharID, 
+              Error: Field is required
+            </li>`
+        );
+      } else if (!(/^[2-9]{1}[0-9]{3}[0-9]{4}[0-9]{4}$/.test(row['aadharID']))) {
+        isRowValid = false;
+        formatedError = formatedError.concat(`
+            <li>
+              Row Number:${index} ,Field: aadharID, 
+              Error: Value doesn't match the required pattern
+            </li>`
+        );
+      }
+      if (isRowValid) {
+        validData.push(row);
+      }
+    })
+    formatedError = formatedError.concat("</ul>");
+    document.getElementById("excel-upload-errors").innerHTML = formatedError;
+    document.getElementById("excel-warning-message").innerText = "Errors if any will be neglected and the remaining data will be created";
+    if (validData.length < 1) {
+      document.getElementById("excel-upload-submit").disabled = true;
+    } else {
+      document.getElementById("excel-upload-submit").disabled = false;
+    }
+    setexcelUploadStudentData(validData);
+  }
+
+  const excelUploadSubmit = () => {
+    console.log(excelUploadStudentData);
+    studentDetailsService.addStudent(excelUploadStudentData).then(
+      _ => {
+        closeModal();
+        studentDetailsService.getStudentsDetails().then(
+          res => setStudentsDetailsData(res)
+        )
+      }
+    );
+  }
 
   useEffect(() => {
     studentDetailsService.getStudentsDetails().then(
@@ -193,9 +312,12 @@ function ManageStudent() {
             </div>
             <div className='upload-students-content'>
               <p>Upload Student details Excel by filling all details in the below template</p>
-              <input type="file" onChange={fileReader} className='upload-file' accept=".xlsx, .xls"/>
+              <input type="file" onChange={fileReader} className='upload-file' accept=".xlsx, .xls" />
               <div id="errorFile" className="errorFile"></div>
               <p className='download-template' onClick={downloadTemplate}>Download Template</p>
+              <div id="excel-upload-errors" className="errorFile"></div>
+              <div id="excel-warning-message" className="errorFile"></div>
+              <Button id="excel-upload-submit" onClick={excelUploadSubmit} disabled={excelUploadStudentData.length === 0} className='submit-button'>Submit</Button>
             </div>
           </Box>
         </Modal>

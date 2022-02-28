@@ -278,15 +278,22 @@ function ManageStudent() {
   }
 
   const excelUploadSubmit = () => {
-    console.log(excelUploadStudentData);
     studentDetailsService.addStudent(excelUploadStudentData).then(
-      _ => {
+      response => {
+        if (!response.ok) {
+          return Promise.reject(response);
+        }
         closeModal();
         studentDetailsService.getStudentsDetails().then(
           res => setStudentsDetailsData(res)
         )
       }
-    );
+    ).catch(error => {
+      console.log(error);
+      if(error[0].id) {
+        document.getElementById("excel-error-message").innerText = "Records with Duplicate ID's found please review the excel data and try again";
+      }
+    });
   }
 
   useEffect(() => {
@@ -316,8 +323,9 @@ function ManageStudent() {
               <div id="errorFile" className="errorFile"></div>
               <p className='download-template' onClick={downloadTemplate}>Download Template</p>
               <div id="excel-upload-errors" className="errorFile"></div>
-              <div id="excel-warning-message" className="errorFile"></div>
+              <div id="excel-warning-message" className="uploadWarning"></div>
               <Button id="excel-upload-submit" onClick={excelUploadSubmit} disabled={excelUploadStudentData.length === 0} className='submit-button'>Submit</Button>
+              <div id="excel-error-message" className="errorFile"></div>
             </div>
           </Box>
         </Modal>

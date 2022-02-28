@@ -119,8 +119,14 @@ label{
 #aadhar{
     margin-bottom: 20px;
 }
-#errorFile{
+.errorFile{
     color:red;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.uploadWarning {
+    color:rgb(255, 179, 0);
     font-size:12px;
     font-weight:bold;
 }

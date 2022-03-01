@@ -280,20 +280,16 @@ function ManageStudent() {
   const excelUploadSubmit = () => {
     studentDetailsService.addStudent(excelUploadStudentData).then(
       response => {
-        if (!response.ok) {
-          return Promise.reject(response);
-        }
         closeModal();
         studentDetailsService.getStudentsDetails().then(
           res => setStudentsDetailsData(res)
         )
       }
     ).catch(error => {
-      console.log(error);
-      if(error[0].id) {
         document.getElementById("excel-error-message").innerText = "Records with Duplicate ID's found please review the excel data and try again";
+        document.getElementById("excel-upload-submit").disabled = true;
       }
-    });
+    );
   }
 
   useEffect(() => {

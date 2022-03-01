@@ -13,8 +13,13 @@ export function addStudent(requestBody) {
         body: JSON.stringify(requestBody)
     };
     return fetch('http://127.0.0.1:8000/students', requestOptions)
-        .then(response => response.json())
-        .then(data => data).catch(console.log);
+        .then(response => {
+            if (!response.ok && response.status===400) {
+                return Promise.reject("Duplicate ID error");
+            }
+            return response.json();
+        })
+        .then(data => data);
 }
 
 // To edit details of existing students

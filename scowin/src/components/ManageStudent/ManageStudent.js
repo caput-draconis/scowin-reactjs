@@ -71,6 +71,9 @@ function ManageStudent() {
             res => setStudentsDetailsData(res)
           )
         }
+      ).catch(error => {
+        document.getElementById("add-error-message").innerText = "Record with this ID is already present, please verify and try again.";
+      }
       );
     } else {
       // Creating and submitting data for editing student details based on ID
@@ -81,7 +84,9 @@ function ManageStudent() {
             res => setStudentsDetailsData(res)
           )
         }
-      );
+      ).catch(error => {
+        document.getElementById("add-error-message").innerText = "There is some issue with the Network please reload and try again.";
+      });
     }
   };
 
@@ -286,9 +291,9 @@ function ManageStudent() {
         )
       }
     ).catch(error => {
-        document.getElementById("excel-error-message").innerText = "Records with Duplicate ID's found please review the excel data and try again";
-        document.getElementById("excel-upload-submit").disabled = true;
-      }
+      document.getElementById("excel-error-message").innerText = "Records with Duplicate ID's found please review the excel data and try again";
+      document.getElementById("excel-upload-submit").disabled = true;
+    }
     );
   }
 
@@ -410,6 +415,7 @@ function ManageStudent() {
               {errors.aadharID && <p className='alert-danger'>{errors.aadharID.message}</p>}
               <TextField id="outlined-basic" label="Existing Comorbidites" placeholder='Existing Comorbidites' variant="outlined" multiline rows={5}  {...register("existingComorbidites")} />
               <Button type='submit' className='submit-button' disabled={!isValid} >Submit</Button>
+              <div id="add-error-message" className="errorFile"></div>
             </form>
           </Box>
         </Modal>

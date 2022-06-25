@@ -109,7 +109,8 @@ export const studentVaccinationHeaders = [
     },
     {
         title: 'Date of Birth',
-        field: 'student.dob'
+        field: 'student.dob',
+        type : 'date'
     },
     {
         title: 'Gender',
@@ -125,7 +126,8 @@ export const studentVaccinationHeaders = [
     },
     {
         title: 'Vaccination Date',
-        field: 'vaccinationDate'
+        field: 'vaccinationDate',
+        type : 'date'
     },
     {
         title: 'Vaccine dosage',

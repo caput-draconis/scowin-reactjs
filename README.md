@@ -32,5 +32,3 @@ JSON-SERVER would be running on - http://localhost:3000
 npm start
 ```
 As JSON-SERVER would be running on port 3000 select a different port for the devserver
-
-test

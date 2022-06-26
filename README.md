@@ -36,3 +36,4 @@ As JSON-SERVER would be running on port 3000 select a different port for the dev
 
 sonar1
 test
+sonar2

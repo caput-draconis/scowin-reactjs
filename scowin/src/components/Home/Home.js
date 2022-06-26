@@ -29,9 +29,10 @@ export default function Home() {
 
 
   useEffect(() => {
-    studentVaccinationMetadataService.getStudentsVaccinationMetadata().then(
-      res => setStudentsVaccinationMetadata(res)
+    let isMounted = true;
+    studentVaccinationMetadataService.getStudentsVaccinationMetadata().then(res => {if(isMounted) setStudentsVaccinationMetadata(res)}
     )
+    return () => { isMounted = false };
   }, []);
 
   const pieData = [

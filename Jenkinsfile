@@ -1,5 +1,5 @@
 node {
-  
+  tools {nodejs "nodejs"}
   stage('Initialise') {
   }
   

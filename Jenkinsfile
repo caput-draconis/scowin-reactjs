@@ -20,16 +20,17 @@ node {
     }
   }
   
-   stage('Install dependencies') {
-            steps {
-                sh 'npm install'
-            }
-        }
-  
+//    stage('Install dependencies') {
+//             steps {
+//                 sh 'npm install'
+//             }
+//         }
+  stages{
   stage('Build artifact') {
             steps {
                 sh 'npm run build'
             }
         }
+  }
 
 }

@@ -109,13 +109,14 @@ pipeline {
 //     def scannerHome = tool name: 'sonarqube';
     withSonarQubeEnv('sonarqube') { 
 //       sh "${scannerHome}/bin/sonar-scanner"
+      sh 'pwd'
       sh '/Users/ashank661/.jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonarqube/bin/sonar-scanner'
     }
          }
   }
         stage('Build') {
             steps {
-                sh 'npm --version'
+                sh 'npm install'
               sh 'npm run build'
             }
         }

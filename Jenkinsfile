@@ -126,6 +126,12 @@ pipeline {
                 sh 'npm run unit-test'
             }
         }
+              stage('Integration test') {
+            steps {
+                sh 'npm run integration-test'
+              sh 'npm run generate-report'
+            }
+        }
 //         stage('Deliver') {
 //             steps {
 // //                 sh './jenkins/scripts/deliver.sh'

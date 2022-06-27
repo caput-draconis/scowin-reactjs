@@ -108,7 +108,8 @@ pipeline {
 //     def scannerHome = tool name: 'sonarqube', type: 'hudson.plugins.sonar.SonarRunnerInstallation';
 //     def scannerHome = tool name: 'sonarqube';
     withSonarQubeEnv('sonarqube') { 
-      sh "${scannerHome}/bin/sonar-scanner"
+//       sh "${scannerHome}/bin/sonar-scanner"
+      sh './gradlew sonarqube'
     }
          }
   }

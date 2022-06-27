@@ -38,37 +38,52 @@
 
 // }
 
+// pipeline {
+//   env.NODEJS_HOME = "${tool 'NodeJS'}"
+//     // on linux / mac
+//     env.PATH="${env.NODEJS_HOME}/bin:${env.PATH}"
+//     // on windows
+//     env.PATH="${env.NODEJS_HOME};${env.PATH}"
+//     sh 'node --version'
+  
+//   stage('Initialise') {
+//   }
+  
+//   stage('SCM') {
+//     checkout scm
+//   }
+//     stages {
+//         stage('Build') {
+//             steps {
+//                 sh 'npm install'
+//             }
+//         }
+// //         stage('Test') {
+// //             steps {
+// //                 sh './jenkins/scripts/test.sh'
+// //             }
+// //         }
+// //         stage('Deliver') {
+// //             steps {
+// //                 sh './jenkins/scripts/deliver.sh'
+// //                 input message: 'Finished using the web site? (Click "Proceed" to continue)'
+// //                 sh './jenkins/scripts/kill.sh'
+// //             }
+// //         }
+//     }
+// }
+
+
 pipeline {
-  env.NODEJS_HOME = "${tool 'NodeJS'}"
-    // on linux / mac
-    env.PATH="${env.NODEJS_HOME}/bin:${env.PATH}"
-    // on windows
-    env.PATH="${env.NODEJS_HOME};${env.PATH}"
-    sh 'node --version'
-  
-  stage('Initialise') {
-  }
-  
-  stage('SCM') {
-    checkout scm
-  }
+    agent any
+
     stages {
         stage('Build') {
             steps {
-                sh 'npm install'
+                nodejs(nodeJSInstallationName: 'NodeJS', configId: '<config-file-provider-id>') {
+                    sh 'npm config ls'
+                }
             }
         }
-//         stage('Test') {
-//             steps {
-//                 sh './jenkins/scripts/test.sh'
-//             }
-//         }
-//         stage('Deliver') {
-//             steps {
-//                 sh './jenkins/scripts/deliver.sh'
-//                 input message: 'Finished using the web site? (Click "Proceed" to continue)'
-//                 sh './jenkins/scripts/kill.sh'
-//             }
-//         }
     }
 }

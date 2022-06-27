@@ -94,7 +94,6 @@ pipeline {
 
     stages {
         stage('Initialise') {
-          steps {}
   }
   
   stage('SCM') {

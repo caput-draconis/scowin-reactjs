@@ -1,0 +1,71 @@
+[
+  {
+    "description": "    Testing all components of Dashboard",
+    "keyword": "Feature",
+    "name": "Dashboard",
+    "line": 1,
+    "id": "dashboard",
+    "tags": [],
+    "uri": "features/dashboard.feature",
+    "elements": [
+      {
+        "id": "dashboard;capture-root-element",
+        "keyword": "Scenario",
+        "line": 5,
+        "name": "Capture root element",
+        "tags": [],
+        "type": "scenario",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "match": {
+              "location": "features/stepDefinitions/hooks/before.js:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 7307000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 6,
+            "name": "\"root\" element",
+            "match": {
+              "location": "features/stepDefinitions/dashboard.js:7"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 7,
+            "name": "the element is identified in the page",
+            "match": {
+              "location": "features/stepDefinitions/dashboard.js:21"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 27000000
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "match": {
+              "location": "features/stepDefinitions/hooks/after.js:4"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 54000000
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

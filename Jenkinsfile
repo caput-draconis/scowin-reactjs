@@ -109,7 +109,7 @@ pipeline {
 //     def scannerHome = tool name: 'sonarqube';
     withSonarQubeEnv('sonarqube') { 
 //       sh "${scannerHome}/bin/sonar-scanner"
-      sh './gradlew sonarqube'
+      sh '/Users/ashank661/.jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonarqube/bin/sonar-scanner'
     }
          }
   }

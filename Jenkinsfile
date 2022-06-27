@@ -91,13 +91,32 @@
 pipeline {
     agent any
   tools {nodejs "NodeJS"}
-//     environment {
-//         CI = 'true'
-//     }
+
     stages {
+        stage('Initialise') {
+          steps {}
+  }
+  
+  stage('SCM') {
+    steps {
+    checkout scm
+    }
+    
+  }
+
+  stage('SonarQube analysis') {
+    steps {
+//     def scannerHome = tool name: 'sonarqube', type: 'hudson.plugins.sonar.SonarRunnerInstallation';
+    def scannerHome = tool name: 'sonarqube';
+    withSonarQubeEnv('sonarqube') { 
+      sh "${scannerHome}/bin/sonar-scanner"
+    }
+         }
+  }
         stage('Build') {
             steps {
-                sh 'node --version'
+                sh 'npm --version'
+              sh 'npm run build'
             }
         }
 //         stage('Test') {

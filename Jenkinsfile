@@ -22,13 +22,13 @@ node {
   
    stage('Install dependencies') {
             steps {
-                npm install
+                sh 'npm install'
             }
         }
   
   stage('Build artifact') {
             steps {
-                npm run build
+                sh 'npm run build'
             }
         }
 

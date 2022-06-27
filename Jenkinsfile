@@ -1,4 +1,8 @@
 node {
+  
+  stage('Initialise') {
+  }
+  
   stage('SCM') {
     checkout scm
   }
@@ -15,5 +19,17 @@ node {
       sh "${scannerHome}/bin/sonar-scanner"
     }
   }
+  
+   stage('Install dependencies') {
+            steps {
+                npm install
+            }
+        }
+  
+  stage('Build artifact') {
+            steps {
+                npm run build
+            }
+        }
 
 }

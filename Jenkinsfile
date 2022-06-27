@@ -114,17 +114,18 @@ pipeline {
     }
          }
   }
-        stage('Build') {
+        stage('Build artifactory') {
             steps {
                 sh 'npm install'
+              sh 'mkdir -p test-reports'
               sh 'npm run build'
             }
         }
-//         stage('Test') {
-//             steps {
-//                 sh 'npm run unit-test'
-//             }
-//         }
+        stage('Unit test') {
+            steps {
+                sh 'npm run unit-test'
+            }
+        }
 //         stage('Deliver') {
 //             steps {
 // //                 sh './jenkins/scripts/deliver.sh'

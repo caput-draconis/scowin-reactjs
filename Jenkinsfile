@@ -93,8 +93,8 @@ pipeline {
   tools {nodejs "NodeJS"}
 
     stages {
-        stage('Initialise') {
-  }
+//         stage('Initialise') {
+//   }
   
   stage('SCM') {
     steps {

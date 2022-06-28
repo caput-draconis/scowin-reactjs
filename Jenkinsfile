@@ -132,6 +132,11 @@ pipeline {
               sh 'npm run generate-report'
             }
         }
+                    stage('Deploy to staging') {
+            steps {
+                sh 'npm start --port 3005'
+            }
+        }
 //         stage('Deliver') {
 //             steps {
 // //                 sh './jenkins/scripts/deliver.sh'

@@ -134,7 +134,7 @@ pipeline {
         }
                     stage('Deploy to staging') {
             steps {
-                sh 'npm start --port 3005'
+                sh 'PORT=3010 npm run start'
             }
         }
 //         stage('Deliver') {

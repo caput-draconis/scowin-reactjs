@@ -49,16 +49,18 @@ pipeline {
       steps {
         sh 'export SCOWINENV=prod'
         input message: 'Push to prod? (Click "Proceed" to continue)'
-        sh 'rm -rf /Users/ashank661/Desktop/apache-tomcat-10.0.22-staging/webapps/scowin-reactjs/*'
-        sh 'scp -r build/* /Users/ashank661/Desktop/apache-tomcat-10.0.22-staging/webapps/scowin-reactjs/'
+        sh 'rm -rf /Users/ashank661/Desktop/apache-tomcat-10.0.22-production/webapps/scowin-reactjs/*'
+        sh 'scp -r build/* /Users/ashank661/Desktop/apache-tomcat-10.0.22-production/webapps/scowin-reactjs/'
       }
     }
-    //         stage('Deliver') {
-    //             steps {
-    // //                 sh './jenkins/scripts/deliver.sh'
-    // //                 input message: 'Finished using the web site? (Click "Proceed" to continue)'
-    // //                 sh './jenkins/scripts/kill.sh'
-    //             }
-    //         }
+         stage('Upload to AWS') {
+              steps {
+                sh 'tar -cvzf scowin-reactjs.tar.gz build'
+                  withAWS(region:'us-east-1',credentials:'my-aws') {
+                  sh 'echo "Uploading content with AWS creds"'
+                      s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file:'scowin-reactjs.tar.gz', bucket:'scowin')
+                  }
+              }
+         }
   }
 }

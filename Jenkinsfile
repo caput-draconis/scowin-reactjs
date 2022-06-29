@@ -5,12 +5,6 @@ pipeline {
   }
 
   stages {
-    stage('SCM') {
-      steps {
-        checkout scm
-      }
-
-    }
 
     stage('SonarQube analysis') {
       steps {
@@ -53,14 +47,14 @@ pipeline {
         sh 'scp -r build/* /Users/ashank661/Desktop/apache-tomcat-10.0.22-production/webapps/scowin-reactjs/'
       }
     }
-         stage('Upload to AWS') {
-              steps {
-                sh 'tar -cvzf scowin-reactjs.tar.gz build'
-                  withAWS(region:'us-east-1',credentials:'my-aws') {
-                  sh 'echo "Uploading content with AWS creds"'
-                      s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file:'scowin-reactjs.tar.gz', bucket:'scowin')
-                  }
-              }
-         }
+    stage('Upload to AWS') {
+      steps {
+        sh 'tar -cvzf scowin-reactjs.tar.gz build'
+        withAWS(region: 'us-east-1', credentials: 'my-aws') {
+          sh 'echo "Uploading content with AWS creds"'
+          s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file: 'scowin-reactjs.tar.gz', bucket: 'scowin')
+        }
+      }
+    }
   }
 }

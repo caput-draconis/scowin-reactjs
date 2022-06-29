@@ -11,7 +11,7 @@ import StudentVaccinationDetails from './components/GenerateReports/GenerateRepo
 function App() {
   return (
     <div className="App">
-      <Router>
+      <Router basename={'/scowin-reactjs'}>
           <Navbar />
           <div className='container mt-5'>
           {/* To display different components based on routes */}

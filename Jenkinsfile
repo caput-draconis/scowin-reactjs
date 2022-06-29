@@ -6,19 +6,19 @@ pipeline {
 
   stages {
 
+    stage('Build artifactory') {
+      steps {
+        sh 'npm install'
+        sh 'mkdir -p test-reports'
+        sh 'npm run build'
+      }
+    }
     stage('SonarQube analysis') {
       steps {
         withSonarQubeEnv('sonarqube') {
           sh 'pwd'
           sh '/Users/ashank661/.jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonarqube/bin/sonar-scanner'
         }
-      }
-    }
-    stage('Build artifactory') {
-      steps {
-        sh 'npm install'
-        sh 'mkdir -p test-reports'
-        sh 'npm run build'
       }
     }
     stage('Unit test') {
@@ -47,7 +47,7 @@ pipeline {
         sh 'scp -r build/* /Users/ashank661/Desktop/apache-tomcat-10.0.22-production/webapps/scowin-reactjs/'
       }
     }
-    stage('Upload to AWS') {
+    stage('Upload artifact to S3') {
       steps {
         sh 'tar -cvzf scowin-reactjs.tar.gz build'
         withAWS(region: 'us-east-1', credentials: 'my-aws') {

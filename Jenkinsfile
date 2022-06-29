@@ -45,6 +45,14 @@ pipeline {
         sh 'scp -r build/* /Users/ashank661/Desktop/apache-tomcat-10.0.22-staging/webapps/scowin-reactjs/'
       }
     }
+    stage('Deploy to production') {
+      steps {
+        sh 'export SCOWINENV=prod'
+        input message: 'Push to prod? (Click "Proceed" to continue)'
+        sh 'rm -rf /Users/ashank661/Desktop/apache-tomcat-10.0.22-staging/webapps/scowin-reactjs/*'
+        sh 'scp -r build/* /Users/ashank661/Desktop/apache-tomcat-10.0.22-staging/webapps/scowin-reactjs/'
+      }
+    }
     //         stage('Deliver') {
     //             steps {
     // //                 sh './jenkins/scripts/deliver.sh'

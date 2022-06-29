@@ -22,6 +22,7 @@ pipeline {
     }
     stage('Build artifactory') {
       steps {
+        sh 'export CI=false'
         sh 'npm install'
         sh 'mkdir -p test-reports'
         sh 'npm run build'

@@ -12,25 +12,24 @@ pipeline {
         sh 'npm run build:staging'
       }
     }
-//     stage('SonarQube analysis') {
-//       steps {
-//         withSonarQubeEnv('sonarqube') {
-//           sh 'pwd'
-//           sh '/Users/ashank661/.jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonarqube/bin/sonar-scanner'
-//         }
-//       }
-//     }
-//     stage('Unit test') {
-//       steps {
-//         sh 'npm run unit-test'
-//       }
-//     }
-//     stage('Integration test') {
-//       steps {
-//         sh 'npm run integration-test'
-//         sh 'npm run generate-report'
-//       }
-//     }
+    stage('SonarQube analysis') {
+      steps {
+        withSonarQubeEnv('sonarqube') {
+          sh '/Users/ashank661/.jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonarqube/bin/sonar-scanner'
+        }
+      }
+    }
+    stage('Unit test') {
+      steps {
+        sh 'npm run unit-test'
+      }
+    }
+    stage('Integration test') {
+      steps {
+        sh 'npm run integration-test'
+        sh 'npm run generate-report'
+      }
+    }
     stage('Deploy to staging') {
       steps {
         sh 'rm -rf /Users/ashank661/Desktop/apache-tomcat-10.0.22-staging/webapps/scowin-reactjs/*'
@@ -64,8 +63,6 @@ pipeline {
             withAWS(region: 'us-east-1', credentials: 'my-aws') {
         s3Download(file: 'scowin-reactjs.tar.gz', bucket: 'scowin', force: true)
       }
-        sh 'pwd'
-        sh 'ls -l'
         sh 'tar -xvzf /Users/ashank661/.jenkins/workspace/scowin-reactjs/scowin-reactjs.tar.gz/scowin-reactjs.tar.gz -C /tmp/'
        sh 'scp -r /tmp/build/* /Users/ashank661/Desktop/apache-tomcat-10.0.22-production/webapps/scowin-reactjs/'
       }

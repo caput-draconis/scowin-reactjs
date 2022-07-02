@@ -1,9 +1,10 @@
 module.exports = () => {
     let environment
-    switch (process.env.SCOWINENV) {
-        case 'prod':
+    console.log("process env => ", process.env)
+    switch (process.env.REACT_APP_ENV) {
+        case 'production':
             return `http://3.87.66.79:8000`
-        case 'stag':
+        case 'staging':
             environment = '8000'
             break
         default:

@@ -57,6 +57,8 @@ pipeline {
             withAWS(region: 'us-east-1', credentials: 'my-aws') {
         s3Download(file: 'scowin-reactjs.tar.gz', bucket: 'scowin', force: true)
       }
+        sh 'pwd'
+        sh 'ls -l'
         sh 'tar -xvzf /Users/ashank661/.jenkins/workspace/scowin-reactjs/scowin-reactjs.tar.gz -C /tmp/'
        sh 'scp -r /tmp/build/* /Users/ashank661/Desktop/apache-tomcat-10.0.22-production/webapps/scowin-reactjs/'
       }

@@ -39,15 +39,7 @@ pipeline {
         sh 'scp -r build/* /Users/ashank661/Desktop/apache-tomcat-10.0.22-staging/webapps/scowin-reactjs/'
       }
     }
-    stage('Deploy to production') {
-      steps {
-        sh 'export SCOWINENV=prod'
-        input message: 'Push to prod? (Click "Proceed" to continue)'
-        sh 'rm -rf /Users/ashank661/Desktop/apache-tomcat-10.0.22-production/webapps/scowin-reactjs/*'
-        sh 'scp -r build/* /Users/ashank661/Desktop/apache-tomcat-10.0.22-production/webapps/scowin-reactjs/'
-      }
-    }
-    stage('Upload artifact to S3') {
+        stage('Upload artifact to S3') {
       steps {
         sh 'tar -cvzf scowin-reactjs.tar.gz build'
         withAWS(region: 'us-east-1', credentials: 'my-aws') {
@@ -56,5 +48,19 @@ pipeline {
         }
       }
     }
+
+    stage('Deploy to production') {
+      steps {
+        sh 'export SCOWINENV=prod'
+        input message: 'Push to prod? (Click "Proceed" to continue)'
+        sh 'rm -rf /Users/ashank661/Desktop/apache-tomcat-10.0.22-production/webapps/scowin-reactjs/*'
+            withAWS(region: 'us-east-1', credentials: 'my-aws') {
+        s3Download(file: 'scowin-reactjs.tar.gz', bucket: 'scowin', path: '/tmp/')
+      }
+        sh 'tar -xvzf /tmp/scowin-reactjs.tar.gz -C /tmp/'
+       sh 'scp -r /tmp/build/* /Users/ashank661/Desktop/apache-tomcat-10.0.22-production/webapps/scowin-reactjs/'
+      }
+    }
+
   }
 }

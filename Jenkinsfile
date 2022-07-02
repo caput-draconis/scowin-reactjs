@@ -6,11 +6,10 @@ pipeline {
 
   stages {
 
-    stage('Build artifactory') {
+    stage('Build staging artifactory') {
       steps {
-//         sh 'npm install'
         sh 'mkdir -p test-reports'
-        sh 'npm run build'
+        sh 'npm run build:staging'
       }
     }
 //     stage('SonarQube analysis') {
@@ -32,13 +31,20 @@ pipeline {
 //         sh 'npm run generate-report'
 //       }
 //     }
-//     stage('Deploy to staging') {
-//       steps {
-//         sh 'export SCOWINENV=stag'
-//         sh 'rm -rf /Users/ashank661/Desktop/apache-tomcat-10.0.22-staging/webapps/scowin-reactjs/*'
-//         sh 'scp -r build/* /Users/ashank661/Desktop/apache-tomcat-10.0.22-staging/webapps/scowin-reactjs/'
-//       }
-//     }
+    stage('Deploy to staging') {
+      steps {
+        sh 'rm -rf /Users/ashank661/Desktop/apache-tomcat-10.0.22-staging/webapps/scowin-reactjs/*'
+        sh 'scp -r build/* /Users/ashank661/Desktop/apache-tomcat-10.0.22-staging/webapps/scowin-reactjs/'
+      }
+    }
+
+    stage('Build production artifactory') {
+      steps {
+        sh 'rm -rf build'
+        sh 'mkdir -p test-reports'
+        sh 'npm run build:production'
+      }
+    }
         stage('Upload artifact to S3') {
       steps {
         sh 'rm -rf scowin-reactjs.tar.gz'

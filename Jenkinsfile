@@ -60,7 +60,7 @@ pipeline {
       }
         sh 'pwd'
         sh 'ls -l'
-        sh 'tar -xvzf /Users/ashank661/.jenkins/workspace/scowin-reactjs/scowin-reactjs.tar.gz -C /tmp/'
+        sh 'tar -xvzf /Users/ashank661/.jenkins/workspace/scowin-reactjs/scowin-reactjs.tar.gz/scowin-reactjs.tar.gz -C /tmp/'
        sh 'scp -r /tmp/build/* /Users/ashank661/Desktop/apache-tomcat-10.0.22-production/webapps/scowin-reactjs/'
       }
     }

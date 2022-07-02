@@ -54,7 +54,7 @@ pipeline {
         sh 'export SCOWINENV=prod'
         input message: 'Push to prod? (Click "Proceed" to continue)'
         sh 'rm -rf /Users/ashank661/Desktop/apache-tomcat-10.0.22-production/webapps/scowin-reactjs/*'
-            withAWS(region: 'us-east-1', credentials: 'my-aws') {
+            withAWS(region: 'us-east-1', credentials: 'my-aws', force=true) {
         s3Download(file: 'scowin-reactjs.tar.gz', bucket: 'scowin', path: '/tmp/')
       }
         sh 'tar -xvzf /tmp/scowin-reactjs.tar.gz -C /tmp/'
